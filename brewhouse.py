@@ -3,32 +3,31 @@ A system to predict demand and help monitor and schedule brewing processes for
 Barnaby's Brewhouse.
 """
 
-import csv
 import pandas
 
 
 def main():
-    read_sales_data()
+    data_frame = read_sales_data()
+    get_sales_ratio(data_frame)
 
 
-def read_sales_data():
+def read_sales_data() -> pandas.core.frame.DataFrame:
     """
-    Reads the sales data and loads it, then interprets the data.
+    Reads the sales data and loads it to a variable.
 
     Returns:
-
+        data_frame (pandas.core.frame.DataFrame): Sales data of beers.
     """
-    with open("sales_data.csv") as file:
-        file.next()
-        total_sales = sum(int(row[7]) for row in csv.reader(file))
+    data_frame = pandas.read_csv("sales_data.csv")
+    print(type(data_frame))
+    print(str(data_frame) + "\n")
 
-    """data_frame = pandas.read_csv("sales_data.csv")
-    print(data_frame)"""
+    return data_frame
 
 
 def get_avg_growth_rate():
     """
-    Calculates the average growth rate from sales data.
+    Calculates the average monthly growth rate from sales data.
 
     Returns:
         avg_growth_rate (float):
@@ -36,14 +35,44 @@ def get_avg_growth_rate():
     pass
 
 
-def get_sales_ratio():
+def get_sales_ratio(data_frame: pandas.core.frame.DataFrame) -> float:
     """
     Calculates the ratio of sales for different beers from sales data.
 
+    Args:
+        data_frame (pandas.core.frame.DataFrame): Sales data of beers.
+
     Returns:
-        sales_ratio (float):
+        red_helles_ratio (float): Sales ratio of Organic Red Helles.
+        pilsner_ratio (float): Sales ratio of Organic Pilsner.
+        dunkel_ratio (float): Sales ratio of Organic Dunkel.
     """
-    pass
+    # Sums the total sales of all beers.
+    total_sales = int(data_frame["Quantity ordered"].sum())
+    print(str(total_sales) + "\n")
+
+    # Sums Red Helles sales and calculates their sales ratio.
+    red_helles = data_frame.query("Recipe == 'Organic Red Helles'")
+    red_helles_sales = int(red_helles["Quantity ordered"].sum())
+    print(str(red_helles_sales))
+    red_helles_ratio = round((red_helles_sales / total_sales) * 100, 3)
+    print("Organic Red Helles: " + str(red_helles_ratio) + "%\n")
+
+    # Sums Pilsner sales and calculates their sales ratio.
+    pilsner = data_frame.query("Recipe == 'Organic Pilsner'")
+    pilsner_sales = int(pilsner["Quantity ordered"].sum())
+    print(str(pilsner_sales))
+    pilsner_ratio = round((pilsner_sales / total_sales) * 100, 3)
+    print("Organic Pilsner: " + str(pilsner_ratio) + "%\n")
+
+    # Sums Dunkel sales and calculates their sales ratio.
+    dunkel = data_frame.query("Recipe == 'Organic Dunkel'")
+    dunkel_sales = int(dunkel["Quantity ordered"].sum())
+    print(str(dunkel_sales))
+    dunkel_ratio = round((dunkel_sales / total_sales) * 100, 3)
+    print("Organic Dunkel: " + str(dunkel_ratio) + "%\n")
+
+    return red_helles_ratio, red_helles_ratio, dunkel_ratio
 
 
 # Prevents the code from executing when the script is imported as a module.
