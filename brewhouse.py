@@ -9,6 +9,7 @@ import pandas
 def main():
     data_frame = read_sales_data()
     get_sales_ratio(data_frame)
+    get_avg_growth_rate(data_frame)
 
 
 def read_sales_data() -> pandas.core.frame.DataFrame:
@@ -23,16 +24,6 @@ def read_sales_data() -> pandas.core.frame.DataFrame:
     print(str(data_frame) + "\n")
 
     return data_frame
-
-
-def get_avg_growth_rate():
-    """
-    Calculates the average monthly growth rate from sales data.
-
-    Returns:
-        avg_growth_rate (float):
-    """
-    pass
 
 
 def get_sales_ratio(data_frame: pandas.core.frame.DataFrame) -> float:
@@ -73,6 +64,28 @@ def get_sales_ratio(data_frame: pandas.core.frame.DataFrame) -> float:
     print("Organic Dunkel: " + str(dunkel_ratio) + "%\n")
 
     return red_helles_ratio, red_helles_ratio, dunkel_ratio
+
+
+def get_avg_growth_rate(data_frame: pandas.core.frame.DataFrame) -> float:
+    """
+    Calculates the average monthly growth rate from sales data.
+
+    Args:
+        data_frame (pandas.core.frame.DataFrame): Sales data of beers.
+
+    Returns:
+        red_helles_growth_rate (float):
+        pilsner_growth_rate (float):
+        dunkel_growth_rate (float):
+    """
+    # Sets filters for each month.
+    nov18_filter = data_frame["Date Required"].str.contains("Nov-18")
+
+    # Calculates Nov-18 sales for Red Helles.
+    red_helles_filter = data_frame["Recipe"].isin(["Organic Red Helles"])
+    red_helles_nov18 = data_frame[nov18_filter & red_helles_filter]
+    red_helles_nov18_sales = red_helles_nov18["Quantity ordered"].sum()
+    print(red_helles_nov18_sales)
 
 
 # Prevents the code from executing when the script is imported as a module.
