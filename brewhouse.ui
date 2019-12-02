@@ -53,14 +53,7 @@
      </item>
      <item>
       <layout class="QHBoxLayout" name="hori_layout_nav">
-       <item>
-        <widget class="QPushButton" name="btn_predict">
-         <property name="text">
-          <string>Predict Sales</string>
-         </property>
-        </widget>
-       </item>
-       <item>
+       <item alignment="Qt::AlignLeft">
         <widget class="QPushButton" name="btn_process_monitoring">
          <property name="text">
           <string>Process Monitoring</string>
@@ -246,14 +239,14 @@
         </widget>
        </item>
        <item row="1" column="0" alignment="Qt::AlignLeft">
-        <widget class="QLabel" name="lbl_predict_date_2">
+        <widget class="QLabel" name="lbl_predict_date">
          <property name="text">
           <string>Date (DD/MM/YYYY):</string>
          </property>
         </widget>
        </item>
        <item row="1" column="1">
-        <widget class="QDateEdit" name="date_edit_predict_2">
+        <widget class="QDateEdit" name="date_edit_predict">
          <property name="minimumDateTime">
           <datetime>
            <hour>0</hour>
@@ -290,7 +283,7 @@
       </layout>
      </item>
      <item alignment="Qt::AlignLeft">
-      <widget class="QPushButton" name="btn_predict_2">
+      <widget class="QPushButton" name="btn_predict">
        <property name="text">
         <string>Update Sales Prediction</string>
        </property>
