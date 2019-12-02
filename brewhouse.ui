@@ -20,13 +20,13 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QWidget" name="">
+   <widget class="QWidget" name="layoutWidget">
     <property name="geometry">
      <rect>
       <x>11</x>
       <y>11</y>
-      <width>265</width>
-      <height>123</height>
+      <width>289</width>
+      <height>309</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="verticalLayout">
@@ -35,6 +35,8 @@
        <property name="font">
         <font>
          <pointsize>16</pointsize>
+         <weight>50</weight>
+         <bold>false</bold>
         </font>
        </property>
        <property name="text">
@@ -61,11 +63,91 @@
        <item>
         <widget class="QPushButton" name="pushButton_2">
          <property name="text">
-          <string>PushButton</string>
+          <string>Process Monitoring</string>
          </property>
         </widget>
        </item>
       </layout>
+     </item>
+     <item>
+      <widget class="Line" name="hori_line_nav">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="lbl_sales_ratios">
+       <property name="font">
+        <font>
+         <underline>true</underline>
+        </font>
+       </property>
+       <property name="text">
+        <string>Sales Ratios</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="lbl_red_helles_ratio">
+       <property name="text">
+        <string>Organic Red Helles - </string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="lbl_pilsner_ratio">
+       <property name="text">
+        <string>Organic Pilsner - </string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="lbl_dunkel_ratio">
+       <property name="text">
+        <string>Organic Dunkel - </string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="Line" name="line">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="lbl_sales_ratios_2">
+       <property name="font">
+        <font>
+         <underline>true</underline>
+        </font>
+       </property>
+       <property name="text">
+        <string>Average Monthly Growth Percentages</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="lbl_red_helles_ratio_2">
+       <property name="text">
+        <string>Organic Red Helles - </string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="lbl_red_helles_ratio_3">
+       <property name="text">
+        <string>Organic Pilsner  - </string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="lbl_red_helles_ratio_4">
+       <property name="text">
+        <string>Organic Dunkel - </string>
+       </property>
+      </widget>
      </item>
     </layout>
    </widget>
