@@ -155,7 +155,45 @@ def predict_sales(data_frame:
         red_helles_growth (float): Average growth rate of sales for Red Helles.
         pilsner_growth (float): Average growth rate of sales for Pilsner.
         dunkel_growth (float): Average growth rate of sales for Dunkel.
+
+    Returns:
+        prediction-sales (int): Predicted monthly sales of a given beer for
+                                a given month.
     """
+
+    # Asks for the beer and month to predict the sales for.
+    prediction_beer = input(
+        "\nPlease enter which beer you would like to "
+        "predict sales for (Red Helles/Pilsner/Dunkel): ")
+    prediction_date = input("Please enter the date you would like the "
+                            "prediction for (DD/MM/YYYY): ")
+
+    # Calculates number of months since the last month of sales data.
+    format_date = "%d/%m/%Y"
+    final_date = datetime.strptime("30/10/2019", format_date).date()
+    prediction_date = datetime.strptime(prediction_date, format_date).date()
+    month_difference = ((prediction_date.year - final_date.year) *
+                        12 + (prediction_date.month - final_date.month))
+
+    # Predicts beer sales for that month, rouned down to nearest integer.
+    last_month_filter = data_frame["Date Required"].str.contains("Oct-19")
+    beer_filter = data_frame["Recipe"].str.contains(prediction_beer)
+    last_month_data = data_frame[last_month_filter & beer_filter]
+    last_month_sales = int(last_month_data["Quantity ordered"].sum())
+
+    if prediction_beer == "Red Helles":
+        prediction_sales = int((last_month_sales *
+                                (red_helles_growth ** month_difference)))
+    elif prediction_beer == "Pilsner":
+        prediction_sales = int((last_month_sales *
+                                (pilsner_growth ** month_difference)))
+    elif prediction_beer == "Dunkel":
+        prediction_sales = int((last_month_sales *
+                                (dunkel_growth ** month_difference)))
+    print("Predicted Sales: " + str(prediction_sales))
+
+    return prediction_sales
+
     """months = ["Nov-19", "Dec-19", "Jan-20", "Feb-20", "Mar-20", "Apr-20",
               "May-20", "Jun-20", "Jul-20", "Aug-20", "Sep-20", "Oct-20",
               "Nov-20"]
@@ -166,22 +204,9 @@ def predict_sales(data_frame:
         for month in months:
             beer_filter = data_frame["Recipe"].isin([beer])"""
 
-    # Asks for the beer and month to predict the sales for.
-    prediction_beer = input("Please enter which beer you would like to "
-                            "predict sales for: ")
-    prediction_date = input("Please enter the date you would like the "
-                            "prediction for (DD/MM/YYYY): ")
 
-    # Calculates number of months since the last month of sales data.
-    format_date = "%d/%m/%Y"
-    final_date = datetime.strptime("30/10/2019", format_date).date()
-    prediction_date = datetime.strptime(prediction_date, format_date).date()
-    month_difference = ((prediction_date.year - final_date.year) *
-                        12 + (prediction_date.month - final_date.month))
-    print(month_difference)
-
-    # Predicts beer sales for that month.
-    
+def process_monitoring():
+    pass
 
 
 # Prevents the code from executing when the script is imported as a module.
