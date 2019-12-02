@@ -17,7 +17,7 @@
    </font>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>Barnaby's Brewhouse</string>
   </property>
   <widget class="QWidget" name="central_widget">
    <widget class="QWidget" name="layoutWidget">
