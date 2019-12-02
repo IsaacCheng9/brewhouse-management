@@ -3,18 +3,22 @@ A system to predict demand and help monitor and schedule brewing processes for
 Barnaby's Brewhouse.
 """
 
+from datetime import datetime
+from typing import Tuple
+
 import pandas
 
 
-def main():
+def main() -> None:
     """
     """
     data_frame = read_sales_data()
     (red_helles_ratio, pilsner_ratio,
      dunkel_ratio) = get_sales_ratio(data_frame)
-    (red_helles_growth, pilsner_growth,
+    (beers, red_helles_growth, pilsner_growth,
      dunkel_growth) = get_avg_growth_rate(data_frame)
-    predict_sales(red_helles_growth, pilsner_growth, dunkel_growth)
+    predict_sales(data_frame, beers, red_helles_growth,
+                  pilsner_growth, dunkel_growth)
 
 
 def read_sales_data() -> pandas.core.frame.DataFrame:
@@ -30,7 +34,8 @@ def read_sales_data() -> pandas.core.frame.DataFrame:
     return data_frame
 
 
-def get_sales_ratio(data_frame: pandas.core.frame.DataFrame) -> float:
+def get_sales_ratio(data_frame:
+                    pandas.core.frame.DataFrame) -> Tuple[float, float, float]:
     """
     Calculates the ratio of sales for different beers from sales data.
 
@@ -67,7 +72,9 @@ def get_sales_ratio(data_frame: pandas.core.frame.DataFrame) -> float:
     return red_helles_ratio, pilsner_ratio, dunkel_ratio
 
 
-def get_avg_growth_rate(data_frame: pandas.core.frame.DataFrame) -> float:
+def get_avg_growth_rate(data_frame:
+                        pandas.core.frame.DataFrame) -> Tuple[list, float,
+                                                              float, float]:
     """
     Calculates the average monthly growth rate from sales data.
 
@@ -75,6 +82,7 @@ def get_avg_growth_rate(data_frame: pandas.core.frame.DataFrame) -> float:
         data_frame (pandas.core.frame.DataFrame): Sales data of beers.
 
     Returns:
+        beers (list): A list of the beers.
         red_helles_growth (float): Average growth rate of sales for Red Helles.
         pilsner_growth (float): Average growth rate of sales for Pilsner.
         dunkel_growth (float): Average growth rate of sales for Dunkel.
@@ -130,19 +138,46 @@ def get_avg_growth_rate(data_frame: pandas.core.frame.DataFrame) -> float:
           "\nPilsner Growth: " + str(pilsner_growth) + "\nDunkel Growth: " +
           str(dunkel_growth))
 
+    return beers, red_helles_growth, pilsner_growth, dunkel_growth
 
-def predict_sales(red_helles_growth: float, pilsner_growth: float,
+
+def predict_sales(data_frame:
+                  pandas.core.frame.DataFrame, beers: list,
+                  red_helles_growth: float, pilsner_growth: float,
                   dunkel_growth: float):
     """
     Calculates future sales of Red Helles, Pilsner, and Dunkel using previous
     sales data.
 
     Args:
+        data_frame (pandas.core.frame.DataFrame): Sales data of beers.
+        beers (list): A list of the beers.
         red_helles_growth (float): Average growth rate of sales for Red Helles.
         pilsner_growth (float): Average growth rate of sales for Pilsner.
         dunkel_growth (float): Average growth rate of sales for Dunkel.
     """
-    pass
+    """months = ["Nov-19", "Dec-19", "Jan-20", "Feb-20", "Mar-20", "Apr-20",
+              "May-20", "Jun-20", "Jul-20", "Aug-20", "Sep-20", "Oct-20",
+              "Nov-20"]
+
+    for beer in beers:
+        month_filter_previous = data_frame["Date Required"].str.contains(
+            "Oct-19")
+        for month in months:
+            beer_filter = data_frame["Recipe"].isin([beer])"""
+
+    # Gets the month and year to predict from the user.
+    format_date = "%d/%m/%Y"
+    prediction_beer = input("Please enter which beer you would like to "
+                            "predict sales for: ")
+    prediction_date = input("Please enter the date you would like the "
+                            "prediction for (DD/MM/YYYY): ")
+    prediction_date = datetime.strptime(prediction_date, format_date).date()
+    # month_prediction = prediction_date[:2]
+    # year_prediction = prediction_date[3:7]
+    month_difference = (prediction_date.to_period("M") -
+                        (2019-10-1).to_period("M"))
+    print(month_difference)
 
 
 # Prevents the code from executing when the script is imported as a module.
