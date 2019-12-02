@@ -98,30 +98,18 @@ class Ui_mwindow_brewhouse(object):
 
     def retranslateUi(self, mwindow_brewhouse):
         _translate = QtCore.QCoreApplication.translate
-        mwindow_brewhouse.setWindowTitle(
-            _translate("mwindow_brewhouse", "MainWindow"))
-        self.lbl_brewhouse.setText(_translate(
-            "mwindow_brewhouse", "Barnaby\'s Brewhouse"))
-        self.btn_predict.setText(_translate(
-            "mwindow_brewhouse", "Predict Sales"))
-        self.btn_process_monitoring.setText(_translate(
-            "mwindow_brewhouse", "Process Monitoring"))
-        self.lbl_ratios.setText(_translate(
-            "mwindow_brewhouse", "Sales Ratios"))
-        self.lbl_red_helles_ratio.setText(_translate(
-            "mwindow_brewhouse", "Organic Red Helles - "))
-        self.lbl_pilsner_ratio.setText(_translate(
-            "mwindow_brewhouse", "Organic Pilsner - "))
-        self.lbl_dunkel_ratio.setText(_translate(
-            "mwindow_brewhouse", "Organic Dunkel - "))
-        self.lbl_growth.setText(_translate(
-            "mwindow_brewhouse", "Average Monthly Growth Percentages"))
-        self.lbl_red_helles_growth.setText(_translate(
-            "mwindow_brewhouse", "Organic Red Helles - "))
-        self.lbl_pilsner_growth.setText(_translate(
-            "mwindow_brewhouse", "Organic Pilsner  - "))
-        self.lbl_dunkel_growth.setText(_translate(
-            "mwindow_brewhouse", "Organic Dunkel - "))
+        mwindow_brewhouse.setWindowTitle(_translate("mwindow_brewhouse", "Barnaby\'s Brewhouse"))
+        self.lbl_brewhouse.setText(_translate("mwindow_brewhouse", "Barnaby\'s Brewhouse"))
+        self.btn_predict.setText(_translate("mwindow_brewhouse", "Predict Sales"))
+        self.btn_process_monitoring.setText(_translate("mwindow_brewhouse", "Process Monitoring"))
+        self.lbl_ratios.setText(_translate("mwindow_brewhouse", "Sales Ratios"))
+        self.lbl_red_helles_ratio.setText(_translate("mwindow_brewhouse", "Organic Red Helles - "))
+        self.lbl_pilsner_ratio.setText(_translate("mwindow_brewhouse", "Organic Pilsner - "))
+        self.lbl_dunkel_ratio.setText(_translate("mwindow_brewhouse", "Organic Dunkel - "))
+        self.lbl_growth.setText(_translate("mwindow_brewhouse", "Average Monthly Growth Percentages"))
+        self.lbl_red_helles_growth.setText(_translate("mwindow_brewhouse", "Organic Red Helles - "))
+        self.lbl_pilsner_growth.setText(_translate("mwindow_brewhouse", "Organic Pilsner  - "))
+        self.lbl_dunkel_growth.setText(_translate("mwindow_brewhouse", "Organic Dunkel - "))
 
 
 if __name__ == "__main__":
