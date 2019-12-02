@@ -25,8 +25,8 @@
      <rect>
       <x>11</x>
       <y>11</y>
-      <width>289</width>
-      <height>309</height>
+      <width>516</width>
+      <height>653</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="vert_layout_brewhouse">
@@ -71,6 +71,46 @@
      </item>
      <item>
       <widget class="Line" name="hori_line_nav">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="lbl_sales">
+       <property name="font">
+        <font>
+         <underline>true</underline>
+        </font>
+       </property>
+       <property name="text">
+        <string>Total Sales</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="lbl_red_helles_sales">
+       <property name="text">
+        <string>Organic Red Helles - </string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="lbl_pilsner_sales">
+       <property name="text">
+        <string>Organic Pilsner - </string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="lbl_dunkel_sales">
+       <property name="text">
+        <string>Organic Dunkel - </string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="Line" name="hori_line_sales">
        <property name="orientation">
         <enum>Qt::Horizontal</enum>
        </property>
@@ -148,6 +188,126 @@
         <string>Organic Dunkel - </string>
        </property>
       </widget>
+     </item>
+     <item>
+      <widget class="Line" name="hori_line_growth">
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="lbl_predict">
+       <property name="font">
+        <font>
+         <underline>true</underline>
+        </font>
+       </property>
+       <property name="text">
+        <string>Predict Sales</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <layout class="QGridLayout" name="grid_layout_predict">
+       <property name="sizeConstraint">
+        <enum>QLayout::SetDefaultConstraint</enum>
+       </property>
+       <item row="0" column="2">
+        <spacer name="hori_spacer_predict">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+       <item row="0" column="1">
+        <widget class="QComboBox" name="combo_box_beer">
+         <item>
+          <property name="text">
+           <string>Organic Red Helles</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Organic Pilsner</string>
+          </property>
+         </item>
+         <item>
+          <property name="text">
+           <string>Organic Dunkel</string>
+          </property>
+         </item>
+        </widget>
+       </item>
+       <item row="1" column="0" alignment="Qt::AlignLeft">
+        <widget class="QLabel" name="lbl_predict_date_2">
+         <property name="text">
+          <string>Date (DD/MM/YYYY):</string>
+         </property>
+        </widget>
+       </item>
+       <item row="1" column="1">
+        <widget class="QDateEdit" name="date_edit_predict_2">
+         <property name="minimumDateTime">
+          <datetime>
+           <hour>0</hour>
+           <minute>0</minute>
+           <second>0</second>
+           <year>2019</year>
+           <month>10</month>
+           <day>31</day>
+          </datetime>
+         </property>
+         <property name="calendarPopup">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item row="0" column="0" alignment="Qt::AlignLeft">
+        <widget class="QLabel" name="lbl_predict_beer">
+         <property name="text">
+          <string>Beer:</string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <layout class="QHBoxLayout" name="hori_layout_predict_result">
+       <item>
+        <widget class="QLabel" name="lbl_predict_result">
+         <property name="text">
+          <string>Estimated Number of Sales: </string>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item alignment="Qt::AlignLeft">
+      <widget class="QPushButton" name="btn_predict_2">
+       <property name="text">
+        <string>Update Sales Prediction</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <spacer name="vert_spacer_brewhouse">
+       <property name="orientation">
+        <enum>Qt::Vertical</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>20</width>
+         <height>40</height>
+        </size>
+       </property>
+      </spacer>
      </item>
     </layout>
    </widget>
