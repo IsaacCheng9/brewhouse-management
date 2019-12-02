@@ -166,18 +166,22 @@ def predict_sales(data_frame:
         for month in months:
             beer_filter = data_frame["Recipe"].isin([beer])"""
 
-    # Gets the month and year to predict from the user.
-    format_date = "%d/%m/%Y"
+    # Asks for the beer and month to predict the sales for.
     prediction_beer = input("Please enter which beer you would like to "
                             "predict sales for: ")
     prediction_date = input("Please enter the date you would like the "
                             "prediction for (DD/MM/YYYY): ")
+
+    # Calculates number of months since the last month of sales data.
+    format_date = "%d/%m/%Y"
+    final_date = datetime.strptime("30/10/2019", format_date).date()
     prediction_date = datetime.strptime(prediction_date, format_date).date()
-    # month_prediction = prediction_date[:2]
-    # year_prediction = prediction_date[3:7]
-    month_difference = (prediction_date.to_period("M") -
-                        (2019-10-1).to_period("M"))
+    month_difference = ((prediction_date.year - final_date.year) *
+                        12 + (prediction_date.month - final_date.month))
     print(month_difference)
+
+    # Predicts beer sales for that month.
+    
 
 
 # Prevents the code from executing when the script is imported as a module.
