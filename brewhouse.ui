@@ -25,8 +25,8 @@
      <rect>
       <x>11</x>
       <y>11</y>
-      <width>516</width>
-      <height>653</height>
+      <width>388</width>
+      <height>635</height>
      </rect>
     </property>
     <layout class="QVBoxLayout" name="vert_layout_brewhouse">
@@ -272,17 +272,13 @@
       </layout>
      </item>
      <item>
-      <layout class="QHBoxLayout" name="hori_layout_predict_result">
-       <item>
-        <widget class="QLabel" name="lbl_predict_result">
-         <property name="text">
-          <string>Estimated Number of Sales: </string>
-         </property>
-        </widget>
-       </item>
-      </layout>
+      <widget class="QLabel" name="lbl_predict_result">
+       <property name="text">
+        <string>Estimated Number of Sales: </string>
+       </property>
+      </widget>
      </item>
-     <item alignment="Qt::AlignLeft">
+     <item>
       <widget class="QPushButton" name="btn_predict">
        <property name="text">
         <string>Update Sales Prediction</string>
