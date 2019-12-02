@@ -7,9 +7,14 @@ import pandas
 
 
 def main():
+    """
+    """
     data_frame = read_sales_data()
-    get_sales_ratio(data_frame)
-    get_avg_growth_rate(data_frame)
+    (red_helles_ratio, pilsner_ratio,
+     dunkel_ratio) = get_sales_ratio(data_frame)
+    (red_helles_growth, pilsner_growth,
+     dunkel_growth) = get_avg_growth_rate(data_frame)
+    predict_sales(red_helles_growth, pilsner_growth, dunkel_growth)
 
 
 def read_sales_data() -> pandas.core.frame.DataFrame:
@@ -58,6 +63,7 @@ def get_sales_ratio(data_frame: pandas.core.frame.DataFrame) -> float:
     print("Total Sales: " + str(total_sales) + "\nRed Helles: " +
           str(red_helles_ratio) + "%\nPilsner: " + str(pilsner_ratio) +
           "%\nDunkel: " + str(dunkel_ratio) + "%")
+
     return red_helles_ratio, pilsner_ratio, dunkel_ratio
 
 
@@ -120,8 +126,23 @@ def get_avg_growth_rate(data_frame: pandas.core.frame.DataFrame) -> float:
     red_helles_growth /= 11
     pilsner_growth /= 11
     dunkel_growth /= 11
-    print("\nRed Helles Growth: " + str(red_helles_growth) + "\nPilsner Growth: " +
-          str(pilsner_growth) + "\nDunkel Growth: " + str(dunkel_growth))
+    print("\nRed Helles Growth: " + str(red_helles_growth) +
+          "\nPilsner Growth: " + str(pilsner_growth) + "\nDunkel Growth: " +
+          str(dunkel_growth))
+
+
+def predict_sales(red_helles_growth: float, pilsner_growth: float,
+                  dunkel_growth: float):
+    """
+    Calculates future sales of Red Helles, Pilsner, and Dunkel using previous
+    sales data.
+
+    Args:
+        red_helles_growth (float): Average growth rate of sales for Red Helles.
+        pilsner_growth (float): Average growth rate of sales for Pilsner.
+        dunkel_growth (float): Average growth rate of sales for Dunkel.
+    """
+    pass
 
 
 # Prevents the code from executing when the script is imported as a module.
