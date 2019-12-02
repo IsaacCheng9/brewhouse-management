@@ -39,30 +39,26 @@ def get_sales_ratio(data_frame: pandas.core.frame.DataFrame) -> float:
     """
     # Sums the total sales of all beers.
     total_sales = int(data_frame["Quantity ordered"].sum())
-    print(str(total_sales) + "\n")
 
     # Sums Red Helles sales and calculates their sales ratio.
     red_helles = data_frame.query("Recipe == 'Organic Red Helles'")
     red_helles_sales = int(red_helles["Quantity ordered"].sum())
-    print(str(red_helles_sales))
     red_helles_ratio = round((red_helles_sales / total_sales) * 100, 3)
-    print("Organic Red Helles: " + str(red_helles_ratio) + "%\n")
 
     # Sums Pilsner sales and calculates their sales ratio.
     pilsner = data_frame.query("Recipe == 'Organic Pilsner'")
     pilsner_sales = int(pilsner["Quantity ordered"].sum())
-    print(str(pilsner_sales))
     pilsner_ratio = round((pilsner_sales / total_sales) * 100, 3)
-    print("Organic Pilsner: " + str(pilsner_ratio) + "%\n")
 
     # Sums Dunkel sales and calculates their sales ratio.
     dunkel = data_frame.query("Recipe == 'Organic Dunkel'")
     dunkel_sales = int(dunkel["Quantity ordered"].sum())
-    print(str(dunkel_sales))
     dunkel_ratio = round((dunkel_sales / total_sales) * 100, 3)
-    print("Organic Dunkel: " + str(dunkel_ratio) + "%\n")
 
-    return red_helles_ratio, red_helles_ratio, dunkel_ratio
+    print("Total Sales: " + str(total_sales) + "\nRed Helles: " +
+          str(red_helles_ratio) + "%\nPilsner: " + str(pilsner_ratio) +
+          "%\nDunkel: " + str(dunkel_ratio) + "%")
+    return red_helles_ratio, pilsner_ratio, dunkel_ratio
 
 
 def get_avg_growth_rate(data_frame: pandas.core.frame.DataFrame) -> float:
@@ -73,19 +69,11 @@ def get_avg_growth_rate(data_frame: pandas.core.frame.DataFrame) -> float:
         data_frame (pandas.core.frame.DataFrame): Sales data of beers.
 
     Returns:
-        red_helles_growth_rate (float):
-        pilsner_growth_rate (float):
-        dunkel_growth_rate (float):
+        red_helles_growth (float): Average growth rate of sales for Red Helles.
+        pilsner_growth (float): Average growth rate of sales for Pilsner.
+        dunkel_growth (float): Average growth rate of sales for Dunkel.
     """
-    """# Sets filters for each month.
-    nov18_filter = data_frame["Date Required"].str.contains("Nov-18")
-
-    # Calculates Nov-18 sales for Red Helles.
-    red_helles_filter = data_frame["Recipe"].isin(["Organic Red Helles"])
-    red_helles_nov18 = data_frame[nov18_filter & red_helles_filter]
-    red_helles_nov18_sales = red_helles_nov18["Quantity ordered"].sum()
-    print(red_helles_nov18_sales)"""
-
+    # Growth rates for Red Helles, Pilsner, and Dunkel.
     red_helles_growth = float()
     pilsner_growth = float()
     dunkel_growth = float()
@@ -132,7 +120,7 @@ def get_avg_growth_rate(data_frame: pandas.core.frame.DataFrame) -> float:
     red_helles_growth /= 11
     pilsner_growth /= 11
     dunkel_growth /= 11
-    print("Red Helles Growth: " + str(red_helles_growth) + "\nPilsner Growth: " +
+    print("\nRed Helles Growth: " + str(red_helles_growth) + "\nPilsner Growth: " +
           str(pilsner_growth) + "\nDunkel Growth: " + str(dunkel_growth))
 
 
