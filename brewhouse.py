@@ -87,35 +87,53 @@ def get_avg_growth_rate(data_frame: pandas.core.frame.DataFrame) -> float:
     print(red_helles_nov18_sales)"""
 
     red_helles_growth = float()
+    pilsner_growth = float()
+    dunkel_growth = float()
 
     # Sets filters for each month.
     months = ["Nov-18", "Dec-18", "Jan-19", "Feb-19", "Mar-19", "Apr-19",
               "May-19", "Jun-19", "Jul-19", "Aug-19", "Sep-19", "Oct-19"]
     beers = ["Organic Red Helles", "Organic Pilsner", "Organic Dunkel"]
 
-    # Calculates average monthly growth rate for each type of beer.
+    # Iterates through monthly sales of each type of beer.
     for beer in beers:
-        month_filter_previous = data_frame["Date Required"].str.contains("Nov-18")
+        month_filter_previous = data_frame["Date Required"].str.contains(
+            "Nov-18")
         for month in months:
             month_filter_current = data_frame["Date Required"].str.contains(
                 month)
             beer_filter = data_frame["Recipe"].isin([beer])
 
-            month_data_current = data_frame[month_filter_current & beer_filter]
-            month_data_previous = data_frame[month_filter_previous & beer_filter]
+            # Filters data to the sales in a month for that type of beer.
+            month_data_current = data_frame[month_filter_current &
+                                            beer_filter]
+            month_data_previous = data_frame[month_filter_previous &
+                                             beer_filter]
             month_sales_current = int(
                 month_data_current["Quantity ordered"].sum())
             month_sales_previous = int(
                 month_data_previous["Quantity ordered"].sum())
 
+            # Accumulates growth rate for each type of beer.
             if beer == "Organic Red Helles" and month != "Nov-18":
                 red_helles_growth += (month_sales_current /
                                       month_sales_previous)
+            elif beer == "Organic Pilsner" and month != "Nov-18":
+                pilsner_growth += (month_sales_current /
+                                   month_sales_previous)
+            elif beer == "Organic Dunkel" and month != "Nov-18":
+                dunkel_growth += (month_sales_current /
+                                  month_sales_previous)
 
+            # Updates previous month to enable monthly sales comparisons.
             month_filter_previous = month_filter_current
 
+    # Calculates mean from cumulative growth rates.
     red_helles_growth /= 11
-    print(red_helles_growth)
+    pilsner_growth /= 11
+    dunkel_growth /= 11
+    print("Red Helles Growth: " + str(red_helles_growth) + "\nPilsner Growth: " +
+          str(pilsner_growth) + "\nDunkel Growth: " + str(dunkel_growth))
 
 
 # Prevents the code from executing when the script is imported as a module.
