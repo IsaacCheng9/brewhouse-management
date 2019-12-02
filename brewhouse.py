@@ -86,32 +86,35 @@ def get_avg_growth_rate(data_frame: pandas.core.frame.DataFrame) -> float:
     red_helles_nov18_sales = red_helles_nov18["Quantity ordered"].sum()
     print(red_helles_nov18_sales)"""
 
-    red_helles_growth = []
-    pilsner_growth = []
-    dunkel_growth = []
-    month_filter_previous = data_frame["Date Required"].str.contains("Nov-18")
+    red_helles_growth = float()
 
     # Sets filters for each month.
     months = ["Nov-18", "Dec-18", "Jan-19", "Feb-19", "Mar-19", "Apr-19",
               "May-19", "Jun-19", "Jul-19", "Aug-19", "Sep-19", "Oct-19"]
     beers = ["Organic Red Helles", "Organic Pilsner", "Organic Dunkel"]
+
+    # Calculates average monthly growth rate for each type of beer.
     for beer in beers:
+        month_filter_previous = data_frame["Date Required"].str.contains("Nov-18")
         for month in months:
-            # Calculates average monthly growth rate for each type of beer.
-            month_filter_current = data_frame["Date Required"].str.contains(month)
+            month_filter_current = data_frame["Date Required"].str.contains(
+                month)
             beer_filter = data_frame["Recipe"].isin([beer])
-            if beer == "Organic Red Helles":
-                red_helles_data_current = data_frame[month_filter_current & beer_filter]
-                red_helles_data_previous = data_frame[month_filter_previous & beer_filter]
-                red_helles_sales_current = red_helles_data_current["Quantity ordered"].sum(
-                )
-                red_helles_sales_previous = red_helles_data_previous["Quantity ordered"].sum(
-                )
-                if month != "Nov-18":
-                    red_helles_growth += (red_helles_sales_current -
-                                          red_helles_sales_previous)
+
+            month_data_current = data_frame[month_filter_current & beer_filter]
+            month_data_previous = data_frame[month_filter_previous & beer_filter]
+            month_sales_current = int(
+                month_data_current["Quantity ordered"].sum())
+            month_sales_previous = int(
+                month_data_previous["Quantity ordered"].sum())
+
+            if beer == "Organic Red Helles" and month != "Nov-18":
+                red_helles_growth += (month_sales_current /
+                                      month_sales_previous)
+
             month_filter_previous = month_filter_current
 
+    red_helles_growth /= 11
     print(red_helles_growth)
 
 
