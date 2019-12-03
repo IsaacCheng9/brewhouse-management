@@ -79,9 +79,9 @@ class BrewhouseWindow(QMainWindow, Ui_mwindow_brewhouse):
         dunkel_sales = int(dunkel["Quantity ordered"].sum())
         dunkel_ratio = round((dunkel_sales / total_sales) * 100, 3)
 
-        print("Total Sales: " + str(total_sales) + "\nRed Helles: " +
-              str(red_helles_ratio) + "%\nPilsner: " + str(pilsner_ratio) +
-              "%\nDunkel: " + str(dunkel_ratio) + "%")
+        print("Total Sales: " + str(total_sales) + "\nRed Helles Ratio: " +
+              str(red_helles_ratio) + "%\nPilsner Ratio: " + str(pilsner_ratio) +
+              "%\nDunkel Ratio: " + str(dunkel_ratio) + "%")
 
         self.lbl_overall_sales.setText(
             "Overall - " + str(total_sales))
