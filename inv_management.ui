@@ -1,0 +1,209 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>dialog_inv_management</class>
+ <widget class="QDialog" name="dialog_inv_management">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>500</width>
+    <height>375</height>
+   </rect>
+  </property>
+  <property name="font">
+   <font>
+    <family>Arial</family>
+    <pointsize>10</pointsize>
+   </font>
+  </property>
+  <property name="windowTitle">
+   <string>Inventory Management - Barnaby's Brewhouse</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout">
+   <item row="0" column="0">
+    <widget class="QScrollArea" name="scroll_area">
+     <property name="font">
+      <font>
+       <kerning>true</kerning>
+      </font>
+     </property>
+     <property name="frameShape">
+      <enum>QFrame::NoFrame</enum>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Plain</enum>
+     </property>
+     <property name="lineWidth">
+      <number>0</number>
+     </property>
+     <property name="widgetResizable">
+      <bool>true</bool>
+     </property>
+     <widget class="QWidget" name="scroll_area_widget_contents">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>478</width>
+        <height>353</height>
+       </rect>
+      </property>
+      <widget class="QWidget" name="verticalLayoutWidget">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>0</y>
+         <width>321</width>
+         <height>311</height>
+        </rect>
+       </property>
+       <layout class="QVBoxLayout" name="vert_layout_inv_management">
+        <item>
+         <widget class="QLabel" name="lbl_inv_management">
+          <property name="font">
+           <font>
+            <family>Arial</family>
+            <pointsize>14</pointsize>
+            <kerning>true</kerning>
+           </font>
+          </property>
+          <property name="text">
+           <string>Inventory Management</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="Line" name="hori_line_monitoring">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="lbl_inv">
+          <property name="font">
+           <font>
+            <underline>true</underline>
+            <kerning>true</kerning>
+           </font>
+          </property>
+          <property name="text">
+           <string>Inventory</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="lbl_red_helles_inv">
+          <property name="text">
+           <string>Organic Red Helles - </string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="lbl_pilsner_inv">
+          <property name="text">
+           <string>Organic Pilsner - </string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="lbl_dunkel_inv">
+          <property name="text">
+           <string>Organic Dunkel - </string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="Line" name="hori_line_inv">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="lbl_update_inv">
+          <property name="font">
+           <font>
+            <underline>true</underline>
+            <kerning>true</kerning>
+           </font>
+          </property>
+          <property name="text">
+           <string>Update Inventory</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <layout class="QGridLayout" name="grid_layout_add_inv">
+          <item row="2" column="0">
+           <widget class="QLabel" name="lbl_add_inv_volume">
+            <property name="text">
+             <string>Volume (L):</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QLabel" name="lbl_add_inv_recipe">
+            <property name="text">
+             <string>Beer Recipe:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QComboBox" name="combo_box_add_inv_recipe">
+            <item>
+             <property name="text">
+              <string>Organic Red Helles</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Organic Pilsner</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Organic Dunkel</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+          <item row="2" column="1">
+           <widget class="QLineEdit" name="line_edit_add_inv_volume">
+            <property name="maxLength">
+             <number>13</number>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item alignment="Qt::AlignLeft">
+         <widget class="QPushButton" name="btn_add_inv">
+          <property name="text">
+           <string>Add to Inventory</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <spacer name="vert_spacer_inv_management">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>40</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+       </layout>
+      </widget>
+     </widget>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
