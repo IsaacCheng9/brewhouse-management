@@ -31,9 +31,16 @@ class BrewhouseWindow(QMainWindow, Ui_mwindow_brewhouse):
         # Reads sales data from the CSV file.
         data_frame = self.read_sales_data()
 
-        # Calculates ratios of sales of beer.
-        (red_helles_ratio, pilsner_ratio,
-         dunkel_ratio) = self.get_sales_ratio(data_frame)
+        # Calculates total sales and sales ratios of beer.
+        (total_sales, red_helles_sales, red_helles_ratio,
+         pilsner_sales, pilsner_ratio,
+         dunkel_sales, dunkel_ratio) = self.get_sales_ratio(data_frame)
+        self.lbl_red_helles_sales.setText(
+            "Organic Red Helles - " + str(red_helles_sales))
+        self.lbl_pilsner_sales.setText(
+            "Organic Pilsner - " + str(pilsner_sales))
+        self.lbl_dunkel_sales.setText(
+            "Organic Dunkel - " + str(dunkel_sales))
         self.lbl_red_helles_ratio.setText(
             "Organic Red Helles - " + str(red_helles_ratio) + "%")
         self.lbl_pilsner_ratio.setText(
@@ -50,12 +57,13 @@ class BrewhouseWindow(QMainWindow, Ui_mwindow_brewhouse):
             "Organic Red Helles - " + str(red_helles_growth_pct) + "%")
         self.lbl_pilsner_growth.setText(
             "Organic Pilsner - " + str(pilsner_growth_pct) + "%")
-        self.lbl_red_helles_growth.setText(
+        self.lbl_dunkel_growth.setText(
             "Organic Dunkel - " + str(dunkel_growth_pct) + "%")
 
         # Predicts future sales of a given beer in a given month.
-        self.predict_sales(data_frame, beers, red_helles_growth,
-                           pilsner_growth, dunkel_growth)
+        self.btn_predict.clicked.connect(lambda: self.predict_sales(
+            data_frame, beers, red_helles_growth,
+            pilsner_growth, dunkel_growth))
 
     def read_sales_data(self) -> pandas.core.frame.DataFrame:
         """
@@ -70,18 +78,24 @@ class BrewhouseWindow(QMainWindow, Ui_mwindow_brewhouse):
         return data_frame
 
     def get_sales_ratio(self, data_frame:
-                        pandas.core.frame.DataFrame) -> Tuple[float, float,
+                        pandas.core.frame.DataFrame) -> Tuple[int, int, float,
+                                                              int, float, int,
                                                               float]:
         """
-        Calculates the ratio of sales for different beers from sales data.
+        Calculates the total sales and ratio of sales for different beers
+        from sales data.
 
         Args:
             data_frame (pandas.core.frame.DataFrame): Sales data of beers.
 
         Returns:
-            red_helles_ratio (float): Sales ratio of Organic Red Helles.
-            pilsner_ratio (float): Sales ratio of Organic Pilsner.
-            dunkel_ratio (float): Sales ratio of Organic Dunkel.
+            total_sales (int): Total sales of all beers.
+            red_helles_sales (int): Total sales of Red Helles.
+            red_helles_ratio (float): Sales ratio of Red Helles.
+            pilsner_sales (int): Total sales of Pilsner.
+            pilsner_ratio (float): Sales ratio of Pilsner.
+            dunkel_sales (int): Total sales of Dunkel.
+            dunkel_ratio (float): Sales ratio of Dunkel.
         """
         # Sums the total sales of all beers.
         total_sales = int(data_frame["Quantity ordered"].sum())
@@ -105,7 +119,8 @@ class BrewhouseWindow(QMainWindow, Ui_mwindow_brewhouse):
               str(red_helles_ratio) + "%\nPilsner: " + str(pilsner_ratio) +
               "%\nDunkel: " + str(dunkel_ratio) + "%")
 
-        return red_helles_ratio, pilsner_ratio, dunkel_ratio
+        return (total_sales, red_helles_sales, red_helles_ratio, pilsner_sales,
+                pilsner_ratio, dunkel_sales, dunkel_ratio)
 
     def get_avg_growth_rate(self, data_frame:
                             pandas.core.frame.DataFrame) -> Tuple[list, float,
@@ -212,12 +227,9 @@ class BrewhouseWindow(QMainWindow, Ui_mwindow_brewhouse):
                                     a given month.
         """
 
-        # Asks for the beer and month to predict the sales for.
-        prediction_beer = input(
-            "\nPlease enter which beer you would like to "
-            "predict sales for (Red Helles/Pilsner/Dunkel): ")
-        prediction_date = input("Please enter the date you would like the "
-                                "prediction for (DD/MM/YYYY): ")
+        # Gets the beer and month to predict the sales for.
+        prediction_beer = self.combo_box_beer.currentText()
+        prediction_date = self.date_edit_predict.text()
 
         # Calculates number of months since the last month of sales data.
         format_date = "%d/%m/%Y"
@@ -233,16 +245,19 @@ class BrewhouseWindow(QMainWindow, Ui_mwindow_brewhouse):
         last_month_data = data_frame[last_month_filter & beer_filter]
         last_month_sales = int(last_month_data["Quantity ordered"].sum())
 
-        if prediction_beer == "Red Helles":
+        if prediction_beer == "Organic Red Helles":
             prediction_sales = int((last_month_sales *
                                     (red_helles_growth ** month_difference)))
-        elif prediction_beer == "Pilsner":
+        elif prediction_beer == "Organic Pilsner":
             prediction_sales = int((last_month_sales *
                                     (pilsner_growth ** month_difference)))
-        elif prediction_beer == "Dunkel":
+        elif prediction_beer == "Organic Dunkel":
             prediction_sales = int((last_month_sales *
                                     (dunkel_growth ** month_difference)))
-        print("Predicted Sales: " + str(prediction_sales))
+        print("\nPredicted Sales: " + str(prediction_sales))
+
+        self.lbl_predict_result.setText(
+            "Estimated Number of Sales: " + str(prediction_sales))
 
         return prediction_sales
 
