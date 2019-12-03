@@ -12,6 +12,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QDialog, QMainWindow
 
 from brewhouse_setup import Ui_mwindow_brewhouse
+from inv_management_setup import Ui_dialog_inv_management
 from process_monitoring_setup import Ui_dialog_monitoring
 
 
@@ -29,6 +30,10 @@ class BrewhouseWindow(QMainWindow, Ui_mwindow_brewhouse):
     def __init__(self) -> None:
         super().__init__()
         self.setupUi(self)
+
+        # Connects 'Inventory Management' button to the inventory dialog.
+        self.btn_inv_management.clicked.connect(
+            self.open_dialog_inv_management)
 
         # Connects 'Process Monitoring' button to the monitoring dialog.
         self.btn_process_monitoring.clicked.connect(
@@ -48,6 +53,11 @@ class BrewhouseWindow(QMainWindow, Ui_mwindow_brewhouse):
         self.btn_predict.clicked.connect(lambda: self.predict_sales(
             data_frame, beers, red_helles_growth,
             pilsner_growth, dunkel_growth))
+
+    def open_dialog_inv_management(self) -> None:
+        """Opens the dialog for the user to manage inventory."""
+        self.Dialog = InventoryManagementDialog()
+        self.Dialog.open()
 
     def open_dialog_monitoring(self) -> None:
         """Opens the dialog for the user to monitor brewing processes."""
@@ -235,21 +245,24 @@ class BrewhouseWindow(QMainWindow, Ui_mwindow_brewhouse):
         elif prediction_beer == "Organic Dunkel":
             prediction_sales = int((last_month_sales *
                                     (dunkel_growth ** month_difference)))
-        print("\nPredicted Sales: " + str(prediction_sales))
+        print("\nEstimated Number of Sales: " + str(prediction_sales))
 
         self.lbl_predict_result.setText(
             "Estimated Number of Sales: " + str(prediction_sales))
 
 
-class ProcessMonitoringDialog(QDialog, Ui_dialog_monitoring):
-    """Contains the dialog window for process monitoring."""
-
+class InventoryManagementDialog(QDialog, Ui_dialog_inv_management):
+    """Contains the dialog window for inventory management."""
     def __init__(self):
         super().__init__()
         self.setupUi(self)
 
-    def process_monitoring(self):
-        pass
+
+class ProcessMonitoringDialog(QDialog, Ui_dialog_monitoring):
+    """Contains the dialog window for process monitoring."""
+    def __init__(self):
+        super().__init__()
+        self.setupUi(self)
 
 
 # Prevents the code from executing when the script is imported as a module.
