@@ -278,7 +278,7 @@
        </property>
       </widget>
      </item>
-     <item>
+     <item alignment="Qt::AlignLeft">
       <widget class="QPushButton" name="btn_predict">
        <property name="text">
         <string>Update Sales Prediction</string>

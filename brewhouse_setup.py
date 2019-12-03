@@ -144,7 +144,7 @@ class Ui_mwindow_brewhouse(object):
         self.vert_layout_brewhouse.addWidget(self.lbl_predict_result)
         self.btn_predict = QtWidgets.QPushButton(self.layoutWidget)
         self.btn_predict.setObjectName("btn_predict")
-        self.vert_layout_brewhouse.addWidget(self.btn_predict)
+        self.vert_layout_brewhouse.addWidget(self.btn_predict, 0, QtCore.Qt.AlignLeft)
         spacerItem1 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
         self.vert_layout_brewhouse.addItem(spacerItem1)
         mwindow_brewhouse.setCentralWidget(self.central_widget)
