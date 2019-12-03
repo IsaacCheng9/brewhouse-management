@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>dialog_monitoring</class>
+ <widget class="QDialog" name="dialog_monitoring">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>960</width>
+    <height>720</height>
+   </rect>
+  </property>
+  <property name="font">
+   <font>
+    <family>Arial</family>
+    <pointsize>10</pointsize>
+   </font>
+  </property>
+  <property name="windowTitle">
+   <string>Barnaby's Brewhouse: Process Monitoring</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout">
+   <item row="0" column="0">
+    <widget class="QScrollArea" name="scroll_area">
+     <property name="font">
+      <font>
+       <kerning>true</kerning>
+      </font>
+     </property>
+     <property name="frameShape">
+      <enum>QFrame::NoFrame</enum>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Plain</enum>
+     </property>
+     <property name="lineWidth">
+      <number>0</number>
+     </property>
+     <property name="widgetResizable">
+      <bool>true</bool>
+     </property>
+     <widget class="QWidget" name="scroll_area_widget_contents">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>938</width>
+        <height>698</height>
+       </rect>
+      </property>
+      <widget class="QWidget" name="verticalLayoutWidget">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>0</y>
+         <width>441</width>
+         <height>651</height>
+        </rect>
+       </property>
+       <layout class="QVBoxLayout" name="vert_layout_monitoring">
+        <item>
+         <widget class="QLabel" name="lbl_monitoring">
+          <property name="font">
+           <font>
+            <family>Arial</family>
+            <pointsize>14</pointsize>
+            <kerning>true</kerning>
+           </font>
+          </property>
+          <property name="text">
+           <string>Process Monitoring</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="Line" name="hori_line_monitoring">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="lbl_inv">
+          <property name="font">
+           <font>
+            <underline>true</underline>
+            <kerning>true</kerning>
+           </font>
+          </property>
+          <property name="text">
+           <string>Inventory</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <layout class="QGridLayout" name="grid_layout_add_inv">
+          <item row="0" column="0">
+           <widget class="QLabel" name="lbl_add_inv_recipe">
+            <property name="text">
+             <string>Beer Recipe:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QLabel" name="lbl_add_inv_volume">
+            <property name="text">
+             <string>Volume (L):</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QComboBox" name="combo_box_add_inv_recipe">
+            <item>
+             <property name="text">
+              <string>Organic Red Helles</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Organic Pilsner</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Organic Dunkel</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QLineEdit" name="line_edit_add_inv_volume"/>
+          </item>
+         </layout>
+        </item>
+        <item>
+         <widget class="Line" name="hori_line_inv">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="lbl_ongoing_processes">
+          <property name="font">
+           <font>
+            <underline>true</underline>
+            <kerning>true</kerning>
+           </font>
+          </property>
+          <property name="text">
+           <string>Ongoing Processes</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="lbl_ongoing_processes_2">
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="Line" name="hori_line_ongoing_processes">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="lbl_start_process">
+          <property name="font">
+           <font>
+            <underline>true</underline>
+            <kerning>true</kerning>
+           </font>
+          </property>
+          <property name="text">
+           <string>Start Process</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <layout class="QGridLayout" name="grid_layout_start_process">
+          <item row="1" column="0">
+           <widget class="QLabel" name="lbl_new_recipe">
+            <property name="text">
+             <string>Beer Recipe:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QComboBox" name="combo_box_new_brew_process">
+            <item>
+             <property name="text">
+              <string>Hot Brew</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Fermentation</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Conditioning and Carbonation</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Bottling and Labelling</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QComboBox" name="combo_box_new_recipe">
+            <item>
+             <property name="text">
+              <string>Organic Red Helles</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Organic Pilsner</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Organic Dunkel</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+          <item row="2" column="1">
+           <widget class="QComboBox" name="combo_box_new_tank">
+            <item>
+             <property name="text">
+              <string>Albert (1000 L, Fermenter/Conditioner)</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Brigadier (800 L, Fermenter/Conditioner)</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Camilla (1000 L, Fermenter/Conditioner)</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Dylon (800 L, Fermenter/Conditioner)</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Emily (1000 L, Fermenter/Conditioner)</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Florence (800 L, Fermenter/Conditioner)</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Gertrude (680 L, Conditioner)</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Harry (680 L, Conditioner)</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>R2D2 (800 L, Fermenter)</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+          <item row="0" column="0">
+           <widget class="QLabel" name="lbl_new_brew_process">
+            <property name="text">
+             <string>Brew Process:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="1">
+           <widget class="QLineEdit" name="line_edit_new_volume"/>
+          </item>
+          <item row="2" column="0">
+           <widget class="QLabel" name="lbl_new_tank">
+            <property name="text">
+             <string>Tank:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="0">
+           <widget class="QLabel" name="lbl_new_volume">
+            <property name="text">
+             <string>Volume (L):</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item alignment="Qt::AlignLeft">
+         <widget class="QPushButton" name="btn_start_process">
+          <property name="text">
+           <string>Start Process</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <spacer name="vert_spacer_monitoring">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>40</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+       </layout>
+      </widget>
+     </widget>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
