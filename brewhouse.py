@@ -23,8 +23,8 @@ def main() -> None:
 
 
 class BrewhouseWindow(QMainWindow, Ui_mwindow_brewhouse):
+    """Contains the main window for the Brewhouse application."""
     def __init__(self) -> None:
-        """Contains the main window for the Brewhouse application."""
         super().__init__()
         self.setupUi(self)
 
