@@ -54,11 +54,31 @@
      <item>
       <layout class="QHBoxLayout" name="hori_layout_nav">
        <item alignment="Qt::AlignLeft">
+        <widget class="QPushButton" name="btn_inv_management">
+         <property name="text">
+          <string>Inventory Management</string>
+         </property>
+        </widget>
+       </item>
+       <item alignment="Qt::AlignLeft">
         <widget class="QPushButton" name="btn_process_monitoring">
          <property name="text">
           <string>Process Monitoring</string>
          </property>
         </widget>
+       </item>
+       <item>
+        <spacer name="hori_spacer_nav">
+         <property name="orientation">
+          <enum>Qt::Horizontal</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>40</width>
+           <height>20</height>
+          </size>
+         </property>
+        </spacer>
        </item>
       </layout>
      </item>
