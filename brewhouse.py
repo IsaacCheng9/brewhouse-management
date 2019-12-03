@@ -53,35 +53,11 @@ class BrewhouseWindow(QMainWindow, Ui_mwindow_brewhouse):
         data_frame = self.read_sales_data()
 
         # Calculates total sales and sales ratios of beer.
-        (total_sales, red_helles_sales, red_helles_ratio,
-         pilsner_sales, pilsner_ratio,
-         dunkel_sales, dunkel_ratio) = self.get_sales_ratio(data_frame)
-        self.lbl_overall_sales.setText(
-            "Overall - " + str(total_sales))
-        self.lbl_red_helles_sales.setText(
-            "Organic Red Helles - " + str(red_helles_sales))
-        self.lbl_pilsner_sales.setText(
-            "Organic Pilsner - " + str(pilsner_sales))
-        self.lbl_dunkel_sales.setText(
-            "Organic Dunkel - " + str(dunkel_sales))
-        self.lbl_red_helles_ratio.setText(
-            "Organic Red Helles - " + str(red_helles_ratio) + "%")
-        self.lbl_pilsner_ratio.setText(
-            "Organic Pilsner - " + str(pilsner_ratio) + "%")
-        self.lbl_dunkel_ratio.setText(
-            "Organic Dunkel - " + str(dunkel_ratio) + "%")
+        self.get_sales_ratio(data_frame)
 
         # Calculates average monthly growth rates in sales of beer.
         (beers, red_helles_growth, pilsner_growth,
-         dunkel_growth, red_helles_growth_pct,
-         pilsner_growth_pct,
-         dunkel_growth_pct) = self.get_avg_growth_rate(data_frame)
-        self.lbl_red_helles_growth.setText(
-            "Organic Red Helles - " + str(red_helles_growth_pct) + "%")
-        self.lbl_pilsner_growth.setText(
-            "Organic Pilsner - " + str(pilsner_growth_pct) + "%")
-        self.lbl_dunkel_growth.setText(
-            "Organic Dunkel - " + str(dunkel_growth_pct) + "%")
+         dunkel_growth) = self.get_avg_growth_rate(data_frame)
 
         # Predicts future sales of a given beer in a given month.
         self.btn_predict.clicked.connect(lambda: self.predict_sales(
@@ -100,22 +76,11 @@ class BrewhouseWindow(QMainWindow, Ui_mwindow_brewhouse):
         return data_frame
 
     def get_sales_ratio(self, data_frame:
-                        pandas.core.frame.DataFrame) -> Tuple[int, int, float,
-                                                              int, float, int,
-                                                              float]:
+                        pandas.core.frame.DataFrame):
         """Calculates total sales and sales ratio for different beers.
 
         Args:
             data_frame (pandas.core.frame.DataFrame): Sales data of beers.
-
-        Returns:
-            total_sales (int): Total sales of all beers.
-            red_helles_sales (int): Total sales of Red Helles.
-            red_helles_ratio (float): Sales ratio of Red Helles.
-            pilsner_sales (int): Total sales of Pilsner.
-            pilsner_ratio (float): Sales ratio of Pilsner.
-            dunkel_sales (int): Total sales of Dunkel.
-            dunkel_ratio (float): Sales ratio of Dunkel.
         """
         # Sums the total sales of all beers.
         total_sales = int(data_frame["Quantity ordered"].sum())
@@ -139,14 +104,23 @@ class BrewhouseWindow(QMainWindow, Ui_mwindow_brewhouse):
               str(red_helles_ratio) + "%\nPilsner: " + str(pilsner_ratio) +
               "%\nDunkel: " + str(dunkel_ratio) + "%")
 
-        return (total_sales, red_helles_sales, red_helles_ratio, pilsner_sales,
-                pilsner_ratio, dunkel_sales, dunkel_ratio)
+        self.lbl_overall_sales.setText(
+            "Overall - " + str(total_sales))
+        self.lbl_red_helles_sales.setText(
+            "Organic Red Helles - " + str(red_helles_sales))
+        self.lbl_pilsner_sales.setText(
+            "Organic Pilsner - " + str(pilsner_sales))
+        self.lbl_dunkel_sales.setText(
+            "Organic Dunkel - " + str(dunkel_sales))
+        self.lbl_red_helles_ratio.setText(
+            "Organic Red Helles - " + str(red_helles_ratio) + "%")
+        self.lbl_pilsner_ratio.setText(
+            "Organic Pilsner - " + str(pilsner_ratio) + "%")
+        self.lbl_dunkel_ratio.setText(
+            "Organic Dunkel - " + str(dunkel_ratio) + "%")
 
     def get_avg_growth_rate(self, data_frame:
                             pandas.core.frame.DataFrame) -> Tuple[list, float,
-                                                                  float,
-                                                                  float,
-                                                                  float,
                                                                   float,
                                                                   float]:
         """Calculates the average monthly growth rate from sales data.
@@ -160,12 +134,6 @@ class BrewhouseWindow(QMainWindow, Ui_mwindow_brewhouse):
                                        Helles.
             pilsner_growth (float): Average growth rate of sales for Pilsner.
             dunkel_growth (float): Average growth rate of sales for Dunkel.
-            red_helles_growth_pct (float): Average growth rate of sales for Red
-                                           Helles shown as a percentage to 3dp.
-            pilsner_growth_pct (float): Average growth rate of sales for
-                                        Pilsner shown as a percentage to 3dp.
-            dunkel_growth_pct (float): Average growth rate of sales for Dunkel
-                                       shown as a percentage to 3dp.
         """
         # Growth rates for Red Helles, Pilsner, and Dunkel.
         red_helles_growth = float()
@@ -222,8 +190,14 @@ class BrewhouseWindow(QMainWindow, Ui_mwindow_brewhouse):
               "%\nPilsner Growth: " + str(pilsner_growth_pct) +
               "%\nDunkel Growth: " + str(dunkel_growth_pct) + "%")
 
-        return (beers, red_helles_growth, pilsner_growth, dunkel_growth,
-                red_helles_growth_pct, pilsner_growth_pct, dunkel_growth_pct)
+        self.lbl_red_helles_growth.setText(
+            "Organic Red Helles - " + str(red_helles_growth_pct) + "%")
+        self.lbl_pilsner_growth.setText(
+            "Organic Pilsner - " + str(pilsner_growth_pct) + "%")
+        self.lbl_dunkel_growth.setText(
+            "Organic Dunkel - " + str(dunkel_growth_pct) + "%")
+
+        return beers, red_helles_growth, pilsner_growth, dunkel_growth
 
     def predict_sales(self, data_frame:
                       pandas.core.frame.DataFrame, beers: list,
@@ -275,8 +249,6 @@ class BrewhouseWindow(QMainWindow, Ui_mwindow_brewhouse):
 
         self.lbl_predict_result.setText(
             "Estimated Number of Sales: " + str(prediction_sales))
-
-        return prediction_sales
 
     def process_monitoring(self):
         pass
