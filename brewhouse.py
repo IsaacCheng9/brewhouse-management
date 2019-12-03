@@ -12,6 +12,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 from PyQt5.QtWidgets import QDialog, QMainWindow
 
 from brewhouse_setup import Ui_mwindow_brewhouse
+from process_monitoring_setup import Ui_dialog_monitoring
 
 
 def main() -> None:
@@ -24,9 +25,14 @@ def main() -> None:
 
 class BrewhouseWindow(QMainWindow, Ui_mwindow_brewhouse):
     """Contains the main window for the Brewhouse application."""
+
     def __init__(self) -> None:
         super().__init__()
         self.setupUi(self)
+
+        # Connects 'Process Monitoring' button to the monitoring dialog.
+        self.btn_process_monitoring.clicked.connect(
+            self.open_dialog_monitoring)
 
         # Reads sales data from the CSV file.
         data_frame = self.read_sales_data()
@@ -42,6 +48,11 @@ class BrewhouseWindow(QMainWindow, Ui_mwindow_brewhouse):
         self.btn_predict.clicked.connect(lambda: self.predict_sales(
             data_frame, beers, red_helles_growth,
             pilsner_growth, dunkel_growth))
+
+    def open_dialog_monitoring(self) -> None:
+        """Opens the dialog for the user to monitor brewing processes."""
+        self.Dialog = ProcessMonitoringDialog()
+        self.Dialog.open()
 
     def read_sales_data(self) -> pandas.core.frame.DataFrame:
         """Reads the sales data and loads it to a variable.
@@ -228,6 +239,14 @@ class BrewhouseWindow(QMainWindow, Ui_mwindow_brewhouse):
 
         self.lbl_predict_result.setText(
             "Estimated Number of Sales: " + str(prediction_sales))
+
+
+class ProcessMonitoringDialog(QDialog, Ui_dialog_monitoring):
+    """Contains the dialog window for process monitoring."""
+
+    def __init__(self):
+        super().__init__()
+        self.setupUi(self)
 
     def process_monitoring(self):
         pass
