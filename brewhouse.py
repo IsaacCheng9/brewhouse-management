@@ -15,8 +15,7 @@ from brewhouse_setup import Ui_mwindow_brewhouse
 
 
 def main() -> None:
-    """
-    """
+    """Opens the program window, and exits program when window is closed."""
     app = QtWidgets.QApplication(sys.argv)
     mwindow_brewhouse = BrewhouseWindow()
     mwindow_brewhouse.show()
@@ -24,7 +23,29 @@ def main() -> None:
 
 
 class BrewhouseWindow(QMainWindow, Ui_mwindow_brewhouse):
-    def __init__(self):
+    def __init__(self) -> None:
+        """Contains the main window for the Brewhouse application.
+
+        Attributes:
+            lbl_overall_sales (PyQt5.QtWidgets.QLabel): Overall sales of beer.
+            lbl_red_helles_sales (PyQt5.QtWidgets.QLabel): Sales of Red Helles.
+            lbl_pilsner_sales (PyQt5.QtWidgets.QLabel): Sales of Pilsner.
+            lbl_dunkel_sales (PyQt5.QtWidgets.QLabel): Sales of Dunkel.
+            lbl_red_helles_ratio (PyQt5.QtWidgets.QLabel): Sales ratio of Red
+                                                           Helles.
+            lbl_pilsner_ratio (PyQt5.QtWidgets.QLabel): Sales ratio of Pilsner.
+            lbl_dunkel_ratio (PyQt5.QtWidgets.QLabel): Sales ratio of Dunkel.
+            btn_predict (PyQt5.QtWidgets.QPushButton): Updates sales
+                                                       predictions.
+            lbl_red_helles_growth (PyQt5.QtWidgets.QLabel): Percentage monthly
+                                                            growth of Red
+                                                            Helles sales.
+            lbl_pilsner_growth (PyQt5.QtWidgets.QLabel): Percentage monthly
+                                                         growth of Pilsner
+                                                         sales.
+            lbl_dunkel_growth (PyQt5.QtWidgets.QLabel): Percentage monthly
+                                                        growth of Dunkel sales.
+        """
         super().__init__()
         self.setupUi(self)
 
@@ -68,8 +89,7 @@ class BrewhouseWindow(QMainWindow, Ui_mwindow_brewhouse):
             pilsner_growth, dunkel_growth))
 
     def read_sales_data(self) -> pandas.core.frame.DataFrame:
-        """
-        Reads the sales data and loads it to a variable.
+        """Reads the sales data and loads it to a variable.
 
         Returns:
             data_frame (pandas.core.frame.DataFrame): Sales data of beers.
@@ -83,9 +103,7 @@ class BrewhouseWindow(QMainWindow, Ui_mwindow_brewhouse):
                         pandas.core.frame.DataFrame) -> Tuple[int, int, float,
                                                               int, float, int,
                                                               float]:
-        """
-        Calculates the total sales and ratio of sales for different beers
-        from sales data.
+        """Calculates total sales and sales ratio for different beers.
 
         Args:
             data_frame (pandas.core.frame.DataFrame): Sales data of beers.
@@ -131,8 +149,7 @@ class BrewhouseWindow(QMainWindow, Ui_mwindow_brewhouse):
                                                                   float,
                                                                   float,
                                                                   float]:
-        """
-        Calculates the average monthly growth rate from sales data.
+        """Calculates the average monthly growth rate from sales data.
 
         Args:
             data_frame (pandas.core.frame.DataFrame): Sales data of beers.
@@ -212,9 +229,7 @@ class BrewhouseWindow(QMainWindow, Ui_mwindow_brewhouse):
                       pandas.core.frame.DataFrame, beers: list,
                       red_helles_growth: float, pilsner_growth: float,
                       dunkel_growth: float) -> int:
-        """
-        Calculates future sales of Red Helles, Pilsner, and Dunkel using
-        previous sales data.
+        """Predicts future sales of Red Helles, Pilsner, and Dunkel.
 
         Args:
             data_frame (pandas.core.frame.DataFrame): Sales data of beers.
@@ -262,16 +277,6 @@ class BrewhouseWindow(QMainWindow, Ui_mwindow_brewhouse):
             "Estimated Number of Sales: " + str(prediction_sales))
 
         return prediction_sales
-
-        """months = ["Nov-19", "Dec-19", "Jan-20", "Feb-20", "Mar-20",
-                "Apr-20", "May-20", "Jun-20", "Jul-20", "Aug-20", "Sep-20",
-                "Oct-20", "Nov-20"]
-
-        for beer in beers:
-            month_filter_previous = data_frame["Date Required"].str.contains(
-                "Oct-19")
-            for month in months:
-                beer_filter = data_frame["Recipe"].isin([beer])"""
 
     def process_monitoring(self):
         pass
