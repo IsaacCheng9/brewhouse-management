@@ -24,28 +24,7 @@ def main() -> None:
 
 class BrewhouseWindow(QMainWindow, Ui_mwindow_brewhouse):
     def __init__(self) -> None:
-        """Contains the main window for the Brewhouse application.
-
-        Attributes:
-            lbl_overall_sales (PyQt5.QtWidgets.QLabel): Overall sales of beer.
-            lbl_red_helles_sales (PyQt5.QtWidgets.QLabel): Sales of Red Helles.
-            lbl_pilsner_sales (PyQt5.QtWidgets.QLabel): Sales of Pilsner.
-            lbl_dunkel_sales (PyQt5.QtWidgets.QLabel): Sales of Dunkel.
-            lbl_red_helles_ratio (PyQt5.QtWidgets.QLabel): Sales ratio of Red
-                                                           Helles.
-            lbl_pilsner_ratio (PyQt5.QtWidgets.QLabel): Sales ratio of Pilsner.
-            lbl_dunkel_ratio (PyQt5.QtWidgets.QLabel): Sales ratio of Dunkel.
-            btn_predict (PyQt5.QtWidgets.QPushButton): Updates sales
-                                                       predictions.
-            lbl_red_helles_growth (PyQt5.QtWidgets.QLabel): Percentage monthly
-                                                            growth of Red
-                                                            Helles sales.
-            lbl_pilsner_growth (PyQt5.QtWidgets.QLabel): Percentage monthly
-                                                         growth of Pilsner
-                                                         sales.
-            lbl_dunkel_growth (PyQt5.QtWidgets.QLabel): Percentage monthly
-                                                        growth of Dunkel sales.
-        """
+        """Contains the main window for the Brewhouse application."""
         super().__init__()
         self.setupUi(self)
 
