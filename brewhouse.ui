@@ -82,6 +82,13 @@
       </widget>
      </item>
      <item>
+      <widget class="QLabel" name="lbl_overall_sales">
+       <property name="text">
+        <string>Overall - </string>
+       </property>
+      </widget>
+     </item>
+     <item>
       <widget class="QLabel" name="lbl_red_helles_sales">
        <property name="text">
         <string>Organic Red Helles - </string>

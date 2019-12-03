@@ -35,6 +35,8 @@ class BrewhouseWindow(QMainWindow, Ui_mwindow_brewhouse):
         (total_sales, red_helles_sales, red_helles_ratio,
          pilsner_sales, pilsner_ratio,
          dunkel_sales, dunkel_ratio) = self.get_sales_ratio(data_frame)
+        self.lbl_overall_sales.setText(
+            "Overall - " + str(total_sales))
         self.lbl_red_helles_sales.setText(
             "Organic Red Helles - " + str(red_helles_sales))
         self.lbl_pilsner_sales.setText(
