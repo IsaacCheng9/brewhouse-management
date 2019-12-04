@@ -497,9 +497,6 @@ class ProcessMonitoringDialog(QDialog, Ui_dialog_monitoring):
         """
         for existing_process in process_list:
             if existing_process["volume"] == 0:
-                for tank in tank_list:
-                    if tank["tank"] == existing_process["tank"]:
-                        tank["volume"] += existing_process["volume"]
                 process_list.remove(existing_process)
 
     def update_tanks(self):
@@ -747,14 +744,7 @@ class ProcessMonitoringDialog(QDialog, Ui_dialog_monitoring):
                 break
 
         # Removes process from process list if they've been used up.
-        for existing_process in process_list:
-            if existing_process["volume"] == 0:
-                for tank in tank_list:
-                    # Adds volume back to tank 
-                    if tank["tank"] == existing_process["tank"]:
-                        tank["volume"] += existing_process["volume"]
-                process_list.remove(existing_process)
-
+        self.remove_used_processes(tank_list, process_list)
         # Saves the updated tank list to the JSON file.
         self.save_tanks(tank_list)
         # Saves the updated process list to the JSON file.
