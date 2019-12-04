@@ -281,7 +281,7 @@ class InventoryManagementDialog(QDialog, Ui_dialog_inv_management):
         self.update_inventory()
 
     def read_inventory(self) -> Tuple[dict, int, int, int]:
-        """Reads the inventory and gets volume for each beer.
+        """Reads the JSON file for inventory and gets volume for each beer.
 
         Returns:
             inventory_dict (dict): Dictionary storing the volume for each beer.
@@ -331,8 +331,8 @@ class InventoryManagementDialog(QDialog, Ui_dialog_inv_management):
         Args:
             inventory_dict (dict): Dictionary storing the volume for each beer.
         """
-        with open("inventory.json", "w") as outfile:
-            json.dump(inventory_dict, outfile, ensure_ascii=False, indent=4)
+        with open("inventory.json", "w") as inventory_file:
+            json.dump(inventory_dict, inventory_file, ensure_ascii=False, indent=4)
 
     def add_inventory(self, inventory_dict: dict, red_helles_volume: int,
                       pilsner_volume: int, dunkel_volume: int):
@@ -402,17 +402,61 @@ class ProcessMonitoringDialog(QDialog, Ui_dialog_monitoring):
         self.only_int = QIntValidator()
         self.line_edit_new_volume.setValidator(self.only_int)
 
-        self.btn_start_process.clicked.connect(self.start_process)
+        # Reads the JSON file for the list of ongoing processes.
+        process_list = self.read_processes()
 
-    def start_process(self):
+        self.btn_start_process.clicked.connect(
+            lambda: self.start_process(process_list))
+
+    def read_processes(self) -> list:
+        """Reads the JSON file for the list of ongoing processes.
+
+        Returns:
+            process_list (list): A list of ongoing processes.
+        """
+        with open("ongoing_processes.json", "r") as process_file:
+            try:
+                process_list = json.load(process_file)
+            except ValueError:
+                print("Empty JSON file.")
+
+        return process_list
+
+    def update_processes(self):
+        """Updates the process list in the UI."""
+        process_list = self.read_processes()
+
+        # for process in process_list:
+
+    def save_processes(self, process_list: dict):
+        """Saves the new process list to the JSON file.
+
+        Args:
+            process_list (list): A list of ongoing processes.
+        """
+        with open("ongoing_processes.json", "w") as process_file:
+            json.dump(process_list, process_file, ensure_ascii=False, indent=4)
+
+    def start_process(self, process_list: list):
+        """Starts a brewing process for the given recipe, tank, and volume.
+
+        Args:
+            process_list (list): A list of ongoing processes.
+        """
         new_process = self.combo_box_new_brew_process.currentText()
         new_recipe = self.combo_box_new_recipe.currentText()
         new_tank = self.combo_box_new_tank.currentText()
         new_volume = self.line_edit_new_volume.text()
 
         if new_process == "Hot Brew":
-            process = {""
-            }
+            process = {"process": new_process,
+                       "recipe": new_recipe,
+                       "tank": new_tank,
+                       "volume": new_volume}
+            process_list.append(dict(process))
+
+        self.save_processes(process_list)
+
 
 # Prevents the code from executing when the script is imported as a module.
 if __name__ == "__main__":

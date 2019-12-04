@@ -1,3 +1,8 @@
 [
-    
+    {
+        "process": "Hot Brew",
+        "recipe": "Organic Red Helles",
+        "tank": "Albert (1000 L, Fermenter/Conditioner)",
+        "volume": "500"
+    }
 ]
