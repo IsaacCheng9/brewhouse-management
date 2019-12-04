@@ -1,3 +1,30 @@
 [
-
+    {
+        "process": "Hot Brew",
+        "recipe": "Organic Red Helles",
+        "tank": "N/A",
+        "volume": 500,
+        "completion": "05/12/2019 01:48:41"
+    },
+    {
+        "process": "Conditioning",
+        "recipe": "Organic Red Helles",
+        "tank": "Albert",
+        "volume": 250,
+        "completion": "18/12/2019 22:49:42"
+    },
+    {
+        "process": "Conditioning",
+        "recipe": "Organic Red Helles",
+        "tank": "Albert",
+        "volume": 50,
+        "completion": "18/12/2019 23:03:01"
+    },
+    {
+        "process": "Conditioning",
+        "recipe": "Organic Red Helles",
+        "tank": "Albert",
+        "volume": 50,
+        "completion": "18/12/2019 23:07:38"
+    }
 ]

@@ -119,6 +119,13 @@
           </property>
          </widget>
         </item>
+        <item alignment="Qt::AlignLeft">
+         <widget class="QPushButton" name="btn_refresh_processes">
+          <property name="text">
+           <string>Refresh Processes</string>
+          </property>
+         </widget>
+        </item>
         <item>
          <widget class="QLabel" name="lbl_processes">
           <property name="text">
@@ -138,7 +145,7 @@
           <item row="0" column="2">
            <widget class="QLabel" name="lbl_vertical_placeholder">
             <property name="text">
-             <string>    </string>
+             <string/>
             </property>
            </widget>
           </item>

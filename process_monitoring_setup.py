@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'process_monitoring.ui'
 #
-# Created by: PyQt5 UI code generator 5.13.2
+# Created by: PyQt5 UI code generator 5.13.1
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -74,6 +74,9 @@ class Ui_dialog_monitoring(object):
         self.lbl_ongoing_processes.setFont(font)
         self.lbl_ongoing_processes.setObjectName("lbl_ongoing_processes")
         self.vert_layout_monitoring.addWidget(self.lbl_ongoing_processes)
+        self.btn_refresh_processes = QtWidgets.QPushButton(self.verticalLayoutWidget)
+        self.btn_refresh_processes.setObjectName("btn_refresh_processes")
+        self.vert_layout_monitoring.addWidget(self.btn_refresh_processes, 0, QtCore.Qt.AlignLeft)
         self.lbl_processes = QtWidgets.QLabel(self.verticalLayoutWidget)
         self.lbl_processes.setText("")
         self.lbl_processes.setObjectName("lbl_processes")
@@ -86,6 +89,7 @@ class Ui_dialog_monitoring(object):
         self.grid_layout_start_process = QtWidgets.QGridLayout()
         self.grid_layout_start_process.setObjectName("grid_layout_start_process")
         self.lbl_vertical_placeholder = QtWidgets.QLabel(self.verticalLayoutWidget)
+        self.lbl_vertical_placeholder.setText("")
         self.lbl_vertical_placeholder.setObjectName("lbl_vertical_placeholder")
         self.grid_layout_start_process.addWidget(self.lbl_vertical_placeholder, 0, 2, 1, 1)
         self.lbl_condition_volume = QtWidgets.QLabel(self.verticalLayoutWidget)
@@ -234,7 +238,7 @@ class Ui_dialog_monitoring(object):
         self.lbl_monitoring.setText(_translate("dialog_monitoring", "Process Monitoring"))
         self.lbl_tank_availability.setText(_translate("dialog_monitoring", "Tank Availability"))
         self.lbl_ongoing_processes.setText(_translate("dialog_monitoring", "Ongoing Processes"))
-        self.lbl_vertical_placeholder.setText(_translate("dialog_monitoring", "    "))
+        self.btn_refresh_processes.setText(_translate("dialog_monitoring", "Refresh Processes"))
         self.lbl_condition_volume.setText(_translate("dialog_monitoring", "Volume (L):"))
         self.lbl_bottle_recipe.setText(_translate("dialog_monitoring", "Beer Recipe:"))
         self.combo_box_ferment_tank.setItemText(0, _translate("dialog_monitoring", "Albert"))
