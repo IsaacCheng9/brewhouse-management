@@ -21,7 +21,7 @@
     },
     {
         "tank": "Emily",
-        "volume": 500,
+        "volume": 1000,
         "capability": "Fermenter/Conditioner"
     },
     {
@@ -41,7 +41,7 @@
     },
     {
         "tank": "R2D2",
-        "volume": 300,
+        "volume": 800,
         "capability": "Fermenter"
     }
 ]
