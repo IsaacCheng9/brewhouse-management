@@ -6,6 +6,7 @@ Barnaby's Brewhouse.
 import json
 import sys
 from datetime import datetime
+from time import localtime, strftime, time
 from typing import Tuple
 
 import pandas
@@ -102,10 +103,7 @@ class BrewhouseWindow(QMainWindow, Ui_mwindow_brewhouse):
         dunkel_sales = int(dunkel["Quantity ordered"].sum())
         dunkel_ratio = round((dunkel_sales / total_sales) * 100, 3)
 
-        print("Total Sales: " + str(total_sales) + "\nRed Helles Ratio: " +
-              str(red_helles_ratio) + "%\nPilsner Ratio: " + str(pilsner_ratio)
-              + "%\nDunkel Ratio: " + str(dunkel_ratio) + "%")
-
+        # DIsplays the sales and sales ratios of beers in UI.
         self.lbl_overall_sales.setText(
             "Overall - " + str(total_sales))
         self.lbl_red_helles_sales.setText(
@@ -188,11 +186,8 @@ class BrewhouseWindow(QMainWindow, Ui_mwindow_brewhouse):
         red_helles_growth_pct = round((red_helles_growth - 1) * 100, 3)
         pilsner_growth_pct = round((pilsner_growth - 1) * 100, 3)
         dunkel_growth_pct = round((dunkel_growth - 1) * 100, 3)
-        print("\nRed Helles Growth: " + str(red_helles_growth_pct) +
-              "%\nPilsner Growth: " + str(pilsner_growth_pct) +
-              "%\nDunkel Growth: " + str(dunkel_growth_pct) + "%")
 
-        # Displays percentage of sales provided by each beer.
+        # Displays percentage of sales provided by each beer in UI.
         self.lbl_red_helles_growth.setText(
             "Organic Red Helles - " + str(red_helles_growth_pct) + "%")
         self.lbl_pilsner_growth.setText(
@@ -248,9 +243,8 @@ class BrewhouseWindow(QMainWindow, Ui_mwindow_brewhouse):
         elif prediction_beer == "Organic Dunkel":
             prediction_sales = int((last_month_sales *
                                     (dunkel_growth ** month_difference)))
-        print("\nEstimated Number of Monthly Sales: " + str(prediction_sales))
 
-        # Shows the sales prediction for the given beer and date.
+        # Shows the sales prediction for the given beer and date in UI.
         self.lbl_predict_result.setText(
             "Estimated Number of Monthly Sales: " + str(prediction_sales))
 
@@ -401,7 +395,10 @@ class ProcessMonitoringDialog(QDialog, Ui_dialog_monitoring):
 
         # Restricts volume input to only numbers.
         self.only_int = QIntValidator()
-        self.line_edit_new_volume.setValidator(self.only_int)
+        self.line_edit_brew_volume.setValidator(self.only_int)
+        self.line_edit_ferment_volume.setValidator(self.only_int)
+        self.line_edit_condition_volume.setValidator(self.only_int)
+        self.line_edit_bottle_volume.setValidator(self.only_int)
 
         # Reads the JSON file for the list showing tank availability.
         tank_list = self.read_tanks()
@@ -409,8 +406,8 @@ class ProcessMonitoringDialog(QDialog, Ui_dialog_monitoring):
         process_list = self.read_processes()
 
         # Connects the 'Start Process' button to start the given process.
-        self.btn_start_process.clicked.connect(
-            lambda: self.start_process(tank_list, process_list))
+        self.btn_start_hot_brew.clicked.connect(
+            lambda: self.start_hot_brew(process_list))
 
         # Updates the tank availability displayed in the UI.
         self.update_tanks()
@@ -470,7 +467,8 @@ class ProcessMonitoringDialog(QDialog, Ui_dialog_monitoring):
         for process in process_list:
             display_processes += (process["process"] + ", " + process["recipe"]
                                   + ", " + process["tank"] + ", " +
-                                  process["volume"] + " L\n")
+                                  process["volume"] + " L (Completion Time: "
+                                  + process["completion"] + ")\n")
 
         # Displays list of process details in UI.
         self.lbl_processes.setText(display_processes)
@@ -493,7 +491,45 @@ class ProcessMonitoringDialog(QDialog, Ui_dialog_monitoring):
         with open("ongoing_processes.json", "w") as process_file:
             json.dump(process_list, process_file, ensure_ascii=False, indent=4)
 
-    def start_process(self, tank_list: list, process_list: list):
+    def start_hot_brew(self, process_list: list):
+        """Starts a brewing process for the given recipe, tank, and volume.
+
+        Args:
+            process_list (list): A list of ongoing processes.
+        """
+        # Gets the inputs for the new process.
+        new_recipe = self.combo_box_brew_recipe.currentText()
+        new_volume = self.line_edit_brew_volume.text()
+
+        # Sets the completion date to three hours later.
+        epoch_time = time() + 10800
+        completion_date = strftime("%d/%m/%Y %H:%M:%S", localtime(epoch_time))
+
+        # Creates the process dictionary.
+        process = {"process": "Hot Brew",
+                   "recipe": new_recipe,
+                   "tank": "N/A",
+                   "volume": new_volume,
+                   "completion": completion_date}
+        process_list.append(dict(process))
+
+        """# Adds process if it's compatible and valid.
+        if new_process == "Hot Brew" and int(new_volume) <= allowed_volume:
+            process_list.append(dict(process))
+            for tank in tank_list:
+                if new_tank == tank["tank"]:
+                    tank["volume"] = int(tank["volume"]) - int(new_volume)"""
+
+        # Saves the updated tank list to the JSON file.
+        self.save_tanks(tank_list)
+        # Saves the updated process list to the JSON file.
+        self.save_processes(process_list)
+        # Updates the tank availability displayed in the UI.
+        self.update_tanks()
+        # Updates the process list in the UI.
+        self.update_processes()
+
+    def start_fermentation(self, tank_list: list, process_list: list):
         """Starts a brewing process for the given recipe, tank, and volume.
 
         Args:
@@ -501,23 +537,23 @@ class ProcessMonitoringDialog(QDialog, Ui_dialog_monitoring):
             process_list (list): A list of ongoing processes.
         """
         # Gets the inputs for the new process.
-        new_process = self.combo_box_new_brew_process.currentText()
-        new_recipe = self.combo_box_new_recipe.currentText()
-        new_tank = self.combo_box_new_tank.currentText()
-        new_volume = self.line_edit_new_volume.text()
+        new_recipe = self.combo_box_ferment_recipe.currentText()
+        new_tank = self.combo_box_ferment_tank.currentText()
+        new_volume = self.line_edit_ferment_volume.text()
+
+        # Sets the completion date to four weeks later.
+        epoch_time = time() + 2419200
+        completion_date = strftime("%d/%m/%Y %H:%M:%S", localtime(epoch_time))
 
         # Creates the process dictionary.
-        process = {"process": new_process,
+        process = {"process": "Fermentation",
                    "recipe": new_recipe,
                    "tank": new_tank,
-                   "volume": new_volume}
-
-        for tank in tank_list:
-            if new_tank == tank["tank"]:
-                allowed_volume = int(tank["volume"])
+                   "volume": new_volume,
+                   "completion": completion_date}
 
         # Adds process if it's compatible and valid.
-        if new_process == "Hot Brew" and int(new_volume) <= allowed_volume:
+        if int(new_volume) <= allowed_volume:
             process_list.append(dict(process))
             for tank in tank_list:
                 if new_tank == tank["tank"]:
