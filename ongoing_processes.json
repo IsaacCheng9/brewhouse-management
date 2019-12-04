@@ -2,7 +2,31 @@
     {
         "process": "Hot Brew",
         "recipe": "Organic Red Helles",
-        "tank": "Albert (1000 L, Fermenter/Conditioner)",
+        "tank": "Albert",
+        "volume": "500"
+    },
+    {
+        "process": "Hot Brew",
+        "recipe": "Organic Red Helles",
+        "tank": "Brigadier",
+        "volume": "1000"
+    },
+    {
+        "process": "Hot Brew",
+        "recipe": "Organic Red Helles",
+        "tank": "Albert",
+        "volume": "500"
+    },
+    {
+        "process": "Hot Brew",
+        "recipe": "Organic Red Helles",
+        "tank": "R2D2",
+        "volume": "500"
+    },
+    {
+        "process": "Hot Brew",
+        "recipe": "Organic Red Helles",
+        "tank": "Emily",
         "volume": "500"
     }
 ]

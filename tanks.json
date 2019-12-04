@@ -1,0 +1,47 @@
+[
+    {
+        "tank": "Albert",
+        "volume": 1000,
+        "capability": "Fermenter/Conditioner"
+    },
+    {
+        "tank": "Brigadier",
+        "volume": 800,
+        "capability": "Fermenter/Conditioner"
+    },
+    {
+        "tank": "Camilla",
+        "volume": 1000,
+        "capability": "Fermenter/Conditioner"
+    },
+    {
+        "tank": "Dylon",
+        "volume": 800,
+        "capability": "Fermenter/Conditioner"
+    },
+    {
+        "tank": "Emily",
+        "volume": 500,
+        "capability": "Fermenter/Conditioner"
+    },
+    {
+        "tank": "Florence",
+        "volume": 800,
+        "capability": "Fermenter/Conditioner"
+    },
+    {
+        "tank": "Gertrude",
+        "volume": 680,
+        "capability": "Conditioner"
+    },
+    {
+        "tank": "Harry",
+        "volume": 680,
+        "capability": "Conditioner"
+    },
+    {
+        "tank": "R2D2",
+        "volume": 300,
+        "capability": "Fermenter"
+    }
+]

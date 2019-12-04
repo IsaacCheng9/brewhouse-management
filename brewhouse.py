@@ -103,8 +103,8 @@ class BrewhouseWindow(QMainWindow, Ui_mwindow_brewhouse):
         dunkel_ratio = round((dunkel_sales / total_sales) * 100, 3)
 
         print("Total Sales: " + str(total_sales) + "\nRed Helles Ratio: " +
-              str(red_helles_ratio) + "%\nPilsner Ratio: " + str(pilsner_ratio) +
-              "%\nDunkel Ratio: " + str(dunkel_ratio) + "%")
+              str(red_helles_ratio) + "%\nPilsner Ratio: " + str(pilsner_ratio)
+              + "%\nDunkel Ratio: " + str(dunkel_ratio) + "%")
 
         self.lbl_overall_sales.setText(
             "Overall - " + str(total_sales))
@@ -332,7 +332,8 @@ class InventoryManagementDialog(QDialog, Ui_dialog_inv_management):
             inventory_dict (dict): Dictionary storing the volume for each beer.
         """
         with open("inventory.json", "w") as inventory_file:
-            json.dump(inventory_dict, inventory_file, ensure_ascii=False, indent=4)
+            json.dump(inventory_dict, inventory_file,
+                      ensure_ascii=False, indent=4)
 
     def add_inventory(self, inventory_dict: dict, red_helles_volume: int,
                       pilsner_volume: int, dunkel_volume: int):
@@ -402,11 +403,19 @@ class ProcessMonitoringDialog(QDialog, Ui_dialog_monitoring):
         self.only_int = QIntValidator()
         self.line_edit_new_volume.setValidator(self.only_int)
 
+        # Reads the JSON file for the list showing tank availability.
+        tank_list = self.read_tanks()
         # Reads the JSON file for the list of ongoing processes.
         process_list = self.read_processes()
 
+        # Connects the 'Start Process' button to start the given process.
         self.btn_start_process.clicked.connect(
-            lambda: self.start_process(process_list))
+            lambda: self.start_process(tank_list, process_list))
+
+        # Updates the tank availability displayed in the UI.
+        self.update_tanks()
+        # Updates the process list in the UI.
+        self.update_processes()
 
     def read_processes(self) -> list:
         """Reads the JSON file for the list of ongoing processes.
@@ -422,14 +431,61 @@ class ProcessMonitoringDialog(QDialog, Ui_dialog_monitoring):
 
         return process_list
 
+    def read_tanks(self) -> list:
+        """Reads the JSON file for the list showing tank availability.
+
+        Returns:
+            tank_list (list): A list showing tank availability.
+        """
+        with open("tanks.json", "r") as tanks_file:
+            try:
+                tank_list = json.load(tanks_file)
+            except ValueError:
+                print("Empty JSON file.")
+
+        return tank_list
+
+    def update_tanks(self):
+        """Updates the tank availability displayed in the UI."""
+        display_tanks = ""
+
+        tank_list = self.read_tanks()
+
+        # Iterates through tanks and adds their details to a tank list.
+        for tank in tank_list:
+            display_tanks += (tank["tank"] + ": " +
+                              str(tank["volume"]) +
+                              " L (" + tank["capability"] + ")\n")
+
+        # Displays list of tank availability in UI.
+        self.lbl_tanks.setText(display_tanks)
+
     def update_processes(self):
         """Updates the process list in the UI."""
+        display_processes = ""
+
         process_list = self.read_processes()
 
-        # for process in process_list:
+        # Iterates through processes and adds their details to a process list.
+        for process in process_list:
+            display_processes += (process["process"] + ", " + process["recipe"]
+                                  + ", " + process["tank"] + ", " +
+                                  process["volume"] + " L\n")
 
-    def save_processes(self, process_list: dict):
-        """Saves the new process list to the JSON file.
+        # Displays list of process details in UI.
+        self.lbl_processes.setText(display_processes)
+
+    def save_tanks(self, tank_list: list):
+        """Saves the updated tank list to the JSON file.
+
+        Args:
+            tank_list (list): A list of ongoing processes.
+        """
+        with open("tanks.json", "w") as tanks_file:
+            json.dump(tank_list, tanks_file, ensure_ascii=False, indent=4)
+
+    def save_processes(self, process_list: list):
+        """Saves the updated process list to the JSON file.
 
         Args:
             process_list (list): A list of ongoing processes.
@@ -437,25 +493,44 @@ class ProcessMonitoringDialog(QDialog, Ui_dialog_monitoring):
         with open("ongoing_processes.json", "w") as process_file:
             json.dump(process_list, process_file, ensure_ascii=False, indent=4)
 
-    def start_process(self, process_list: list):
+    def start_process(self, tank_list: list, process_list: list):
         """Starts a brewing process for the given recipe, tank, and volume.
 
         Args:
+            tank_list (list): A list showing tank availability.
             process_list (list): A list of ongoing processes.
         """
+        # Gets the inputs for the new process.
         new_process = self.combo_box_new_brew_process.currentText()
         new_recipe = self.combo_box_new_recipe.currentText()
         new_tank = self.combo_box_new_tank.currentText()
         new_volume = self.line_edit_new_volume.text()
 
-        if new_process == "Hot Brew":
-            process = {"process": new_process,
-                       "recipe": new_recipe,
-                       "tank": new_tank,
-                       "volume": new_volume}
-            process_list.append(dict(process))
+        # Creates the process dictionary.
+        process = {"process": new_process,
+                   "recipe": new_recipe,
+                   "tank": new_tank,
+                   "volume": new_volume}
 
+        for tank in tank_list:
+            if new_tank == tank["tank"]:
+                allowed_volume = int(tank["volume"])
+
+        # Adds process if it's compatible and valid.
+        if new_process == "Hot Brew" and int(new_volume) <= allowed_volume:
+            process_list.append(dict(process))
+            for tank in tank_list:
+                if new_tank == tank["tank"]:
+                    tank["volume"] = int(tank["volume"]) - int(new_volume)
+
+        # Saves the updated tank list to the JSON file.
+        self.save_tanks(tank_list)
+        # Saves the updated process list to the JSON file.
         self.save_processes(process_list)
+        # Updates the tank availability displayed in the UI.
+        self.update_tanks()
+        # Updates the process list in the UI.
+        self.update_processes()
 
 
 # Prevents the code from executing when the script is imported as a module.
