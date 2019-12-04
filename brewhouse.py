@@ -293,10 +293,10 @@ class InventoryManagementDialog(QDialog, Ui_dialog_inv_management):
             try:
                 inventory_dict = json.load(inventory_file)
                 red_helles_volume = int(
-                    inventory_dict["Organic Red Helles"]["Volume"])
+                    inventory_dict["red_helles"]["volume"])
                 pilsner_volume = int(
-                    inventory_dict["Organic Pilsner"]["Volume"])
-                dunkel_volume = int(inventory_dict["Organic Dunkel"]["Volume"])
+                    inventory_dict["pilsner"]["volume"])
+                dunkel_volume = int(inventory_dict["dunkel"]["volume"])
             except ValueError:
                 print("Empty JSON file.")
 
@@ -344,10 +344,18 @@ class InventoryManagementDialog(QDialog, Ui_dialog_inv_management):
             pilsner_volume (int): Volume (L) of Pilsner.
             dunkel_volume (int): Volume (L) of Dunkel.
         """
-        # Adds inputted volume to the selected beer.
-        add_beer = self.combo_box_update_inv_recipe.currentText()
+        # Gets the beer and volume inputs.
+        add_beer_input = self.combo_box_update_inv_recipe.currentText()
+        if add_beer_input == "Organic Red Helles":
+            add_beer = "red_helles"
+        elif add_beer_input == "Organic Pilsner":
+            add_beer = "pilsner"
+        elif add_beer_input == "Organic Dunkel":
+            add_beer = "dunkel"
         add_volume = self.line_edit_update_inv_volume.text()
-        inventory_dict[add_beer]["Volume"] += int(add_volume)
+
+        # Adds inputted volume to the selected beer.
+        inventory_dict[add_beer]["volume"] += int(add_volume)
 
         # Saves the new inventory to the JSON file.
         self.save_inventory(inventory_dict)
@@ -364,10 +372,18 @@ class InventoryManagementDialog(QDialog, Ui_dialog_inv_management):
             pilsner_volume (int): Volume (L) of Pilsner.
             dunkel_volume (int): Volume (L) of Dunkel.
         """
-        # Adds inputted volume to the selected beer.
-        remove_beer = self.combo_box_update_inv_recipe.currentText()
+        # Gets the beer and volume inputs.
+        remove_beer_input = self.combo_box_update_inv_recipe.currentText()
+        if remove_beer_input == "Organic Red Helles":
+            remove_beer = "red_helles"
+        elif remove_beer_input == "Organic Pilsner":
+            remove_beer = "pilsner"
+        elif remove_beer_input == "Organic Dunkel":
+            remove_beer = "dunkel"
         remove_volume = self.line_edit_update_inv_volume.text()
-        inventory_dict[remove_beer]["Volume"] -= int(remove_volume)
+
+        # Removes inputted volume to the selected beer.
+        inventory_dict[remove_beer]["volume"] -= int(remove_volume)
 
         # Saves the new inventory to the JSON file.
         self.save_inventory(inventory_dict)
@@ -386,6 +402,17 @@ class ProcessMonitoringDialog(QDialog, Ui_dialog_monitoring):
         self.only_int = QIntValidator()
         self.line_edit_new_volume.setValidator(self.only_int)
 
+        self.btn_start_process.clicked.connect(self.start_process)
+
+    def start_process(self):
+        new_process = self.combo_box_new_brew_process.currentText()
+        new_recipe = self.combo_box_new_recipe.currentText()
+        new_tank = self.combo_box_new_tank.currentText()
+        new_volume = self.line_edit_new_volume.text()
+
+        if new_process == "Hot Brew":
+            process = {""
+            }
 
 # Prevents the code from executing when the script is imported as a module.
 if __name__ == "__main__":

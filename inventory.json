@@ -1,11 +1,11 @@
 {
-    "Organic Red Helles": {
-        "Volume": 0
+    "red_helles": {
+        "volume": 0
     },
-    "Organic Pilsner": {
-        "Volume": 0
+    "pilsner": {
+        "volume": 0
     },
-    "Organic Dunkel": {
-        "Volume": 0
+    "dunkel": {
+        "volume": 0
     }
 }
