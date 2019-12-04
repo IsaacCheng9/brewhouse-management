@@ -405,9 +405,12 @@ class ProcessMonitoringDialog(QDialog, Ui_dialog_monitoring):
         # Reads the JSON file for the list of ongoing processes.
         process_list = self.read_processes()
 
-        # Connects the 'Start Process' button to start the given process.
+        # Connects the 'Start Hot Brew' button to start hot brew.
         self.btn_start_hot_brew.clicked.connect(
             lambda: self.start_hot_brew(process_list))
+        # Connects the 'Start Fermentation' button to start fermentation.
+        self.btn_start_fermentation.clicked.connect(
+            lambda: self.start_fermentation(tank_list, process_list))
 
         # Updates the tank availability displayed in the UI.
         self.update_tanks()
@@ -467,7 +470,7 @@ class ProcessMonitoringDialog(QDialog, Ui_dialog_monitoring):
         for process in process_list:
             display_processes += (process["process"] + ", " + process["recipe"]
                                   + ", " + process["tank"] + ", " +
-                                  process["volume"] + " L (Completion Time: "
+                                  str(process["volume"]) + " L (Completion Time: "
                                   + process["completion"] + ")\n")
 
         # Displays list of process details in UI.
@@ -492,7 +495,7 @@ class ProcessMonitoringDialog(QDialog, Ui_dialog_monitoring):
             json.dump(process_list, process_file, ensure_ascii=False, indent=4)
 
     def start_hot_brew(self, process_list: list):
-        """Starts a brewing process for the given recipe, tank, and volume.
+        """Starts a hot brew for the given recipe and volume.
 
         Args:
             process_list (list): A list of ongoing processes.
@@ -509,33 +512,26 @@ class ProcessMonitoringDialog(QDialog, Ui_dialog_monitoring):
         process = {"process": "Hot Brew",
                    "recipe": new_recipe,
                    "tank": "N/A",
-                   "volume": new_volume,
+                   "volume": int(new_volume),
                    "completion": completion_date}
+
+        # Appends the process to the process list.
         process_list.append(dict(process))
 
-        """# Adds process if it's compatible and valid.
-        if new_process == "Hot Brew" and int(new_volume) <= allowed_volume:
-            process_list.append(dict(process))
-            for tank in tank_list:
-                if new_tank == tank["tank"]:
-                    tank["volume"] = int(tank["volume"]) - int(new_volume)"""
-
-        # Saves the updated tank list to the JSON file.
-        self.save_tanks(tank_list)
         # Saves the updated process list to the JSON file.
         self.save_processes(process_list)
-        # Updates the tank availability displayed in the UI.
-        self.update_tanks()
         # Updates the process list in the UI.
         self.update_processes()
 
     def start_fermentation(self, tank_list: list, process_list: list):
-        """Starts a brewing process for the given recipe, tank, and volume.
+        """Starts fermentation for the given recipe, tank, and volume.
 
         Args:
             tank_list (list): A list showing tank availability.
             process_list (list): A list of ongoing processes.
         """
+        prior_processed = False
+
         # Gets the inputs for the new process.
         new_recipe = self.combo_box_ferment_recipe.currentText()
         new_tank = self.combo_box_ferment_tank.currentText()
@@ -549,11 +545,32 @@ class ProcessMonitoringDialog(QDialog, Ui_dialog_monitoring):
         process = {"process": "Fermentation",
                    "recipe": new_recipe,
                    "tank": new_tank,
-                   "volume": new_volume,
+                   "volume": int(new_volume),
                    "completion": completion_date}
 
+        # Calculates the available volume from the selected tank.
+        for tank in tank_list:
+            if new_tank == tank["tank"]:
+                allowed_volume = int(tank["volume"])
+
+        # Checks if prerequisite process has been completed.
+        for existing_process in process_list:
+            if (existing_process["process"] == "Hot Brew" and
+                existing_process["recipe"] == new_recipe and
+                existing_process["volume"] >= int(new_volume) and
+                    existing_process["completion"] <=
+                    strftime("%d/%m/%Y %H:%M:%S")):
+                prior_processed = True
+                existing_process["volume"] -= int(new_volume)
+                break
+
+        # Removes process from process list if they've been used up.
+        for existing_process in process_list:
+            if existing_process["volume"] == 0:
+                process_list.remove(existing_process)
+
         # Adds process if it's compatible and valid.
-        if int(new_volume) <= allowed_volume:
+        if int(new_volume) <= allowed_volume and prior_processed is True:
             process_list.append(dict(process))
             for tank in tank_list:
                 if new_tank == tank["tank"]:
