@@ -480,6 +480,205 @@
          </layout>
         </item>
         <item>
+         <widget class="Line" name="hori_line_start_process">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="lbl_abort_process">
+          <property name="font">
+           <font>
+            <underline>true</underline>
+            <kerning>true</kerning>
+           </font>
+          </property>
+          <property name="text">
+           <string>Abort Process</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <layout class="QGridLayout" name="grid_layout_abort_process">
+          <item row="3" column="1" alignment="Qt::AlignLeft">
+           <widget class="QLineEdit" name="line_edit_abort_volume"/>
+          </item>
+          <item row="0" column="1">
+           <widget class="QComboBox" name="combo_box_abort_process">
+            <item>
+             <property name="text">
+              <string>Hot Brew</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Fermentation</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Conditioning</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Bottling</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+          <item row="1" column="0" alignment="Qt::AlignLeft">
+           <widget class="QLabel" name="lbl_abort_recipe">
+            <property name="text">
+             <string>Beer Recipe:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="0">
+           <widget class="QLabel" name="lbl_abort">
+            <property name="text">
+             <string>Process:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="0" alignment="Qt::AlignLeft">
+           <widget class="QLabel" name="lbl_abort_tank">
+            <property name="text">
+             <string>Tank:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="0" alignment="Qt::AlignLeft">
+           <widget class="QLabel" name="lbl_abort_volume">
+            <property name="text">
+             <string>Volume (L):</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="1" alignment="Qt::AlignLeft">
+           <widget class="QComboBox" name="combo_box_abort_tank">
+            <item>
+             <property name="text">
+              <string>N/A</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Albert</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Brigadier</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Camilla</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Dylon</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Emily</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Florence </string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Gertrude</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Harry</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>R2D2</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+          <item row="4" column="1">
+           <widget class="QDateTimeEdit" name="date_time_edit_completion">
+            <property name="minimumDateTime">
+             <datetime>
+              <hour>0</hour>
+              <minute>0</minute>
+              <second>0</second>
+              <year>2019</year>
+              <month>10</month>
+              <day>31</day>
+             </datetime>
+            </property>
+            <property name="displayFormat">
+             <string>dd/MM/yyyy hh:mm:ss</string>
+            </property>
+            <property name="calendarPopup">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1" alignment="Qt::AlignLeft">
+           <widget class="QComboBox" name="combo_box_abort_recipe">
+            <item>
+             <property name="text">
+              <string>Organic Red Helles</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Organic Pilsner</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Organic Dunkel</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+          <item row="4" column="0">
+           <widget class="QLabel" name="lbl_abort_completion">
+            <property name="text">
+             <string>Completion:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="2">
+           <spacer name="hori_spacer_abort_process">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
+        </item>
+        <item alignment="Qt::AlignLeft">
+         <widget class="QPushButton" name="btn_abort_process">
+          <property name="text">
+           <string>Abort Process</string>
+          </property>
+         </widget>
+        </item>
+        <item>
          <spacer name="vert_spacer_monitoring">
           <property name="orientation">
            <enum>Qt::Vertical</enum>
