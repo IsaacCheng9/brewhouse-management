@@ -33,7 +33,7 @@ class Ui_dialog_inv_management(object):
         self.scroll_area_widget_contents.setGeometry(QtCore.QRect(0, 0, 478, 353))
         self.scroll_area_widget_contents.setObjectName("scroll_area_widget_contents")
         self.verticalLayoutWidget = QtWidgets.QWidget(self.scroll_area_widget_contents)
-        self.verticalLayoutWidget.setGeometry(QtCore.QRect(0, 0, 391, 330))
+        self.verticalLayoutWidget.setGeometry(QtCore.QRect(0, 0, 471, 330))
         self.verticalLayoutWidget.setObjectName("verticalLayoutWidget")
         self.vert_layout_inv_management = QtWidgets.QVBoxLayout(self.verticalLayoutWidget)
         self.vert_layout_inv_management.setContentsMargins(0, 0, 0, 0)
