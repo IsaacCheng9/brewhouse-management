@@ -65,8 +65,7 @@ class BrewhouseWindow(QMainWindow, Ui_mwindow_brewhouse):
 
         # Predicts future sales of a given beer in a given month.
         self.btn_predict.clicked.connect(lambda: self.predict_sales(
-            data_frame, beers, red_helles_growth,
-            pilsner_growth, dunkel_growth))
+            data_frame, red_helles_growth, pilsner_growth, dunkel_growth))
 
     def open_dialog_inv_management(self) -> None:
         """Opens the dialog for the user to manage inventory."""
@@ -262,11 +261,19 @@ class BrewhouseWindow(QMainWindow, Ui_mwindow_brewhouse):
         predicted_dunkel_sales = int((last_dunkel_sales *
                                       (dunkel_growth ** month_difference)))
 
-        # Shows the sales prediction for the given beer and date in UI.
+        # Shows the calculations of sales predictions for the given date in UI.
         self.lbl_predictions.setText(
-            "Organic Red Helles: " + str(predicted_red_helles_sales) +
-            "\nOrganic Pilsner: " + str(predicted_pilsner_sales) +
-            "\nOrganic Dunkel: " + str(predicted_dunkel_sales))
+            "(Last Monthly Beer Sales * (Average Beer Growth Rate ^ " +
+            "Month Difference))\nOrganic Red Helles: (" +
+            str(last_red_helles_sales) + " * (" + str(red_helles_growth) +
+            " ^ " + str(month_difference) + ")) = " +
+            str(predicted_red_helles_sales) +
+            "\nOrganic Pilsner: (" + str(last_pilsner_sales) + "* (" +
+            str(pilsner_growth) + " ^ " + str(month_difference) + ")) = " +
+            str(predicted_pilsner_sales) +
+            "\nOrganic Dunkel: (" + str(last_dunkel_sales) + "* (" +
+            str(dunkel_growth) + " ^ " + str(month_difference) + ")) = " +
+            str(predicted_dunkel_sales))
 
         # Recommends next beer to produce based on predicted demand.
         self.production_advice(predicted_red_helles_sales,
