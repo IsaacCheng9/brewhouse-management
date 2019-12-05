@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>800</width>
-    <height>900</height>
+    <height>950</height>
    </rect>
   </property>
   <property name="font">
@@ -45,7 +45,7 @@
         <x>0</x>
         <y>0</y>
         <width>778</width>
-        <height>878</height>
+        <height>928</height>
        </rect>
       </property>
       <widget class="QWidget" name="verticalLayoutWidget">
@@ -54,7 +54,7 @@
          <x>0</x>
          <y>0</y>
          <width>720</width>
-         <height>871</height>
+         <height>921</height>
         </rect>
        </property>
        <layout class="QVBoxLayout" name="vert_layout_monitoring">
@@ -212,7 +212,7 @@
             </property>
            </widget>
           </item>
-          <item row="10" column="3" alignment="Qt::AlignLeft">
+          <item row="10" column="3" alignment="Qt::AlignLeft|Qt::AlignTop">
            <widget class="QPushButton" name="btn_start_bottling">
             <property name="text">
              <string>Start Bottling</string>
@@ -236,7 +236,7 @@
             </property>
            </widget>
           </item>
-          <item row="10" column="0" alignment="Qt::AlignLeft">
+          <item row="10" column="0" alignment="Qt::AlignLeft|Qt::AlignTop">
            <widget class="QPushButton" name="btn_start_conditioning">
             <property name="text">
              <string>Start Conditioning</string>
@@ -463,14 +463,14 @@
             </property>
            </widget>
           </item>
-          <item row="4" column="3" alignment="Qt::AlignLeft">
+          <item row="4" column="3" alignment="Qt::AlignLeft|Qt::AlignTop">
            <widget class="QPushButton" name="btn_start_fermentation">
             <property name="text">
              <string>Start Fermentation</string>
             </property>
            </widget>
           </item>
-          <item row="4" column="0" alignment="Qt::AlignLeft">
+          <item row="4" column="0" alignment="Qt::AlignLeft|Qt::AlignTop">
            <widget class="QPushButton" name="btn_start_hot_brew">
             <property name="text">
              <string>Start Hot Brew</string>

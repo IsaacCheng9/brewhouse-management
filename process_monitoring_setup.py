@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'process_monitoring.ui'
 #
-# Created by: PyQt5 UI code generator 5.13.1
+# Created by: PyQt5 UI code generator 5.13.2
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -13,7 +13,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 class Ui_dialog_monitoring(object):
     def setupUi(self, dialog_monitoring):
         dialog_monitoring.setObjectName("dialog_monitoring")
-        dialog_monitoring.resize(800, 900)
+        dialog_monitoring.resize(800, 950)
         font = QtGui.QFont()
         font.setFamily("Arial")
         font.setPointSize(10)
@@ -30,10 +30,10 @@ class Ui_dialog_monitoring(object):
         self.scroll_area.setWidgetResizable(True)
         self.scroll_area.setObjectName("scroll_area")
         self.scroll_area_widget_contents = QtWidgets.QWidget()
-        self.scroll_area_widget_contents.setGeometry(QtCore.QRect(0, 0, 778, 878))
+        self.scroll_area_widget_contents.setGeometry(QtCore.QRect(0, 0, 778, 928))
         self.scroll_area_widget_contents.setObjectName("scroll_area_widget_contents")
         self.verticalLayoutWidget = QtWidgets.QWidget(self.scroll_area_widget_contents)
-        self.verticalLayoutWidget.setGeometry(QtCore.QRect(0, 0, 720, 871))
+        self.verticalLayoutWidget.setGeometry(QtCore.QRect(0, 0, 720, 921))
         self.verticalLayoutWidget.setObjectName("verticalLayoutWidget")
         self.vert_layout_monitoring = QtWidgets.QVBoxLayout(self.verticalLayoutWidget)
         self.vert_layout_monitoring.setContentsMargins(0, 0, 0, 0)
@@ -117,7 +117,7 @@ class Ui_dialog_monitoring(object):
         self.grid_layout_start_process.addWidget(self.lbl_hori_placeholder, 5, 3, 1, 1)
         self.btn_start_bottling = QtWidgets.QPushButton(self.verticalLayoutWidget)
         self.btn_start_bottling.setObjectName("btn_start_bottling")
-        self.grid_layout_start_process.addWidget(self.btn_start_bottling, 10, 3, 1, 1, QtCore.Qt.AlignLeft)
+        self.grid_layout_start_process.addWidget(self.btn_start_bottling, 10, 3, 1, 1, QtCore.Qt.AlignLeft|QtCore.Qt.AlignTop)
         self.lbl_condition_tank = QtWidgets.QLabel(self.verticalLayoutWidget)
         self.lbl_condition_tank.setObjectName("lbl_condition_tank")
         self.grid_layout_start_process.addWidget(self.lbl_condition_tank, 8, 0, 1, 1)
@@ -129,7 +129,7 @@ class Ui_dialog_monitoring(object):
         self.grid_layout_start_process.addWidget(self.lbl_ferment_volume, 3, 3, 1, 1)
         self.btn_start_conditioning = QtWidgets.QPushButton(self.verticalLayoutWidget)
         self.btn_start_conditioning.setObjectName("btn_start_conditioning")
-        self.grid_layout_start_process.addWidget(self.btn_start_conditioning, 10, 0, 1, 1, QtCore.Qt.AlignLeft)
+        self.grid_layout_start_process.addWidget(self.btn_start_conditioning, 10, 0, 1, 1, QtCore.Qt.AlignLeft|QtCore.Qt.AlignTop)
         self.line_edit_condition_volume = QtWidgets.QLineEdit(self.verticalLayoutWidget)
         self.line_edit_condition_volume.setObjectName("line_edit_condition_volume")
         self.grid_layout_start_process.addWidget(self.line_edit_condition_volume, 9, 1, 1, 1)
@@ -219,10 +219,10 @@ class Ui_dialog_monitoring(object):
         self.grid_layout_start_process.addWidget(self.lbl_start_brew, 0, 0, 1, 1)
         self.btn_start_fermentation = QtWidgets.QPushButton(self.verticalLayoutWidget)
         self.btn_start_fermentation.setObjectName("btn_start_fermentation")
-        self.grid_layout_start_process.addWidget(self.btn_start_fermentation, 4, 3, 1, 1, QtCore.Qt.AlignLeft)
+        self.grid_layout_start_process.addWidget(self.btn_start_fermentation, 4, 3, 1, 1, QtCore.Qt.AlignLeft|QtCore.Qt.AlignTop)
         self.btn_start_hot_brew = QtWidgets.QPushButton(self.verticalLayoutWidget)
         self.btn_start_hot_brew.setObjectName("btn_start_hot_brew")
-        self.grid_layout_start_process.addWidget(self.btn_start_hot_brew, 4, 0, 1, 1, QtCore.Qt.AlignLeft)
+        self.grid_layout_start_process.addWidget(self.btn_start_hot_brew, 4, 0, 1, 1, QtCore.Qt.AlignLeft|QtCore.Qt.AlignTop)
         self.vert_layout_monitoring.addLayout(self.grid_layout_start_process)
         self.hori_line_start_process = QtWidgets.QFrame(self.verticalLayoutWidget)
         self.hori_line_start_process.setFrameShape(QtWidgets.QFrame.HLine)

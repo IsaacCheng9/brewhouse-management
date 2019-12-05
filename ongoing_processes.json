@@ -1,1 +1,9 @@
-[]
+[
+    {
+        "process": "Hot Brew",
+        "recipe": "Organic Red Helles",
+        "tank": "N/A",
+        "volume": 500,
+        "completion": "05/12/2019 13:57:30"
+    }
+]
