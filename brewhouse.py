@@ -290,8 +290,10 @@ class BrewhouseWindow(QMainWindow, Ui_mwindow_brewhouse):
             predicted_pilsner_sales (int): Predicted sales of Pilsner for the
                                            given month.
             predicted_dunkel_sales (int): Predicted sales of Dunkel for the
-                                          given month."""
-        pass
+                                          given month.
+        """
+        (inventory_list, red_helles_volume, pilsner_volume,
+         dunkel_volume) = InventoryManagementDialog.read_inventory(self)
 
 
 class InventoryManagementDialog(QDialog, Ui_dialog_inv_management):
@@ -555,8 +557,8 @@ class ProcessMonitoringDialog(QDialog, Ui_dialog_monitoring):
 
         for existing_process in process_list:
             if (existing_process["process"] == "Bottling" and
-                datetime.strptime(existing_process["completion"],
-                                  "%d/%m/%Y %H:%M:%S")
+                    datetime.strptime(existing_process["completion"],
+                                      "%d/%m/%Y %H:%M:%S")
                     <= datetime.now()):
                 # Adds the bottled volume of relevant beer to the inventory.
                 for inventory in inventory_list:
@@ -657,10 +659,10 @@ class ProcessMonitoringDialog(QDialog, Ui_dialog_monitoring):
         # Checks if prerequisite process has been completed.
         for existing_process in process_list:
             if (existing_process["process"] == "Hot Brew" and
-                existing_process["recipe"] == new_recipe and
-                existing_process["volume"] >= new_volume and
-                datetime.strptime(
-                    existing_process["completion"], "%d/%m/%Y %H:%M:%S")
+                    existing_process["recipe"] == new_recipe and
+                    existing_process["volume"] >= new_volume and
+                    datetime.strptime(
+                        existing_process["completion"], "%d/%m/%Y %H:%M:%S")
                     <= datetime.now()
                     and new_volume <= allowed_volume):
                 # Adds process details to the list.
@@ -717,10 +719,10 @@ class ProcessMonitoringDialog(QDialog, Ui_dialog_monitoring):
         # Checks if prerequisite process has been completed.
         for existing_process in process_list:
             if (existing_process["process"] == "Fermentation" and
-                existing_process["recipe"] == new_recipe and
-                existing_process["volume"] >= new_volume and
-                datetime.strptime(
-                    existing_process["completion"], "%d/%m/%Y %H:%M:%S")
+                    existing_process["recipe"] == new_recipe and
+                    existing_process["volume"] >= new_volume and
+                    datetime.strptime(
+                        existing_process["completion"], "%d/%m/%Y %H:%M:%S")
                     <= datetime.now()
                     and new_volume <= allowed_volume):
                 # Adds process details to the list.
@@ -774,10 +776,10 @@ class ProcessMonitoringDialog(QDialog, Ui_dialog_monitoring):
         # Checks if prerequisite process has been completed.
         for existing_process in process_list:
             if (existing_process["process"] == "Conditioning" and
-                existing_process["recipe"] == new_recipe and
-                existing_process["volume"] >= new_volume and
-                datetime.strptime(
-                    existing_process["completion"], "%d/%m/%Y %H:%M:%S")
+                    existing_process["recipe"] == new_recipe and
+                    existing_process["volume"] >= new_volume and
+                    datetime.strptime(
+                        existing_process["completion"], "%d/%m/%Y %H:%M:%S")
                     <= datetime.now()):
                 # Adds process details to the list.
                 process_list.append(dict(process))
@@ -819,9 +821,9 @@ class ProcessMonitoringDialog(QDialog, Ui_dialog_monitoring):
         # Checks for selected process in the process list.
         for existing_process in process_list:
             if (abort_process == existing_process["process"] and
-                abort_recipe == existing_process["recipe"] and
-                abort_tank == existing_process["tank"] and
-                abort_volume == existing_process["volume"] and
+                    abort_recipe == existing_process["recipe"] and
+                    abort_tank == existing_process["tank"] and
+                    abort_volume == existing_process["volume"] and
                     abort_completion == existing_process["completion"]):
                 for tank in tank_list:
                     # Adds volume to tank of removed process.
