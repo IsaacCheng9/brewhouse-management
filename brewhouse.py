@@ -209,14 +209,12 @@ class BrewhouseWindow(QMainWindow, Ui_mwindow_brewhouse):
         return beers, red_helles_growth, pilsner_growth, dunkel_growth
 
     def predict_sales(self, data_frame:
-                      pandas.core.frame.DataFrame, beers: list,
-                      red_helles_growth: float, pilsner_growth: float,
-                      dunkel_growth: float) -> int:
+                      pandas.core.frame.DataFrame, red_helles_growth: float,
+                      pilsner_growth: float, dunkel_growth: float) -> int:
         """Predicts future sales of Red Helles, Pilsner, and Dunkel.
 
         Args:
             data_frame (pandas.core.frame.DataFrame): Sales data of beers.
-            beers (list): A list of the beers.
             red_helles_growth (float): Average growth rate of sales for Red
                                        Helles.
             pilsner_growth (float): Average growth rate of sales for Pilsner.
@@ -306,10 +304,10 @@ class InventoryManagementDialog(QDialog, Ui_dialog_inv_management):
 
         # Connects 'Add to Inventory' button to add inventory volume.
         self.btn_add_inv.clicked.connect(lambda: self.add_inventory(
-            inventory_list, red_helles_volume, pilsner_volume, dunkel_volume))
+            inventory_list))
         # Connects 'Remove from Inventory' button to remove inventory volume.
         self.btn_remove_inv.clicked.connect(lambda: self.remove_inventory(
-            inventory_list, red_helles_volume, pilsner_volume, dunkel_volume))
+            inventory_list))
 
         # Updates the volumes in the inventory in the UI.
         self.update_inventory()
@@ -371,15 +369,11 @@ class InventoryManagementDialog(QDialog, Ui_dialog_inv_management):
             json.dump(inventory_list, inventory_file,
                       ensure_ascii=False, indent=4)
 
-    def add_inventory(self, inventory_list: list, red_helles_volume: int,
-                      pilsner_volume: int, dunkel_volume: int):
+    def add_inventory(self, inventory_list: list):
         """Adds the given volume to the given beer in the inventory.
 
         Args:
             inventory_list (list): List storing the volume for each beer.
-            red_helles_volume (int): Volume (L) of Red Helles.
-            pilsner_volume (int): Volume (L) of Pilsner.
-            dunkel_volume (int): Volume (L) of Dunkel.
         """
         # Gets the beer and volume inputs.
         add_beer_input = self.combo_box_update_inv_recipe.currentText()
@@ -401,15 +395,11 @@ class InventoryManagementDialog(QDialog, Ui_dialog_inv_management):
         # Updates the volumes in the inventory in the UI.
         self.update_inventory()
 
-    def remove_inventory(self, inventory_list: list, red_helles_volume: int,
-                         pilsner_volume: int, dunkel_volume: int):
+    def remove_inventory(self, inventory_list: list):
         """Removes the given volume to the given beer in the inventory.
 
         Args:
             inventory_list (list): List storing the volume for each beer.
-            red_helles_volume (int): Volume (L) of Red Helles.
-            pilsner_volume (int): Volume (L) of Pilsner.
-            dunkel_volume (int): Volume (L) of Dunkel.
         """
         # Gets the beer and volume inputs.
         remove_beer_input = self.combo_box_update_inv_recipe.currentText()
@@ -503,7 +493,7 @@ class ProcessMonitoringDialog(QDialog, Ui_dialog_monitoring):
 
         return tank_list
 
-    def remove_used_processes(self, tank_list: list, process_list: list):
+    def remove_used_processes(self, process_list: list):
         """Removes process from process list if they've been used up.
 
         Args:
@@ -562,15 +552,16 @@ class ProcessMonitoringDialog(QDialog, Ui_dialog_monitoring):
                                   "%d/%m/%Y %H:%M:%S")
                     <= datetime.now()):
                 # Adds the bottled volume of relevant beer to the inventory.
-                if existing_process["recipe"] == "Organic Red Helles":
-                    inventory_list["red_helles"]["volume"] += (
-                        existing_process["volume"])
-                elif existing_process["recipe"] == "Organic Pilsner":
-                    inventory_list["pilsner"]["volume"] += (
-                        existing_process["volume"])
-                elif existing_process["recipe"] == "Organic Dunkel":
-                    inventory_list["dunkel"]["volume"] += (
-                        existing_process["volume"])
+                for inventory in inventory_list:
+                    if (existing_process["recipe"] == "Organic Red Helles" and
+                            inventory["recipe"] == "red_helles"):
+                        inventory["volume"] += (existing_process["volume"])
+                    elif (existing_process["recipe"] == "Organic Pilsner" and
+                          inventory["recipe"] == "pilsner"):
+                        inventory["volume"] += (existing_process["volume"])
+                    elif (existing_process["recipe"] == "Organic Dunkel" and
+                          inventory["recipe"] == "pilsner"):
+                        inventory["volume"] += (existing_process["volume"])
                 # Removes finished bottling process from process list.
                 process_list.remove(existing_process)
 
@@ -678,7 +669,7 @@ class ProcessMonitoringDialog(QDialog, Ui_dialog_monitoring):
                 break
 
         # Removes process from process list if they've been used up.
-        self.remove_used_processes(tank_list, process_list)
+        self.remove_used_processes(process_list)
         # Saves the updated tank list to the JSON file.
         self.save_tanks(tank_list)
         # Saves the updated process list to the JSON file.
@@ -741,7 +732,7 @@ class ProcessMonitoringDialog(QDialog, Ui_dialog_monitoring):
                 break
 
         # Removes process from process list if they've been used up.
-        self.remove_used_processes(tank_list, process_list)
+        self.remove_used_processes(process_list)
         # Saves the updated tank list to the JSON file.
         self.save_tanks(tank_list)
         # Saves the updated process list to the JSON file.
@@ -794,7 +785,7 @@ class ProcessMonitoringDialog(QDialog, Ui_dialog_monitoring):
                 break
 
         # Removes process from process list if they've been used up.
-        self.remove_used_processes(tank_list, process_list)
+        self.remove_used_processes(process_list)
         # Saves the updated tank list to the JSON file.
         self.save_tanks(tank_list)
         # Saves the updated process list to the JSON file.
