@@ -16,3 +16,13 @@ running your machine.
 Python 3.7.0 or later is required for this software to run. It can be installed
 from Python's website [here.](https://www.python.org/getit/)
 
+The following Python modules must be installed, as they are not built into
+the Python installation by default:
+- pandas [for CSV handling]
+```
+pip install pandas
+```
+- pyqt5 [for user interfaces]
+```
+pip install pyqt5
+```
