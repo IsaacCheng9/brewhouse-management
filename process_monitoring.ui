@@ -120,9 +120,9 @@
          </widget>
         </item>
         <item alignment="Qt::AlignLeft">
-         <widget class="QPushButton" name="btn_refresh_processes">
+         <widget class="QPushButton" name="btn_send_bottles">
           <property name="text">
-           <string>Refresh Processes</string>
+           <string>Send Bottles to Inventory</string>
           </property>
          </widget>
         </item>

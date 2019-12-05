@@ -35,8 +35,8 @@ class ProcessMonitoringDialog(QDialog, Ui_dialog_monitoring):
         process_list = self.read_processes()
 
         # Connects the 'Refresh Processes' button to refresh processes.
-        self.btn_refresh_processes.clicked.connect(
-            lambda: self.refresh_processes(tank_list, process_list))
+        self.btn_send_bottles.clicked.connect(
+            lambda: self.send_bottles_to_inventory(tank_list, process_list))
         # Connects the 'Start Hot Brew' button to start hot brew.
         self.btn_start_hot_brew.clicked.connect(
             lambda: self.start_hot_brew(process_list))
@@ -129,7 +129,7 @@ class ProcessMonitoringDialog(QDialog, Ui_dialog_monitoring):
         # Displays list of process details in UI.
         self.lbl_processes.setText(display_processes.rstrip())
 
-    def refresh_processes(self, tank_list: list, process_list: list):
+    def send_bottles_to_inventory(self, tank_list: list, process_list: list):
         """Removes finished bottling from process list and adds to inventory.
 
         Args:
