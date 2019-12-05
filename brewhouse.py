@@ -33,6 +33,7 @@ def setup_logging():
     """
     Sets up the logging system to automatically log actions to log file.
     """
+    # No restoration from logging; data is always persisted in files anyway.
     logging.basicConfig(filename="logs.txt", level=logging.DEBUG,
                         format="%(asctime)s - %(levelname)s - %(message)s")
     logging.debug("Barnaby's Brewhouse program started.")
@@ -267,13 +268,13 @@ class BrewhouseWindow(QMainWindow, Ui_mwindow_brewhouse):
             "Month Difference))\nOrganic Red Helles: (" +
             str(last_red_helles_sales) + " * (" + str(red_helles_growth) +
             " ^ " + str(month_difference) + ")) = " +
-            str(predicted_red_helles_sales) +
+            str(predicted_red_helles_sales) + " L"
             "\nOrganic Pilsner: (" + str(last_pilsner_sales) + "* (" +
             str(pilsner_growth) + " ^ " + str(month_difference) + ")) = " +
-            str(predicted_pilsner_sales) +
+            str(predicted_pilsner_sales) + " L"
             "\nOrganic Dunkel: (" + str(last_dunkel_sales) + "* (" +
             str(dunkel_growth) + " ^ " + str(month_difference) + ")) = " +
-            str(predicted_dunkel_sales))
+            str(predicted_dunkel_sales) + " L")
 
         # Recommends next beer to produce based on predicted demand.
         self.production_advice(predicted_red_helles_sales,
@@ -292,8 +293,65 @@ class BrewhouseWindow(QMainWindow, Ui_mwindow_brewhouse):
             predicted_dunkel_sales (int): Predicted sales of Dunkel for the
                                           given month.
         """
+        red_helles_production = 0
+        pilsner_production = 0
+        dunkel_production = 0
+
         (inventory_list, red_helles_volume, pilsner_volume,
          dunkel_volume) = InventoryManagementDialog.read_inventory(self)
+        process_list = ProcessMonitoringDialog.read_processes(self)
+
+        # Sums the volume of each beer currently in production processes.
+        for process in process_list:
+            if process["recipe"] == "Organic Red Helles":
+                red_helles_production += process["volume"]
+            elif process["recipe"] == "Organic Pilsner":
+                pilsner_production += process["volume"]
+            elif process["recipe"] == "Organic Red Helles":
+                dunkel_production += process["volume"]
+
+        # Calculates the deficit in volume of each beer.
+        red_helles_deficit = (predicted_red_helles_sales - red_helles_volume -
+                              red_helles_production)
+        pilsner_deficit = (predicted_pilsner_sales - pilsner_volume -
+                           pilsner_production)
+        dunkel_deficit = (predicted_dunkel_sales - dunkel_volume -
+                          dunkel_production)
+
+        # Recommends producing the beer with the largest volume deficit.
+        print(red_helles_deficit, pilsner_deficit, dunkel_deficit)
+        largest_deficit = max(red_helles_deficit, pilsner_deficit,
+                              dunkel_deficit)
+        print(largest_deficit)
+        deficit_calculation = ("(Beer Deficit = Estimated Demand - Inventory "
+                               "Volume - Volume in Production)\n"
+                               "Organic Red Helles Deficit:  " +
+                               str(predicted_red_helles_sales) + " - " +
+                               str(red_helles_volume) + " - " +
+                               str(red_helles_production) + " = " +
+                               str(red_helles_deficit) + " L\n"
+                               "Organic Pilsner Deficit: " +
+                               str(predicted_pilsner_sales) + " - " +
+                               str(pilsner_volume) + " - " +
+                               str(pilsner_production) + " = " +
+                               str(pilsner_deficit) + " L\n"
+                               "Organic Dunkel Deficit:  " +
+                               str(predicted_dunkel_sales) + " - " +
+                               str(dunkel_volume) + " - " +
+                               str(dunkel_production) + " = " +
+                               str(dunkel_deficit) + " L\n")
+        if largest_deficit == red_helles_deficit:
+            recommendation = ("\nOrganic Red Helles would be the best beer to "
+                              "produce next, as it has the largest deficit.")
+        elif largest_deficit == pilsner_deficit:
+            recommendation = ("\nOrganic Pilsner would be the best beer to "
+                              "produce next, as it has the largest deficit.")
+        elif largest_deficit == dunkel_deficit:
+            recommendation = ("\nOrganic Dunkel would be the best beer to "
+                              "produce next, as it has the largest deficit.")
+
+        # Updates the UI with the deficit calculations and the recommendation.
+        self.lbl_advice.setText(deficit_calculation + recommendation)
 
 
 class InventoryManagementDialog(QDialog, Ui_dialog_inv_management):
