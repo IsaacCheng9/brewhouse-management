@@ -10,12 +10,13 @@ beers respectively.
 
 ## Getting Started
 These instructions will help you to get the software for Barnaby's Brewhouse
-running your machine.
+running on your computer.
 
 ### Prerequisites
 Python 3.7.0 or later is required for this software to run. It can be installed
 from Python's website [here.](https://www.python.org/getit/)
 
+### Installing
 The following Python modules must be installed, as they are not built into
 the Python installation by default:
 - pandas [for CSV handling]
@@ -26,3 +27,17 @@ pip install pandas
 ```
 pip install pyqt5
 ```
+
+Ensure that all files are installed in the same folder on your computer, as
+they will need to be able to access one another for full functionality. The
+`.py` files are needed for all the code in the software to work, the `.json`
+files are needed for data persistence to function, and the `.csv` file is
+needed so that existing sales data can be accessed.
+
+## Usage
+
+
+## Other Details
+
+### GitHub Repository
+The repository for this software project can be found on GitHub [here.](https://github.com/IsaacCheng9/brewhouse)
