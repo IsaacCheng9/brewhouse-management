@@ -23,6 +23,22 @@ Ensure that all files are installed in the same folder on your computer, as they
 ## Usage
 Start running the software by opening `brewhouse.py` in your integrated developer environment (IDE) of choice, such as PyCharm, Visual Studio Code, or IDLE, and running the Python file from there. Alternatively, you could navigate to the file directory where the files have been saved in your operating system's terminal using the `cd [DIRECTORY]` command (`cd` followed by the file directory), and run `brewhouse.py` by entering the command `python brewhouse.py`.
 
+This will open the main window for the software. You will be presented with the total sales, sales ratios, and average monthly growth percentages from the existing sales data. You can predict sales by entering a month, and the software will display an estimate of the volume of each beer which will be ordered that month based on the average monthly growth in sales for each beer. It will also give advice on which beer should be produced next, based on which beer has the largest volume deficit, and this advice can be useful when managing the production process in the `Process Monitoring` section of the software.
+
+At the top, you can navigate to other sections of the software; there are buttons to navigate to inventory management and process monitoring.
+
+The `Inventory Management` button will open a dialog which displays the current inventory of each beer in Barnaby's Brewhouse in terms of both volume and number of 500 ml bottles. You can also add or remove volume of a given beer by selecting the beer recipe and volume, then clicking on a button to `Add to Inventory` or `Remove from Inventory`. Inventory data is automatically saved whenever changes are made.
+
+The `Process Monitoring` button will open a dialog which displays the availability of tanks for fermentation and conditioning, and ongoing brewing processes. You can start different brewing processes as long as any prerequisite processes have been completed for the appropriate beer and volume at the time. Starting a hot brew does not have any prerequisites, but fermentation has the prerequisite of a completed hot brew, conditioning has the prerequisite of completed fermentation, and bottling has the prerequisite of completed conditioning.
+
+Once a valid process has been entered and started, it will be shown in the list of ongoing processes, where you can see the type of process, beer recipe it is being performed on, the tank being used (if applicable), volume, and completion time. The ongoing process list is always up to date, and it will react to processes being started or aborted. This can be useful for checking whether you will be able to start the next process, as you can see whether the prerequisite process has been completed.
+
+Processes can be aborted by entering the exact details of the process you would like to abort. Aborting a process cannot be undone, so all details of that process must be entered, as this will reduce cases of accidental process abortions.
+
+When the bottling has been completed, it means that the full beer brewing process has been completed. You can send completed bottles to the inventory by clicking on the `Send Bottles to Inventory` button in the `Ongoing Processes` section. This will remove the completed bottling process, and add the volume of beer to the inventory, which can be seen in the `Inventory Management` section of the software.
+
+All changes which are made in the `Process Monitoring` section are automatically saved, so data is not lost when the window or program is closed.
+
 ## Other Details
 
 ### Code Style
