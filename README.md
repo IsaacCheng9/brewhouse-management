@@ -40,8 +40,7 @@ needed so that existing sales data can be accessed.
 ## Other Details
 
 ### Code Style
-This project was developed using Python's PEP 8 style guide for code, which
-can be found [here.](https://www.python.org/dev/peps/pep-0008/)
+This project was developed using [Python's PEP 8 style guide for code](https://www.python.org/dev/peps/pep-0008/), as it is a commonly used standard within the Python community.
 
 ### Tools Used
 [Qt Creator](https://www.qt.io/download) was used to design the user interfaces
@@ -56,4 +55,7 @@ the other Python files such as `brewhouse.py` so that functionality could be
 developed for the user interface objects. 
 
 ### GitHub Repository
-The repository for this software project can be found on GitHub [here.](https://github.com/IsaacCheng9/brewhouse)
+The Git repository for this software project can be found on [GitHub here.](https://github.com/IsaacCheng9/brewhouse) In this repository, you can view the version
+history of files for this project, meaning you can see the version history and
+how development occurred over time. You can also flag issues with the software
+from this repository.
