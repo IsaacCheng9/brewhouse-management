@@ -14,7 +14,7 @@ running on your computer.
 
 ### Prerequisites
 Python 3.7.0 or later is required for this software to run. It can be installed
-from Python's website [here.](https://www.python.org/getit/)
+from [Python's website here.](https://www.python.org/getit/)
 
 ### Installing
 The following Python modules must be installed, as they are not built into
@@ -38,6 +38,22 @@ needed so that existing sales data can be accessed.
 
 
 ## Other Details
+
+### Code Style
+This project was developed using Python's PEP 8 style guide for code, which
+can be found [here.](https://www.python.org/dev/peps/pep-0008/)
+
+### Tools Used
+[Qt Creator](https://www.qt.io/download) was used to design the user interfaces
+for this project in a what you see is what you get (WYSIWYG) editor.
+
+[PyQt5's `pyuic5`](https://www.riverbankcomputing.com/static/Docs/PyQt5/designer.html) was used to generate the base Python code from the user interface designs,
+effectively converting the `.ui` files to `.py` files. I edited the generated
+code to conform to PEP 8 guidelines, and added documentation to make the code
+easier to understand. These generated code files were marked with the
+`_setup.py` suffixes, such as `brewhouse_setup.py`, and they were imported into
+the other Python files such as `brewhouse.py` so that functionality could be
+developed for the user interface objects. 
 
 ### GitHub Repository
 The repository for this software project can be found on GitHub [here.](https://github.com/IsaacCheng9/brewhouse)
