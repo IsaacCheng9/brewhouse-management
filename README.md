@@ -39,6 +39,8 @@ When the bottling has been completed, it means that the full beer brewing proces
 
 All changes which are made in the `Process Monitoring` section are automatically saved, so data is not lost when the window or program is closed.
 
+The `Upload Sales Data` button will open a small dialog which provides a form for the user to input the details of their new sale. Once they click the `Upload New Sale` button, the form will be checked. If all of the fields have been filled in, the new sale will be added to the CSV file.
+
 ## Other Details
 
 ### Code Style

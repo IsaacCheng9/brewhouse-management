@@ -56,17 +56,15 @@ class BrewhouseWindow(QMainWindow, Ui_mwindow_brewhouse):
         # Connects 'Process Monitoring' button to the monitoring dialog.
         self.btn_process_monitoring.clicked.connect(
             self.open_dialog_monitoring)
-        # Connects 'Process Monitoring' button to the monitoring dialog.
+        # Connects 'Upload Sales Data' button to the upload sales dialog.
         self.btn_upload_sales.clicked.connect(
             self.open_dialog_upload_sales)
 
 
         # Reads sales data from the CSV file.
         data_frame = self.read_sales_data()
-
         # Calculates total sales and sales ratios of beer.
         self.get_sales_ratio(data_frame)
-
         # Calculates average monthly growth rates in sales of beer.
         (beers, red_helles_growth, pilsner_growth,
          dunkel_growth) = self.get_avg_growth_rate(data_frame)
