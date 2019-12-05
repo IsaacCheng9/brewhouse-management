@@ -1,6 +1,12 @@
 """
 A system to predict demand and help monitor and schedule brewing processes for
-Barnaby's Brewhouse.
+Barnaby's Brewhouse. The user is presented with the statistics on total sales,
+sales ratios, and average monthly growth rates calculated from the existing
+sales data. They can select a date and receive a sales prediction for the month
+of that date for each beer being sold. The user can also navigate to the
+inventory management and process monitoring sections, which will allow them
+to manage the company's inventory and manage the production stages of different
+beers respectively.
 """
 
 import logging
@@ -290,22 +296,24 @@ class BrewhouseWindow(QMainWindow, Ui_mwindow_brewhouse):
             predicted_dunkel_sales (int): Predicted sales of Dunkel for the
                                           given month.
         """
-        red_helles_production = 0
-        pilsner_production = 0
-        dunkel_production = 0
+        red_helles_production = int()
+        pilsner_production = int()
+        dunkel_production = int()
 
+        # Reads the inventory data to access volumes of each beer.
         (inventory_list, red_helles_volume, pilsner_volume,
          dunkel_volume) = InventoryManagementDialog.read_inventory(self)
+        # Reads the processes data to access volumes of each beer being made.
         process_list = ProcessMonitoringDialog.read_processes(self)
 
         # Sums the volume of each beer currently in production processes.
         for process in process_list:
             if process["recipe"] == "Organic Red Helles":
-                red_helles_production += process["volume"]
+                red_helles_production = process["volume"]
             elif process["recipe"] == "Organic Pilsner":
-                pilsner_production += process["volume"]
+                pilsner_production = process["volume"]
             elif process["recipe"] == "Organic Red Helles":
-                dunkel_production += process["volume"]
+                dunkel_production = process["volume"]
 
         # Calculates the deficit in volume of each beer.
         red_helles_deficit = (predicted_red_helles_sales - red_helles_volume -
@@ -316,10 +324,8 @@ class BrewhouseWindow(QMainWindow, Ui_mwindow_brewhouse):
                           dunkel_production)
 
         # Recommends producing the beer with the largest volume deficit.
-        print(red_helles_deficit, pilsner_deficit, dunkel_deficit)
         largest_deficit = max(red_helles_deficit, pilsner_deficit,
                               dunkel_deficit)
-        print(largest_deficit)
         deficit_calculation = ("(Beer Deficit = Estimated Demand - Inventory "
                                "Volume - Volume in Production)\n"
                                "Organic Red Helles Deficit:  " +
