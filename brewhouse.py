@@ -4,9 +4,9 @@ Barnaby's Brewhouse. The user is presented with the statistics on total sales,
 sales ratios, and average monthly growth rates calculated from the existing
 sales data. They can select a date and receive a sales prediction for the month
 of that date for each beer being sold. The user can also navigate to the
-inventory management and process monitoring sections, which will allow them
-to manage the company's inventory and manage the production stages of different
-beers respectively.
+inventory management, process monitoring, and upload new sales sections, which
+will allow them to manage the company's inventory, manage the production
+stages of different beers, and upload new sales data respectively.
 """
 
 import logging
@@ -21,6 +21,7 @@ from PyQt5.QtWidgets import QMainWindow
 from brewhouse_setup import Ui_mwindow_brewhouse
 from inv_management import InventoryManagementDialog
 from process_monitoring import ProcessMonitoringDialog
+from upload_sales import UploadSalesDialog
 
 
 def main() -> None:
@@ -52,10 +53,13 @@ class BrewhouseWindow(QMainWindow, Ui_mwindow_brewhouse):
         # Connects 'Inventory Management' button to the inventory dialog.
         self.btn_inv_management.clicked.connect(
             self.open_dialog_inv_management)
-
         # Connects 'Process Monitoring' button to the monitoring dialog.
         self.btn_process_monitoring.clicked.connect(
             self.open_dialog_monitoring)
+        # Connects 'Process Monitoring' button to the monitoring dialog.
+        self.btn_upload_sales.clicked.connect(
+            self.open_dialog_upload_sales)
+
 
         # Reads sales data from the CSV file.
         data_frame = self.read_sales_data()
@@ -79,6 +83,11 @@ class BrewhouseWindow(QMainWindow, Ui_mwindow_brewhouse):
     def open_dialog_monitoring(self) -> None:
         """Opens the dialog for the user to monitor brewing processes."""
         self.Dialog = ProcessMonitoringDialog()
+        self.Dialog.open()
+
+    def open_dialog_upload_sales(self) -> None:
+        """Opens the dialog for the user to upload new sales data."""
+        self.Dialog = UploadSalesDialog()
         self.Dialog.open()
 
     def read_sales_data(self) -> pandas.core.frame.DataFrame:

@@ -2,7 +2,7 @@
 
 # Form implementation generated from reading ui file 'brewhouse.ui'
 #
-# Created by: PyQt5 UI code generator 5.13.2
+# Created by: PyQt5 UI code generator 5.13.1
 #
 # WARNING! All changes made in this file will be lost!
 
@@ -47,6 +47,9 @@ class Ui_mwindow_brewhouse(object):
         self.btn_process_monitoring = QtWidgets.QPushButton(self.layoutWidget)
         self.btn_process_monitoring.setObjectName("btn_process_monitoring")
         self.hori_layout_nav.addWidget(self.btn_process_monitoring, 0, QtCore.Qt.AlignLeft)
+        self.btn_upload_sales = QtWidgets.QPushButton(self.layoutWidget)
+        self.btn_upload_sales.setObjectName("btn_upload_sales")
+        self.hori_layout_nav.addWidget(self.btn_upload_sales)
         spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
         self.hori_layout_nav.addItem(spacerItem)
         self.vert_layout_brewhouse.addLayout(self.hori_layout_nav)
@@ -175,16 +178,17 @@ class Ui_mwindow_brewhouse(object):
         self.lbl_brewhouse.setText(_translate("mwindow_brewhouse", "Barnaby\'s Brewhouse"))
         self.btn_inv_management.setText(_translate("mwindow_brewhouse", "Inventory Management"))
         self.btn_process_monitoring.setText(_translate("mwindow_brewhouse", "Process Monitoring"))
-        self.lbl_sales.setText(_translate("mwindow_brewhouse", "Total Sales"))
+        self.btn_upload_sales.setText(_translate("mwindow_brewhouse", "Upload Sales Data"))
+        self.lbl_sales.setText(_translate("mwindow_brewhouse", "Total Sales (November 2018 to October 2019)"))
         self.lbl_overall_sales.setText(_translate("mwindow_brewhouse", "Overall - "))
         self.lbl_red_helles_sales.setText(_translate("mwindow_brewhouse", "Organic Red Helles - "))
         self.lbl_pilsner_sales.setText(_translate("mwindow_brewhouse", "Organic Pilsner - "))
         self.lbl_dunkel_sales.setText(_translate("mwindow_brewhouse", "Organic Dunkel - "))
-        self.lbl_ratios.setText(_translate("mwindow_brewhouse", "Sales Ratios"))
+        self.lbl_ratios.setText(_translate("mwindow_brewhouse", "Sales Ratios (November 2018 to October 2019)"))
         self.lbl_red_helles_ratio.setText(_translate("mwindow_brewhouse", "Organic Red Helles - "))
         self.lbl_pilsner_ratio.setText(_translate("mwindow_brewhouse", "Organic Pilsner - "))
         self.lbl_dunkel_ratio.setText(_translate("mwindow_brewhouse", "Organic Dunkel - "))
-        self.lbl_growth.setText(_translate("mwindow_brewhouse", "Average Monthly Growth Percentages"))
+        self.lbl_growth.setText(_translate("mwindow_brewhouse", "Average Monthly Growth Percentages (November 2018 to October 2019)"))
         self.lbl_red_helles_growth.setText(_translate("mwindow_brewhouse", "Organic Red Helles - "))
         self.lbl_pilsner_growth.setText(_translate("mwindow_brewhouse", "Organic Pilsner  - "))
         self.lbl_dunkel_growth.setText(_translate("mwindow_brewhouse", "Organic Dunkel - "))

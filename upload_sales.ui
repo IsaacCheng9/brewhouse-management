@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>dialog_upload_sales</class>
+ <widget class="QDialog" name="dialog_upload_sales">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>600</width>
+    <height>375</height>
+   </rect>
+  </property>
+  <property name="font">
+   <font>
+    <family>Arial</family>
+    <pointsize>10</pointsize>
+   </font>
+  </property>
+  <property name="windowTitle">
+   <string>Upload New Sales Data - Barnaby's Brewhouse</string>
+  </property>
+  <layout class="QGridLayout" name="gridLayout">
+   <item row="0" column="0">
+    <widget class="QScrollArea" name="scroll_area">
+     <property name="font">
+      <font>
+       <kerning>true</kerning>
+      </font>
+     </property>
+     <property name="frameShape">
+      <enum>QFrame::NoFrame</enum>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Plain</enum>
+     </property>
+     <property name="lineWidth">
+      <number>0</number>
+     </property>
+     <property name="widgetResizable">
+      <bool>true</bool>
+     </property>
+     <widget class="QWidget" name="scroll_area_widget_contents">
+      <property name="geometry">
+       <rect>
+        <x>0</x>
+        <y>0</y>
+        <width>578</width>
+        <height>353</height>
+       </rect>
+      </property>
+      <widget class="QWidget" name="verticalLayoutWidget">
+       <property name="geometry">
+        <rect>
+         <x>0</x>
+         <y>0</y>
+         <width>571</width>
+         <height>331</height>
+        </rect>
+       </property>
+       <layout class="QVBoxLayout" name="vert_layout_upload_sales">
+        <item>
+         <widget class="QLabel" name="lbl_upload_sales">
+          <property name="font">
+           <font>
+            <family>Arial</family>
+            <pointsize>14</pointsize>
+            <kerning>true</kerning>
+           </font>
+          </property>
+          <property name="text">
+           <string>Upload New Sales Data</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="Line" name="hori_line_upload_sales">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <layout class="QGridLayout" name="grid_layout_upload_sales">
+          <item row="3" column="0">
+           <widget class="QLabel" name="lbl_sale_date">
+            <property name="text">
+             <string>Date Required:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="1">
+           <widget class="QDateEdit" name="date_edit_sale_date">
+            <property name="dateTime">
+             <datetime>
+              <hour>0</hour>
+              <minute>0</minute>
+              <second>0</second>
+              <year>2019</year>
+              <month>11</month>
+              <day>1</day>
+             </datetime>
+            </property>
+            <property name="maximumDateTime">
+             <datetime>
+              <hour>23</hour>
+              <minute>59</minute>
+              <second>59</second>
+              <year>9999</year>
+              <month>1</month>
+              <day>1</day>
+             </datetime>
+            </property>
+            <property name="minimumDateTime">
+             <datetime>
+              <hour>0</hour>
+              <minute>0</minute>
+              <second>0</second>
+              <year>2000</year>
+              <month>1</month>
+              <day>1</day>
+             </datetime>
+            </property>
+            <property name="maximumDate">
+             <date>
+              <year>9999</year>
+              <month>1</month>
+              <day>1</day>
+             </date>
+            </property>
+            <property name="calendarPopup">
+             <bool>true</bool>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="0">
+           <widget class="QLabel" name="lbl_sale_recipe">
+            <property name="text">
+             <string>Recipe:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="1">
+           <widget class="QComboBox" name="combo_box_sale_recipe">
+            <item>
+             <property name="text">
+              <string>Organic Red Helles</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Organic Pilsner</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Organic Dunkel</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+          <item row="6" column="0">
+           <widget class="QLabel" name="lbl_sale_quantity">
+            <property name="text">
+             <string>Quantity Ordered:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="6" column="1">
+           <widget class="QLineEdit" name="line_edit_sale_quantity">
+            <property name="maxLength">
+             <number>13</number>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QLabel" name="lbl_sale_invoice">
+            <property name="text">
+             <string>Invoice Number:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QLineEdit" name="line_edit_sale_invoice">
+            <property name="maxLength">
+             <number>13</number>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="0">
+           <widget class="QLabel" name="lbl_sale_customer">
+            <property name="text">
+             <string>Customer:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="1">
+           <widget class="QLineEdit" name="line_edit_sale_customer">
+            <property name="maxLength">
+             <number>40</number>
+            </property>
+           </widget>
+          </item>
+          <item row="5" column="0">
+           <widget class="QLabel" name="lbl_sale_gyle">
+            <property name="text">
+             <string>Gyle Number:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="5" column="1">
+           <widget class="QLineEdit" name="line_edit_sale_gyle">
+            <property name="maxLength">
+             <number>13</number>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item alignment="Qt::AlignLeft">
+         <widget class="QPushButton" name="btn_upload_sale">
+          <property name="text">
+           <string>Upload New Sale</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="Line" name="hori_line_sale">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="lbl_upload_successful">
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <spacer name="vert_spacer_upload_sales">
+          <property name="orientation">
+           <enum>Qt::Vertical</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>20</width>
+            <height>40</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+       </layout>
+      </widget>
+     </widget>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

@@ -68,6 +68,13 @@
         </widget>
        </item>
        <item>
+        <widget class="QPushButton" name="btn_upload_sales">
+         <property name="text">
+          <string>Upload Sales Data</string>
+         </property>
+        </widget>
+       </item>
+       <item>
         <spacer name="hori_spacer_nav">
          <property name="orientation">
           <enum>Qt::Horizontal</enum>
@@ -97,7 +104,7 @@
         </font>
        </property>
        <property name="text">
-        <string>Total Sales</string>
+        <string>Total Sales (November 2018 to October 2019)</string>
        </property>
       </widget>
      </item>
@@ -144,7 +151,7 @@
         </font>
        </property>
        <property name="text">
-        <string>Sales Ratios</string>
+        <string>Sales Ratios (November 2018 to October 2019)</string>
        </property>
       </widget>
      </item>
@@ -184,7 +191,7 @@
         </font>
        </property>
        <property name="text">
-        <string>Average Monthly Growth Percentages</string>
+        <string>Average Monthly Growth Percentages (November 2018 to October 2019)</string>
        </property>
       </widget>
      </item>
