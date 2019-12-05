@@ -1,11 +1,14 @@
-{
-    "red_helles": {
+[
+    {
+        "recipe": "red_helles",
         "volume": 0
     },
-    "pilsner": {
+    {
+        "recipe": "pilsner",
         "volume": 0
     },
-    "dunkel": {
+    {
+        "recipe": "dunkel",
         "volume": 0
     }
-}
+]

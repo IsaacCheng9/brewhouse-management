@@ -11,7 +11,7 @@ from time import localtime, strftime, time
 from typing import Tuple
 
 import pandas
-from PyQt5 import QtCore, QtGui, QtWidgets
+from PyQt5 import QtWidgets
 from PyQt5.QtGui import QIntValidator
 from PyQt5.QtWidgets import QDialog, QMainWindow
 
@@ -223,7 +223,7 @@ class BrewhouseWindow(QMainWindow, Ui_mwindow_brewhouse):
             dunkel_growth (float): Average growth rate of sales for Dunkel.
 
         Returns:
-            prediction-sales (int): Predicted monthly sales of a given beer for
+            prediction_sales (int): Predicted monthly sales of a given beer for
                                     a given month.
         """
 
@@ -301,44 +301,46 @@ class InventoryManagementDialog(QDialog, Ui_dialog_inv_management):
         self.line_edit_update_inv_volume.setValidator(self.only_int)
 
         # Reads the inventory and gets volume for each beer.
-        (inventory_dict, red_helles_volume, pilsner_volume,
+        (inventory_list, red_helles_volume, pilsner_volume,
          dunkel_volume) = self.read_inventory()
 
         # Connects 'Add to Inventory' button to add inventory volume.
         self.btn_add_inv.clicked.connect(lambda: self.add_inventory(
-            inventory_dict, red_helles_volume, pilsner_volume, dunkel_volume))
+            inventory_list, red_helles_volume, pilsner_volume, dunkel_volume))
         # Connects 'Remove from Inventory' button to remove inventory volume.
         self.btn_remove_inv.clicked.connect(lambda: self.remove_inventory(
-            inventory_dict, red_helles_volume, pilsner_volume, dunkel_volume))
+            inventory_list, red_helles_volume, pilsner_volume, dunkel_volume))
 
         # Updates the volumes in the inventory in the UI.
         self.update_inventory()
 
-    def read_inventory(self) -> Tuple[dict, int, int, int]:
+    def read_inventory(self) -> Tuple[list, int, int, int]:
         """Reads the JSON file for inventory and gets volume for each beer.
 
         Returns:
-            inventory_dict (dict): Dictionary storing the volume for each beer.
+            inventory_list (list): List storing the volume for each beer.
             red_helles_volume (int): Volume (L) of Red Helles.
             pilsner_volume (int): Volume (L) of Pilsner.
             dunkel_volume (int): Volume (L) of Dunkel.
         """
         with open("inventory.json", "r") as inventory_file:
             try:
-                inventory_dict = json.load(inventory_file)
-                red_helles_volume = int(
-                    inventory_dict["red_helles"]["volume"])
-                pilsner_volume = int(
-                    inventory_dict["pilsner"]["volume"])
-                dunkel_volume = int(inventory_dict["dunkel"]["volume"])
+                inventory_list = json.load(inventory_file)
+                for inventory in inventory_list:
+                    if inventory["recipe"] == "red_helles":
+                        red_helles_volume = int(inventory["volume"])
+                    elif inventory["recipe"] == "pilsner":
+                        pilsner_volume = int(inventory["volume"])
+                    elif inventory["recipe"] == "dunkel":
+                        dunkel_volume = int(inventory["volume"])
             except ValueError:
                 print("Empty JSON file.")
 
-        return inventory_dict, red_helles_volume, pilsner_volume, dunkel_volume
+        return inventory_list, red_helles_volume, pilsner_volume, dunkel_volume
 
     def update_inventory(self):
         """Updates the volumes in the inventory in the UI."""
-        (inventory_dict, red_helles_volume, pilsner_volume,
+        (inventory_list, red_helles_volume, pilsner_volume,
          dunkel_volume) = self.read_inventory()
 
         # Shows the volume and number of bottles of Red Helles.
@@ -359,22 +361,22 @@ class InventoryManagementDialog(QDialog, Ui_dialog_inv_management):
             "Organic Dunkel - " + str(dunkel_volume) + " L / " +
             str(dunkel_quantity) + " bottle(s)")
 
-    def save_inventory(self, inventory_dict: dict):
+    def save_inventory(self, inventory_list: list):
         """Saves the new inventory to the JSON file.
 
         Args:
-            inventory_dict (dict): Dictionary storing the volume for each beer.
+            inventory_list (list): List storing the volume for each beer.
         """
         with open("inventory.json", "w") as inventory_file:
-            json.dump(inventory_dict, inventory_file,
+            json.dump(inventory_list, inventory_file,
                       ensure_ascii=False, indent=4)
 
-    def add_inventory(self, inventory_dict: dict, red_helles_volume: int,
+    def add_inventory(self, inventory_list: list, red_helles_volume: int,
                       pilsner_volume: int, dunkel_volume: int):
         """Adds the given volume to the given beer in the inventory.
 
         Args:
-            inventory_dict (dict): Dictionary storing the volume for each beer.
+            inventory_list (list): List storing the volume for each beer.
             red_helles_volume (int): Volume (L) of Red Helles.
             pilsner_volume (int): Volume (L) of Pilsner.
             dunkel_volume (int): Volume (L) of Dunkel.
@@ -390,19 +392,21 @@ class InventoryManagementDialog(QDialog, Ui_dialog_inv_management):
         add_volume = self.line_edit_update_inv_volume.text()
 
         # Adds inputted volume to the selected beer.
-        inventory_dict[add_beer]["volume"] += int(add_volume)
+        for inventory in inventory_list:
+            if inventory["recipe"] == add_beer:
+                inventory["volume"] += int(add_volume)
 
         # Saves the new inventory to the JSON file.
-        self.save_inventory(inventory_dict)
+        self.save_inventory(inventory_list)
         # Updates the volumes in the inventory in the UI.
         self.update_inventory()
 
-    def remove_inventory(self, inventory_dict: dict, red_helles_volume: int,
+    def remove_inventory(self, inventory_list: list, red_helles_volume: int,
                          pilsner_volume: int, dunkel_volume: int):
         """Removes the given volume to the given beer in the inventory.
 
         Args:
-            inventory_dict (dict): Dictionary storing the volume for each beer.
+            inventory_list (list): List storing the volume for each beer.
             red_helles_volume (int): Volume (L) of Red Helles.
             pilsner_volume (int): Volume (L) of Pilsner.
             dunkel_volume (int): Volume (L) of Dunkel.
@@ -418,10 +422,12 @@ class InventoryManagementDialog(QDialog, Ui_dialog_inv_management):
         remove_volume = self.line_edit_update_inv_volume.text()
 
         # Removes inputted volume to the selected beer.
-        inventory_dict[remove_beer]["volume"] -= int(remove_volume)
+        for inventory in inventory_list:
+            if inventory["recipe"] == remove_beer:
+                inventory["volume"] -= int(remove_volume)
 
         # Saves the new inventory to the JSON file.
-        self.save_inventory(inventory_dict)
+        self.save_inventory(inventory_list)
         # Updates the volumes in the inventory in the UI.
         self.update_inventory()
 
@@ -534,7 +540,7 @@ class ProcessMonitoringDialog(QDialog, Ui_dialog_monitoring):
             display_processes += (process["process"] + ", " + process["recipe"]
                                   + ", " + process["tank"] + ", " +
                                   str(process["volume"]) +
-                                    " L (Completion Time: "
+                                  " L (Completion Time: "
                                   + process["completion"] + ")\n")
 
         # Displays list of process details in UI.
@@ -547,7 +553,7 @@ class ProcessMonitoringDialog(QDialog, Ui_dialog_monitoring):
             tank_list (list): A list showing tank availability.
             process_list (list): A list of ongoing processes.
         """
-        (inventory_dict, red_helles_volume, pilsner_volume,
+        (inventory_list, red_helles_volume, pilsner_volume,
          dunkel_volume) = InventoryManagementDialog.read_inventory(self)
 
         for existing_process in process_list:
@@ -555,19 +561,21 @@ class ProcessMonitoringDialog(QDialog, Ui_dialog_monitoring):
                 datetime.strptime(existing_process["completion"],
                                   "%d/%m/%Y %H:%M:%S")
                     <= datetime.now()):
+                # Adds the bottled volume of relevant beer to the inventory.
                 if existing_process["recipe"] == "Organic Red Helles":
-                    inventory_dict["red_helles"]["volume"] += (
+                    inventory_list["red_helles"]["volume"] += (
                         existing_process["volume"])
                 elif existing_process["recipe"] == "Organic Pilsner":
-                    inventory_dict["pilsner"]["volume"] += (
+                    inventory_list["pilsner"]["volume"] += (
                         existing_process["volume"])
                 elif existing_process["recipe"] == "Organic Dunkel":
-                    inventory_dict["dunkel"]["volume"] += (
+                    inventory_list["dunkel"]["volume"] += (
                         existing_process["volume"])
+                # Removes finished bottling process from process list.
                 process_list.remove(existing_process)
 
-        InventoryManagementDialog.save_inventory(self, inventory_dict)
-
+        # Saves the newly updated inventory.
+        InventoryManagementDialog.save_inventory(self, inventory_list)
         # Saves the updated process list to the JSON file.
         self.save_processes(process_list)
         # Updates the process list in the UI.
