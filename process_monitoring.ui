@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>800</width>
-    <height>950</height>
+    <height>1000</height>
    </rect>
   </property>
   <property name="font">
@@ -45,7 +45,7 @@
         <x>0</x>
         <y>0</y>
         <width>778</width>
-        <height>928</height>
+        <height>978</height>
        </rect>
       </property>
       <widget class="QWidget" name="verticalLayoutWidget">
@@ -54,7 +54,7 @@
          <x>0</x>
          <y>0</y>
          <width>720</width>
-         <height>921</height>
+         <height>971</height>
         </rect>
        </property>
        <layout class="QVBoxLayout" name="vert_layout_monitoring">
