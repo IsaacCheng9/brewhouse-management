@@ -227,8 +227,7 @@ class BrewhouseWindow(QMainWindow, Ui_mwindow_brewhouse):
                                     a given month.
         """
 
-        # Gets the beer and month to predict the sales for.
-        prediction_beer = self.combo_box_beer.currentText()
+        # Gets the date to predict the sales for.
         prediction_date = self.date_edit_predict.text()
 
         # Calculates number of months since the last month of sales data.
@@ -239,25 +238,55 @@ class BrewhouseWindow(QMainWindow, Ui_mwindow_brewhouse):
         month_difference = ((prediction_date.year - final_date.year) *
                             12 + (prediction_date.month - final_date.month))
 
-        # Predicts beer sales for that month, rounded down to nearest integer.
+        # Filters to last month's sales of Red Helles, Pilsner, and Dunkel.
         last_month_filter = data_frame["Date Required"].str.contains("Oct-19")
-        beer_filter = data_frame["Recipe"].str.contains(prediction_beer)
-        last_month_data = data_frame[last_month_filter & beer_filter]
-        last_month_sales = int(last_month_data["Quantity ordered"].sum())
+        red_helles_filter = data_frame["Recipe"].str.contains(
+            "Organic Red Helles")
+        pilsner_filter = data_frame["Recipe"].str.contains("Organic Pilsner")
+        dunkel_filter = data_frame["Recipe"].str.contains("Organic Dunkel")
 
-        if prediction_beer == "Organic Red Helles":
-            prediction_sales = int((last_month_sales *
-                                    (red_helles_growth ** month_difference)))
-        elif prediction_beer == "Organic Pilsner":
-            prediction_sales = int((last_month_sales *
-                                    (pilsner_growth ** month_difference)))
-        elif prediction_beer == "Organic Dunkel":
-            prediction_sales = int((last_month_sales *
-                                    (dunkel_growth ** month_difference)))
+        # Gets last month's sales of Red Helles, Pilsner, and Dunkel.
+        last_red_helles_data = data_frame[last_month_filter &
+                                          red_helles_filter]
+        last_pilsner_data = data_frame[last_month_filter & pilsner_filter]
+        last_dunkel_data = data_frame[last_month_filter & dunkel_filter]
+        last_red_helles_sales = int(
+            last_red_helles_data["Quantity ordered"].sum())
+        last_pilsner_sales = int(last_pilsner_data["Quantity ordered"].sum())
+        last_dunkel_sales = int(last_dunkel_data["Quantity ordered"].sum())
+
+        # Predicts beer sales for given month, rounded down to nearest integer.
+        predicted_red_helles_sales = int((last_red_helles_sales *
+                                          (red_helles_growth **
+                                           month_difference)))
+        predicted_pilsner_sales = int((last_pilsner_sales *
+                                       (pilsner_growth ** month_difference)))
+        predicted_dunkel_sales = int((last_dunkel_sales *
+                                      (dunkel_growth ** month_difference)))
 
         # Shows the sales prediction for the given beer and date in UI.
-        self.lbl_predict_result.setText(
-            "Estimated Number of Monthly Sales: " + str(prediction_sales))
+        self.lbl_predictions.setText(
+            "Organic Red Helles: " + str(predicted_red_helles_sales) +
+            "\nOrganic Pilsner: " + str(predicted_pilsner_sales) +
+            "\nOrganic Dunkel: " + str(predicted_dunkel_sales))
+
+        # Recommends next beer to produce based on predicted demand.
+        self.production_advice(predicted_red_helles_sales,
+                               predicted_pilsner_sales, predicted_dunkel_sales)
+
+    def production_advice(self, predicted_red_helles_sales: int,
+                          predicted_pilsner_sales: int,
+                          predicted_dunkel_sales: int):
+        """Recommends next beer to produce based on predicted demand.
+
+        Args:
+            predicted_red_helles_sales (int): Predicted sales of Red Helles for
+                                              the given month.
+            predicted_pilsner_sales (int): Predicted sales of Pilsner for the
+                                           given month.
+            predicted_dunkel_sales (int): Predicted sales of Dunkel for the
+                                          given month."""
+        pass
 
 
 class InventoryManagementDialog(QDialog, Ui_dialog_inv_management):
