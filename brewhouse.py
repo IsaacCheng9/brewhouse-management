@@ -4,11 +4,11 @@ Barnaby's Brewhouse.
 """
 
 import json
+import logging
 import sys
 from datetime import datetime
 from time import localtime, strftime, time
 from typing import Tuple
-from datetime import datetime
 
 import pandas
 from PyQt5 import QtCore, QtGui, QtWidgets
@@ -23,9 +23,19 @@ from process_monitoring_setup import Ui_dialog_monitoring
 def main() -> None:
     """Opens the program window, and exits program when window is closed."""
     app = QtWidgets.QApplication(sys.argv)
+    setup_logging()
     mwindow_brewhouse = BrewhouseWindow()
     mwindow_brewhouse.show()
     sys.exit(app.exec())
+
+
+def setup_logging():
+    """
+    Sets up the logging system to automatically log actions to log file.
+    """
+    logging.basicConfig(filename="logs.txt", level=logging.DEBUG,
+                        format="%(asctime)s - %(levelname)s - %(message)s")
+    logging.debug("Barnaby's Brewhouse program started.")
 
 
 class BrewhouseWindow(QMainWindow, Ui_mwindow_brewhouse):
