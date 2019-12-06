@@ -135,7 +135,7 @@
           <item row="4" column="0">
            <widget class="QLabel" name="lbl_sale_recipe">
             <property name="text">
-             <string>Recipe:</string>
+             <string>Beer Recipe:</string>
             </property>
            </widget>
           </item>

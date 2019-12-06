@@ -14,6 +14,30 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 
 
 class Ui_dialog_upload_sales(object):
+    """Creates the objects for the UI of this dialog for uploading sales.
+
+    Attributes:
+        dialog_upload_sales (QDialog): The baseplate which forms the dialog
+                                       window.
+        scroll_area (QScrollArea): Creates a scroll bar if the widget exceeds
+                                   size of the frame.
+        scroll_area_widget_contents (QWidget): Contents of the scroll area
+                                               widget.
+        vert_layout_upload_sales (QVBoxLayout): Lays out UI elements vertically
+                                                for a cleaner interface.
+        grid_layout_upload_sales (QGridLayout): Lays out input boxes in a grid
+                                                for ease of use.
+        combo_box_sale_recipe (QComboBox): Provides a dropdown menu for input
+                                           of beer recipe in new sale for ease
+                                           of use.
+        date_edit_sale_date (QDateEdit): Provides a calendar menu for input of
+                                         date in new sale for ease of use.
+        lbl_sale_customer (QLabel): Displays instruction for the line edit
+                                    input box next to it.
+        lbl_sale_date (QLabel): Displays instruction for the calendar menu
+                                input box next to it.
+    """
+
     def setupUi(self, dialog_upload_sales):
         dialog_upload_sales.setObjectName("dialog_upload_sales")
         dialog_upload_sales.resize(600, 375)
@@ -163,7 +187,7 @@ class Ui_dialog_upload_sales(object):
         self.lbl_sale_date.setText(_translate(
             "dialog_upload_sales", "Date Required:"))
         self.lbl_sale_recipe.setText(
-            _translate("dialog_upload_sales", "Recipe:"))
+            _translate("dialog_upload_sales", "Beer Recipe:"))
         self.combo_box_sale_recipe.setItemText(
             0, _translate("dialog_upload_sales", "Organic Red Helles"))
         self.combo_box_sale_recipe.setItemText(
