@@ -234,12 +234,13 @@ class InventoryManagementDialog(QDialog, Ui_dialog_inv_management):
 
         # Validates against null input.
         if dispatch_order_id != "":
+            # Checks for the order in the order list.
             for order in order_list:
                 if dispatch_order_id == order["order_id"]:
                     for inventory in inventory_list:
                         # Subtracts volume of beer from order from inventory.
                         if ((order["order_recipe"] == "Organic Red Helles" and
-                                inventory["recipe"] == "red_helles")
+                             inventory["recipe"] == "red_helles")
                                 or
                                 (order["order_recipe"] == "Organic Pilsner" and
                                  inventory["recipe"] == "pilsner")
@@ -256,6 +257,7 @@ class InventoryManagementDialog(QDialog, Ui_dialog_inv_management):
                         json.dump(order_list, orders_file,
                                   ensure_ascii=False, indent=4)
 
+                    # Displays message to say dispatch was successful.
                     self.lbl_order_message.setText("Order dispatched "
                                                    "successfully.")
 
@@ -266,6 +268,7 @@ class InventoryManagementDialog(QDialog, Ui_dialog_inv_management):
                     # Updates the volumes in the inventory in the UI.
                     self.update_inventory()
         else:
+            # Displays message to say dispatch was unsuccessful.
             self.lbl_order_message.setText("This is not a valid order to "
                                            "dispatch. Please input the order "
                                            "ID.")
