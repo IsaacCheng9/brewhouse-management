@@ -62,6 +62,12 @@ selecting the beer recipe and volume, then clicking on a button to
 `Add to Inventory` or `Remove from Inventory`. Inventory data is automatically
 saved whenever changes are made.
 
+Customer orders can be added in from the `Inventory Management` section as
+well. The user can add an order ID, beer, and volume to record the
+customer order. Once they've dispatched the order, they can record the dispatch
+by entering the order ID, which will remove the volume of the appropriate beer
+from the inventory of the brewhouse.
+
 The `Process Monitoring` button will open a dialog which displays the
 availability of tanks for fermentation and conditioning, and ongoing brewing
 processes. You can start different brewing processes as long as any
