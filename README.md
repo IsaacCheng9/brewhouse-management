@@ -111,7 +111,7 @@ is a commonly used standard within the Python community.
 for this project in a what you see is what you get (WYSIWYG) editor.
 
 PyQt5's
-[`pyuic5`](https://www.riverbankcomputing.com/static/Docs/PyQt5 designer.html)
+[pyuic5](https://www.riverbankcomputing.com/static/Docs/PyQt5/designer.html)
 was used to generate the base Python code from the user interface designs,
 effectively converting the `.ui` files to `.py` files. I edited the generated
 code to conform to PEP 8 guidelines, and added documentation to make the code
