@@ -15,7 +15,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 
 class Ui_dialog_inv_management(object):
     """Creates the objects for the UI of this dialog for managing inventory.
-    
+
         Attributes:
         dialog_inv_management (QDialog): The baseplate which forms the dialog
                                          window.
@@ -51,8 +51,43 @@ class Ui_dialog_inv_management(object):
                                      customer order.
         btn_dispatch_order (QPushButton): Enables user to dispatch the inputted
                                           customer order.
-        hori_line_add_order (Line): 
+        hori_line_add_order (Line): Separates the sections for adding an order
+                                    and dispatching an order.
+        hori_line_dispatch_order (Line): Separates the sections for dispatching
+                                         an order and the order
+                                         adding/dispatching confirmation.
+        hori_line_inv (Line): Separates the section showing current inventory
+                              level with the secion for updating inventory.
+        hori_line_monitoring (Line): Separates the header for the dialog
+                                     window and the section showing current
+                                     inventory level.
+        hori_line_orders (Line): Separates the customer orders list and the
+                                 section for adding a customer order.
+        hori_line_update_inv (Line): Separates the section for updating
+                                     inventory and the customer orders list.
+        lbl_add_order (QLabel): Displays subheader for adding a customer order.
+        lbl_customer_orders (QLabel): Displays subheader for the customer
+                                      orders list.
+        lbl_dispatch_order (QLabel): Displays subheader for dispatching a
+                                     customer order.
+        lbl_dunkel_inv (QLabel): Displays current volume of Dunkel in
+                                 inventory.
+        lbl_inv (QLabel): Displays subheader for current inventory levels.
+        lbl_inv_managagement (QLabel): Displays header for dialog window.
+        lbl_order_message (QLabel): Displays confirmation of a successful or
+                                    unsuccessful order added/dispatched.
+        lbl_orders (QLabel): Displays a list of customer orders.
+        lbl_pilsner_inv (QLabel): Displays current volume of Pilsner in
+                                  inventory.
+        lbl_red_helles_inv (QLabel): Displays current volume of Red Helles in
+                                     inventory.
+        lbl_update_inv (QLabel): Displays subheader for updating inventory
+                                 section.
+        vert_spacer_inv_management (Spacer): Pushes all UI elements up to
+                                             prevent unintended vertical
+                                             spacing.
     """
+
     def setupUi(self, dialog_inv_management):
         dialog_inv_management.setObjectName("dialog_inv_management")
         dialog_inv_management.resize(800, 800)
