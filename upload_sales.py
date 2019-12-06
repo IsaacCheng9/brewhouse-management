@@ -46,6 +46,7 @@ class UploadSalesDialog(QDialog, Ui_dialog_upload_sales):
                 sale = (invoice + "," + customer + "," + date + "," + recipe +
                         "," + gyle + "," + quantity + "\n")
                 sales_file.write(sale)
+
             # Notifies the user that their upload was successful.
             self.lbl_upload_successful.setText("Sale uploaded successfully!")
         else:
