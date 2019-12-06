@@ -23,10 +23,13 @@ class InventoryManagementDialog(QDialog, Ui_dialog_inv_management):
         # Restricts volume input to only numbers.
         self.only_int = QIntValidator()
         self.line_edit_update_inv_volume.setValidator(self.only_int)
+        self.line_edit_add_order_volume.setValidator(self.only_int)
 
         # Reads the inventory and gets volume for each beer.
         (inventory_list, red_helles_volume, pilsner_volume,
          dunkel_volume) = self.read_inventory()
+        # Reads the customer order list and adds to UI..
+        order_list = self.read_orders()
 
         # Connects 'Add to Inventory' button to add inventory volume.
         self.btn_add_inv.clicked.connect(lambda: self.add_inventory(
@@ -34,6 +37,11 @@ class InventoryManagementDialog(QDialog, Ui_dialog_inv_management):
         # Connects 'Remove from Inventory' button to remove inventory volume.
         self.btn_remove_inv.clicked.connect(lambda: self.remove_inventory(
             inventory_list))
+        # Connects 'Add Order' button to add customer order.
+        self.btn_add_order.clicked.connect(lambda: self.add_order(order_list))
+        # Connects 'Dispatch Order' button to dispatch customer order.
+        self.btn_dispatch_order.clicked.connect(lambda: self.dispatch_order(
+            inventory_list, order_list))
 
         # Updates the volumes in the inventory in the UI.
         self.update_inventory()
@@ -146,3 +154,112 @@ class InventoryManagementDialog(QDialog, Ui_dialog_inv_management):
         self.save_inventory(inventory_list)
         # Updates the volumes in the inventory in the UI.
         self.update_inventory()
+
+    def read_orders(self) -> list:
+        """Reads the customer orders from the JSON file and adds to UI.
+
+        Returns:
+            order_list (list): A list of the customer orders.
+        """
+        display_orders = ""
+
+        with open("customer_orders.json", "r") as orders_file:
+            try:
+                order_list = json.load(orders_file)
+            except ValueError:
+                print("Empty JSON file")
+
+        # Iterates through the orders and adds their details to an order list.
+        for order in order_list:
+            display_orders += ("Order ID: " + order["order_id"] + ", Beer "
+                               "Recipe: " + order["order_recipe"] +
+                               ", Order Volume: " +
+                               str(order["order_volume"]) + "\n")
+
+        # Displays list of orders in UI.
+        self.lbl_orders.setText(display_orders.rstrip())
+
+        return order_list
+
+    def add_order(self, order_list: list):
+        """Adds customer order to the list.
+
+        Args:
+            order_list (list): A list of the customer orders.
+        """
+
+        # Gets the inputs for the new customer order.
+        try:
+            order_id = self.line_edit_add_order_id.text()
+            order_recipe = self.combo_box_add_order_recipe.currentText()
+            order_volume = int(self.line_edit_add_order_volume.text())
+        except ValueError or TypeError:
+            pass
+
+        # Validates against null inputs.
+        if order_id != "" and str(order_volume) != "":
+            # Appends order to order list.
+            order = {"order_id": order_id,
+                     "order_recipe": order_recipe,
+                     "order_volume": order_volume}
+            order_list.append(order)
+
+            # Saves order list to JSON file.
+            with open("customer_orders.json", "w") as orders_file:
+                json.dump(order_list, orders_file,
+                          ensure_ascii=False, indent=4)
+
+            # Displays message to confirm their new order was added.
+            self.lbl_order_message.setText("Order added successfully.")
+
+            # Updates orders list in UI.
+            self.read_orders()
+        else:
+            # Displays message to notify their new order was unsuccessful.
+            self.lbl_order_message.setText("This is not a valid order to add. "
+                                           "Please add input in all fields.")
+
+    def dispatch_order(self, inventory_list: list, order_list: list):
+        """Dispatches customer order from the list.
+
+        Args:
+            inventory_list (list): List storing the volume for each beer.
+            order_list (list): A list of the customer orders.
+        """
+
+        try:
+            dispatch_order_id = self.line_edit_dispatch_order_id.text()
+        except ValueError or TypeError:
+            pass
+
+        # Validates against null input.
+        if dispatch_order_id != "":
+            for order in order_list:
+                if dispatch_order_id == order["order_id"]:
+                    for inventory in inventory_list:
+                        # Subtracts volume of beer from order from inventory.
+                        if (order["order_recipe"] == "Organic Red Helles" and
+                                inventory["recipe"] == "red_helles"):
+                            inventory["volume"] -= order["order_volume"]
+
+                    # Removes order from the order list.
+                    order_list.remove(order)
+
+                    # Saves order list to JSON file.
+                    with open("customer_orders.json", "w") as orders_file:
+                        json.dump(order_list, orders_file,
+                                  ensure_ascii=False, indent=4)
+
+                    self.lbl_order_message.setText("Order dispatched "
+                                                   "successfully.")
+
+                    # Updates orders list in UI.
+                    self.read_orders()
+                    # Saves the new inventory to the JSON file.
+                    self.save_inventory(inventory_list)
+                    # Updates the volumes in the inventory in the UI.
+                    self.update_inventory()
+        else:
+            self.lbl_order_message.setText("This is not a valid order to "
+                                           "dispatch. Please input the order "
+                                           "ID.")

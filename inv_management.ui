@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>500</width>
-    <height>375</height>
+    <width>800</width>
+    <height>800</height>
    </rect>
   </property>
   <property name="font">
@@ -44,8 +44,8 @@
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>478</width>
-        <height>353</height>
+        <width>778</width>
+        <height>778</height>
        </rect>
       </property>
       <widget class="QWidget" name="verticalLayoutWidget">
@@ -53,8 +53,8 @@
         <rect>
          <x>0</x>
          <y>0</y>
-         <width>471</width>
-         <height>330</height>
+         <width>771</width>
+         <height>771</height>
         </rect>
        </property>
        <layout class="QVBoxLayout" name="vert_layout_inv_management">
@@ -207,6 +207,190 @@
            </spacer>
           </item>
          </layout>
+        </item>
+        <item>
+         <widget class="Line" name="hori_line_update_inv">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="lbl_customer_orders">
+          <property name="font">
+           <font>
+            <underline>true</underline>
+            <kerning>true</kerning>
+           </font>
+          </property>
+          <property name="text">
+           <string>Customer Orders</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="lbl_orders">
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="Line" name="hori_line_orders">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="lbl_add_order">
+          <property name="font">
+           <font>
+            <underline>true</underline>
+            <kerning>true</kerning>
+           </font>
+          </property>
+          <property name="text">
+           <string>Add Customer Order</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <layout class="QGridLayout" name="grid_layout_add_order">
+          <item row="2" column="0">
+           <widget class="QLabel" name="lbl_add_order_recipe">
+            <property name="text">
+             <string>Beer Recipe:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="1">
+           <widget class="QComboBox" name="combo_box_add_order_recipe">
+            <item>
+             <property name="text">
+              <string>Organic Red Helles</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Organic Pilsner</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Organic Dunkel</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+          <item row="3" column="1">
+           <widget class="QLineEdit" name="line_edit_add_order_volume">
+            <property name="maxLength">
+             <number>13</number>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="0">
+           <widget class="QLabel" name="lbl_add_order_volume">
+            <property name="text">
+             <string>Volume (L):</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QLabel" name="lbl_add_order_id">
+            <property name="text">
+             <string>Order ID:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QLineEdit" name="line_edit_add_order_id">
+            <property name="maxLength">
+             <number>13</number>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </item>
+        <item alignment="Qt::AlignLeft">
+         <widget class="QPushButton" name="btn_add_order">
+          <property name="text">
+           <string>Add Order</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="Line" name="hori_line_add_order">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="lbl_dispatch_order">
+          <property name="font">
+           <font>
+            <underline>true</underline>
+            <kerning>true</kerning>
+           </font>
+          </property>
+          <property name="text">
+           <string>Dispatch Customer Order</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <layout class="QHBoxLayout" name="hori_layout_dispatch_order">
+          <item alignment="Qt::AlignLeft">
+           <widget class="QLabel" name="lbl_dispatch_order_id">
+            <property name="text">
+             <string>Order ID:</string>
+            </property>
+           </widget>
+          </item>
+          <item alignment="Qt::AlignLeft">
+           <widget class="QLineEdit" name="line_edit_dispatch_order_id">
+            <property name="maxLength">
+             <number>13</number>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <spacer name="hori_spacer_dispatch_order">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
+          </item>
+         </layout>
+        </item>
+        <item alignment="Qt::AlignLeft">
+         <widget class="QPushButton" name="btn_dispatch_order">
+          <property name="text">
+           <string>Dispatch Order</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="Line" name="hori_line_dispatch_order">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="lbl_order_message">
+          <property name="text">
+           <string> </string>
+          </property>
+         </widget>
         </item>
         <item>
          <spacer name="vert_spacer_inv_management">
