@@ -95,21 +95,21 @@
         <item>
          <widget class="QLabel" name="lbl_red_helles_inv">
           <property name="text">
-           <string>Organic Red Helles - </string>
+           <string>Organic Red Helles: </string>
           </property>
          </widget>
         </item>
         <item>
          <widget class="QLabel" name="lbl_pilsner_inv">
           <property name="text">
-           <string>Organic Pilsner - </string>
+           <string>Organic Pilsner: </string>
           </property>
          </widget>
         </item>
         <item>
          <widget class="QLabel" name="lbl_dunkel_inv">
           <property name="text">
-           <string>Organic Dunkel - </string>
+           <string>Organic Dunkel: </string>
           </property>
          </widget>
         </item>

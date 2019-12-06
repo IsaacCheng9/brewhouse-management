@@ -111,28 +111,28 @@
      <item>
       <widget class="QLabel" name="lbl_overall_sales">
        <property name="text">
-        <string>Overall - </string>
+        <string>Overall: </string>
        </property>
       </widget>
      </item>
      <item>
       <widget class="QLabel" name="lbl_red_helles_sales">
        <property name="text">
-        <string>Organic Red Helles - </string>
+        <string>Organic Red Helles: </string>
        </property>
       </widget>
      </item>
      <item>
       <widget class="QLabel" name="lbl_pilsner_sales">
        <property name="text">
-        <string>Organic Pilsner - </string>
+        <string>Organic Pilsner: </string>
        </property>
       </widget>
      </item>
      <item>
       <widget class="QLabel" name="lbl_dunkel_sales">
        <property name="text">
-        <string>Organic Dunkel - </string>
+        <string>Organic Dunkel: </string>
        </property>
       </widget>
      </item>
@@ -158,21 +158,21 @@
      <item>
       <widget class="QLabel" name="lbl_red_helles_ratio">
        <property name="text">
-        <string>Organic Red Helles - </string>
+        <string>Organic Red Helles: </string>
        </property>
       </widget>
      </item>
      <item>
       <widget class="QLabel" name="lbl_pilsner_ratio">
        <property name="text">
-        <string>Organic Pilsner - </string>
+        <string>Organic Pilsner: </string>
        </property>
       </widget>
      </item>
      <item>
       <widget class="QLabel" name="lbl_dunkel_ratio">
        <property name="text">
-        <string>Organic Dunkel - </string>
+        <string>Organic Dunkel:</string>
        </property>
       </widget>
      </item>
@@ -198,21 +198,21 @@
      <item>
       <widget class="QLabel" name="lbl_red_helles_growth">
        <property name="text">
-        <string>Organic Red Helles - </string>
+        <string>Organic Red Helles: </string>
        </property>
       </widget>
      </item>
      <item>
       <widget class="QLabel" name="lbl_pilsner_growth">
        <property name="text">
-        <string>Organic Pilsner  - </string>
+        <string>Organic Pilsner: </string>
        </property>
       </widget>
      </item>
      <item>
       <widget class="QLabel" name="lbl_dunkel_growth">
        <property name="text">
-        <string>Organic Dunkel - </string>
+        <string>Organic Dunkel: </string>
        </property>
       </widget>
      </item>

@@ -126,19 +126,19 @@ class BrewhouseWindow(QMainWindow, Ui_mwindow_brewhouse):
 
         # Displays the sales and sales ratios of beers in UI.
         self.lbl_overall_sales.setText(
-            "Overall - " + str(total_sales))
+            "Overall: " + str(total_sales))
         self.lbl_red_helles_sales.setText(
-            "Organic Red Helles - " + str(red_helles_sales))
+            "Organic Red Helles: " + str(red_helles_sales))
         self.lbl_pilsner_sales.setText(
-            "Organic Pilsner - " + str(pilsner_sales))
+            "Organic Pilsner: " + str(pilsner_sales))
         self.lbl_dunkel_sales.setText(
-            "Organic Dunkel - " + str(dunkel_sales))
+            "Organic Dunkel: " + str(dunkel_sales))
         self.lbl_red_helles_ratio.setText(
-            "Organic Red Helles - " + str(red_helles_ratio) + "%")
+            "Organic Red Helles: " + str(red_helles_ratio) + "%")
         self.lbl_pilsner_ratio.setText(
-            "Organic Pilsner - " + str(pilsner_ratio) + "%")
+            "Organic Pilsner: " + str(pilsner_ratio) + "%")
         self.lbl_dunkel_ratio.setText(
-            "Organic Dunkel - " + str(dunkel_ratio) + "%")
+            "Organic Dunkel: " + str(dunkel_ratio) + "%")
 
     def get_avg_growth_rate(self, data_frame:
                             pandas.core.frame.DataFrame) -> Tuple[list, float,
@@ -210,11 +210,11 @@ class BrewhouseWindow(QMainWindow, Ui_mwindow_brewhouse):
 
         # Displays percentage of sales provided by each beer in UI.
         self.lbl_red_helles_growth.setText(
-            "Organic Red Helles - " + str(red_helles_growth_pct) + "%")
+            "Organic Red Helles: " + str(red_helles_growth_pct) + "%")
         self.lbl_pilsner_growth.setText(
-            "Organic Pilsner - " + str(pilsner_growth_pct) + "%")
+            "Organic Pilsner: " + str(pilsner_growth_pct) + "%")
         self.lbl_dunkel_growth.setText(
-            "Organic Dunkel - " + str(dunkel_growth_pct) + "%")
+            "Organic Dunkel: " + str(dunkel_growth_pct) + "%")
 
         return beers, red_helles_growth, pilsner_growth, dunkel_growth
 

@@ -78,19 +78,19 @@ class InventoryManagementDialog(QDialog, Ui_dialog_inv_management):
         # Shows the volume and number of bottles of Red Helles.
         red_helles_quantity = int(red_helles_volume / 0.5)
         self.lbl_red_helles_inv.setText(
-            "Organic Red Helles - " + str(red_helles_volume) + " L / " +
+            "Organic Red Helles: " + str(red_helles_volume) + " L / " +
             str(red_helles_quantity) + " bottle(s)")
 
         # Shows the volume and number of bottles of Pilsner.
         pilsner_quantity = int(pilsner_volume / 0.5)
         self.lbl_pilsner_inv.setText(
-            "Organic Pilsner - " + str(pilsner_volume) + " L / " +
+            "Organic Pilsner: " + str(pilsner_volume) + " L / " +
             str(pilsner_quantity) + " bottle(s)")
 
         # Shows the volume and number of bottles of Dunkel.
         dunkel_quantity = int(dunkel_volume / 0.5)
         self.lbl_dunkel_inv.setText(
-            "Organic Dunkel - " + str(dunkel_volume) + " L / " +
+            "Organic Dunkel: " + str(dunkel_volume) + " L / " +
             str(dunkel_quantity) + " bottle(s)")
 
     def save_inventory(self, inventory_list: list):
@@ -238,8 +238,14 @@ class InventoryManagementDialog(QDialog, Ui_dialog_inv_management):
                 if dispatch_order_id == order["order_id"]:
                     for inventory in inventory_list:
                         # Subtracts volume of beer from order from inventory.
-                        if (order["order_recipe"] == "Organic Red Helles" and
-                                inventory["recipe"] == "red_helles"):
+                        if ((order["order_recipe"] == "Organic Red Helles" and
+                                inventory["recipe"] == "red_helles")
+                                or
+                                (order["order_recipe"] == "Organic Pilsner" and
+                                 inventory["recipe"] == "pilsner")
+                                or
+                                (order["order_recipe"] == "Organic Dunkel" and
+                                 inventory["recipe"] == "dunkel")):
                             inventory["volume"] -= order["order_volume"]
 
                     # Removes order from the order list.
