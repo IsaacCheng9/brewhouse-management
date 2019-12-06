@@ -60,7 +60,6 @@ class BrewhouseWindow(QMainWindow, Ui_mwindow_brewhouse):
         self.btn_upload_sales.clicked.connect(
             self.open_dialog_upload_sales)
 
-
         # Reads sales data from the CSV file.
         data_frame = self.read_sales_data()
         # Calculates total sales and sales ratios of beer.
