@@ -178,7 +178,7 @@ class InventoryManagementDialog(QDialog, Ui_dialog_inv_management):
             display_orders += ("Order ID: " + order["order_id"] + ", Beer "
                                "Recipe: " + order["order_recipe"] +
                                ", Order Volume: " +
-                               str(order["order_volume"]) + "\n")
+                               str(order["order_volume"]) + " L \n")
 
         # Displays list of orders in UI.
         self.lbl_orders.setText(display_orders.rstrip())
