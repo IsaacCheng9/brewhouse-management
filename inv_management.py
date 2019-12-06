@@ -119,15 +119,17 @@ class InventoryManagementDialog(QDialog, Ui_dialog_inv_management):
             add_beer = "dunkel"
         add_volume = self.line_edit_update_inv_volume.text()
 
-        # Adds inputted volume to the selected beer.
-        for inventory in inventory_list:
-            if inventory["recipe"] == add_beer:
-                inventory["volume"] += int(add_volume)
+        # Validates against null input.
+        if add_volume != "":
+            # Adds inputted volume to the selected beer.
+            for inventory in inventory_list:
+                if inventory["recipe"] == add_beer:
+                    inventory["volume"] += int(add_volume)
 
-        # Saves the new inventory to the JSON file.
-        self.save_inventory(inventory_list)
-        # Updates the volumes in the inventory in the UI.
-        self.update_inventory()
+            # Saves the new inventory to the JSON file.
+            self.save_inventory(inventory_list)
+            # Updates the volumes in the inventory in the UI.
+            self.update_inventory()
 
     def remove_inventory(self, inventory_list: list):
         """Removes the given volume to the given beer in the inventory.
@@ -145,15 +147,17 @@ class InventoryManagementDialog(QDialog, Ui_dialog_inv_management):
             remove_beer = "dunkel"
         remove_volume = self.line_edit_update_inv_volume.text()
 
-        # Removes inputted volume to the selected beer.
-        for inventory in inventory_list:
-            if inventory["recipe"] == remove_beer:
-                inventory["volume"] -= int(remove_volume)
+        # Validates against null input.
+        if remove_volume != "":
+            # Removes inputted volume to the selected beer.
+            for inventory in inventory_list:
+                if inventory["recipe"] == remove_beer:
+                    inventory["volume"] -= int(remove_volume)
 
-        # Saves the new inventory to the JSON file.
-        self.save_inventory(inventory_list)
-        # Updates the volumes in the inventory in the UI.
-        self.update_inventory()
+            # Saves the new inventory to the JSON file.
+            self.save_inventory(inventory_list)
+            # Updates the volumes in the inventory in the UI.
+            self.update_inventory()
 
     def read_orders(self) -> list:
         """Reads the customer orders from the JSON file and adds to UI.
@@ -193,7 +197,7 @@ class InventoryManagementDialog(QDialog, Ui_dialog_inv_management):
             order_id = self.line_edit_add_order_id.text()
             order_recipe = self.combo_box_add_order_recipe.currentText()
             order_volume = int(self.line_edit_add_order_volume.text())
-        except ValueError or TypeError:
+        except (ValueError, TypeError):
             pass
 
         # Validates against null inputs.
@@ -229,7 +233,7 @@ class InventoryManagementDialog(QDialog, Ui_dialog_inv_management):
 
         try:
             dispatch_order_id = self.line_edit_dispatch_order_id.text()
-        except ValueError or TypeError:
+        except (ValueError, TypeError):
             pass
 
         # Validates against null input.
