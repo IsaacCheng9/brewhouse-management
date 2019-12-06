@@ -196,6 +196,10 @@ class ProcessMonitoringDialog(QDialog, Ui_dialog_monitoring):
                 # Removes finished bottling process from process list.
                 process_list.remove(existing_process)
 
+                # Displays confirmation message of successful action.
+                self.lbl_process_message.setText("Bottles successfully sent "
+                                                 "to inventory.")
+
         # Saves the newly updated inventory.
         InventoryManagementDialog.save_inventory(self, inventory_list)
         # Saves the updated process list to the JSON file.
@@ -252,6 +256,9 @@ class ProcessMonitoringDialog(QDialog, Ui_dialog_monitoring):
 
             # Appends the process to the process list.
             process_list.append(dict(process))
+
+            # Displays confirmation message of successful action.
+            self.lbl_process_message.setText("Hot brew successfully started.")
 
             # Saves the updated process list to the JSON file.
             self.save_processes(process_list)
@@ -314,6 +321,10 @@ class ProcessMonitoringDialog(QDialog, Ui_dialog_monitoring):
 
                     # Removes volume from the prerequisite process.
                     existing_process["volume"] -= new_volume
+
+                    # Displays confirmation message of successful action.
+                    self.lbl_process_message.setText("Fermentation "
+                                                     "successfully started.")
                     break
 
             # Removes process from process list if they've been used up.
@@ -386,6 +397,10 @@ class ProcessMonitoringDialog(QDialog, Ui_dialog_monitoring):
 
                     # Removes volume from the prerequisite process.
                     existing_process["volume"] -= new_volume
+
+                    # Displays confirmation message of successful action.
+                    self.lbl_process_message.setText("Conditioning "
+                                                     "successfully started.")
                     break
 
             # Removes process from process list if they've been used up.
@@ -448,6 +463,10 @@ class ProcessMonitoringDialog(QDialog, Ui_dialog_monitoring):
 
                     # Removes volume from the prerequisite process.
                     existing_process["volume"] -= new_volume
+
+                    # Displays confirmation message of successful action.
+                    self.lbl_process_message.setText("Bottling "
+                                                     "successfully started.")
                     break
 
             # Removes process from process list if they've been used up.
@@ -496,6 +515,10 @@ class ProcessMonitoringDialog(QDialog, Ui_dialog_monitoring):
 
                     # Removes selected process to abort.
                     process_list.remove(existing_process)
+
+                    # Displays confirmation message of successful action.
+                    self.lbl_process_message.setText("Process "
+                                                     "successfully aborted.")
 
             # Saves the updated tank list to the JSON file.
             self.save_tanks(tank_list)

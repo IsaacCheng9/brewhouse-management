@@ -1,16 +1,91 @@
-# -*- coding: utf-8 -*-
+"""
+The base user interface for the dialog for process monitoring.
 
-# Form implementation generated from reading ui file 'process_monitoring.ui'
-#
-# Created by: PyQt5 UI code generator 5.13.1
-#
-# WARNING! All changes made in this file will be lost!
+This creates the objects in the user interface, so that the user can interact
+with the program more easily.
 
+Coding: utf-8
+Form implementation generated from reading ui file 'process_monitoring.ui'
+Created by: PyQt5 UI code generator 5.13.2
+"""
 
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 
 class Ui_dialog_monitoring(object):
+    """Creates the objects for the UI of this dialog for monitoring processes.
+
+        Attributes:
+        dialog_monitoring (QDialog): The baseplate which forms the dialog
+                                     window.
+        scroll_area (QScrollArea): Creates a scroll bar if the widget exceeds
+                                    size of the frame.
+        scroll_area_widget_contents (QWidget): Contents of the scroll area
+                                                widget.
+        vert_layout_monitoring (QVBoxLayout): Lays out all UI elements
+                                              vertically for a cleaner
+                                              interface.
+        grid_layout_start_process (QGridLayout): Lays out inputs for updating
+                                                 starting processes in a grid
+                                                 for ease of use.
+        combo_box_update_inv_recipe (QComboBox): Provides a dropdown menu input
+                                                 for user to input beer for
+                                                 updating inventory.
+        lbl_update_inv_recipe (QLabel): Displays an instruction for the user
+                                        to input beer for updating inventory.
+        lbl_update_inv_volume (QLabel): Displays an instruction for the user
+                                        to input volume for updating inventory.
+        line_edit_update_inv_volume (QLineEdit): Provides a line edit input for
+                                                 user to enter volume for
+                                                 updating inventory.
+        hori_layout_update_inv (QHBoxLayout): Lays out buttons for updating
+                                              inventory horizontally for ease
+                                              of use.
+        btn_add_inv (QPushButton): Enables user to add volume to selected beer.
+        btn_remove_inv (QPushButton): Enables user to remove volume from
+                                      selected beer.
+        hori_spacer_update_inv (Spacer): Pushes buttons for updating inventory
+                                         to the left for ease of use.
+        btn_add_order (QPushButton): Enables user to add the inputted
+                                     customer order.
+        btn_dispatch_order (QPushButton): Enables user to dispatch the inputted
+                                          customer order.
+        hori_line_add_order (Line): Separates the sections for adding an order
+                                    and dispatching an order.
+        hori_line_dispatch_order (Line): Separates the sections for dispatching
+                                         an order and the order
+                                         adding/dispatching confirmation.
+        hori_line_inv (Line): Separates the section showing current inventory
+                              level with the secion for updating inventory.
+        hori_line_monitoring (Line): Separates the header for the dialog
+                                     window and the section showing current
+                                     inventory level.
+        hori_line_orders (Line): Separates the customer orders list and the
+                                 section for adding a customer order.
+        hori_line_update_inv (Line): Separates the section for updating
+                                     inventory and the customer orders list.
+        lbl_add_order (QLabel): Displays subheader for adding a customer order.
+        lbl_customer_orders (QLabel): Displays subheader for the customer
+                                      orders list.
+        lbl_dispatch_order (QLabel): Displays subheader for dispatching a
+                                     customer order.
+        lbl_dunkel_inv (QLabel): Displays current volume of Dunkel in
+                                 inventory.
+        lbl_inv (QLabel): Displays subheader for current inventory levels.
+        lbl_monitoring (QLabel): Displays header for dialog window.
+        lbl_order_message (QLabel): Displays confirmation of a successful or
+                                    unsuccessful order added/dispatched.
+        lbl_orders (QLabel): Displays a list of customer orders.
+        lbl_pilsner_inv (QLabel): Displays current volume of Pilsner in
+                                  inventory.
+        lbl_red_helles_inv (QLabel): Displays current volume of Red Helles in
+                                     inventory.
+        lbl_update_inv (QLabel): Displays subheader for updating inventory
+                                 section.
+        vert_spacer_monitoring(Spacer): Pushes all UI elements up to
+                                        prevent unintended vertical
+                                        spacing.
+    """
     def setupUi(self, dialog_monitoring):
         dialog_monitoring.setObjectName("dialog_monitoring")
         dialog_monitoring.resize(800, 1000)
@@ -356,8 +431,8 @@ class Ui_dialog_monitoring(object):
         self.date_time_edit_completion = QtWidgets.QDateTimeEdit(
             self.verticalLayoutWidget)
         self.date_time_edit_completion.setMinimumDateTime(
-            QtCore.QDateTime(QtCore.QDate(2019, 10, 31), QtCore.QTime(0, 0,
-                                                                      0)))
+            QtCore.QDateTime(QtCore.QDate(2019, 10, 31),
+                             QtCore.QTime(0, 0, 0)))
         self.date_time_edit_completion.setCalendarPopup(True)
         self.date_time_edit_completion.setObjectName(
             "date_time_edit_completion")
@@ -385,18 +460,20 @@ class Ui_dialog_monitoring(object):
         self.btn_abort_process.setObjectName("btn_abort_process")
         self.vert_layout_monitoring.addWidget(
             self.btn_abort_process, 0, QtCore.Qt.AlignLeft)
+        self.hori_line_abort_process = QtWidgets.QFrame(
+            self.verticalLayoutWidget)
+        self.hori_line_abort_process.setFrameShape(QtWidgets.QFrame.HLine)
+        self.hori_line_abort_process.setFrameShadow(QtWidgets.QFrame.Sunken)
+        self.hori_line_abort_process.setObjectName("hori_line_abort_process")
+        self.vert_layout_monitoring.addWidget(self.hori_line_abort_process)
+        self.lbl_process_message = QtWidgets.QLabel(self.verticalLayoutWidget)
+        self.lbl_process_message.setText("")
+        self.lbl_process_message.setObjectName("lbl_process_message")
+        self.vert_layout_monitoring.addWidget(self.lbl_process_message)
         spacerItem1 = QtWidgets.QSpacerItem(
             20, 40, QtWidgets.QSizePolicy.Minimum,
             QtWidgets.QSizePolicy.Expanding)
         self.vert_layout_monitoring.addItem(spacerItem1)
-        self.hori_line_start_process_2 = QtWidgets.QFrame(
-            self.scroll_area_widget_contents)
-        self.hori_line_start_process_2.setGeometry(
-            QtCore.QRect(330, 570, 718, 3))
-        self.hori_line_start_process_2.setFrameShape(QtWidgets.QFrame.HLine)
-        self.hori_line_start_process_2.setFrameShadow(QtWidgets.QFrame.Sunken)
-        self.hori_line_start_process_2.setObjectName(
-            "hori_line_start_process_2")
         self.scroll_area.setWidget(self.scroll_area_widget_contents)
         self.gridLayout.addWidget(self.scroll_area, 0, 0, 1, 1)
 

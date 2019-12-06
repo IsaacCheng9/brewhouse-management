@@ -686,6 +686,20 @@
          </widget>
         </item>
         <item>
+         <widget class="Line" name="hori_line_abort_process">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLabel" name="lbl_process_message">
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
+        </item>
+        <item>
          <spacer name="vert_spacer_monitoring">
           <property name="orientation">
            <enum>Qt::Vertical</enum>
@@ -699,19 +713,6 @@
          </spacer>
         </item>
        </layout>
-      </widget>
-      <widget class="Line" name="hori_line_start_process_2">
-       <property name="geometry">
-        <rect>
-         <x>330</x>
-         <y>570</y>
-         <width>718</width>
-         <height>3</height>
-        </rect>
-       </property>
-       <property name="orientation">
-        <enum>Qt::Horizontal</enum>
-       </property>
       </widget>
      </widget>
     </widget>
