@@ -36,6 +36,31 @@ class Ui_dialog_upload_sales(object):
                                     input box next to it.
         lbl_sale_date (QLabel): Displays instruction for the calendar menu
                                 input box next to it.
+        lbl_sale_gyle (QLabel): Displays  instruction for the line edit input
+                                box for gyle number next to it.
+        lbl_sale_invoice (QLabel): Displays instruction for the line edit input
+                                   box for invoice number next to it.
+        lbl_sale_quantity (QLabel): Displays instruction for the line edit
+                                    input box for quantity ordered next to it.
+        line_edit_sale_customer (QLabel): Provides a line edit input box for
+                                          user to enter customer name.
+        line_edit_sale_gyle (QLabel): Provides a line edit input box for
+                                          user to enter gyle number.
+        line_edit_sale_invoice (QLabel): Provides a line edit input box for
+                                          user to enter invoice number.
+        line_edit_sale_quantity (QLabel): Provides a line edit input box for
+                                          user to enter quantity ordered.
+        btn_upload_sale (QPushButton): Enables user to upload the sale they've
+                                       input.
+        hori_line_sale (Line): Separates the upload sale button and
+                               confirmation message section.
+        hori_line_upload_sales (Line): Separates the dialog header label and
+                                       the grid for inputs.
+        lbl_upload_sales (QLabel): Displays the header for the dialog box.
+        lbl_upload_successful (QLabel): Displays a message confirming their
+                                        upload was successful/unsuccessful.
+        vert_spacer_upload_sales (Spacer): Pushes UI elements up to avoid
+                                           unintended vertical spacing.
     """
 
     def setupUi(self, dialog_upload_sales):
