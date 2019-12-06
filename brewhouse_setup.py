@@ -14,7 +14,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 
 
 class Ui_mwindow_brewhouse(object):
-    """Creates the objects for the user interface of the main window.
+    """Creates the objects for the UI of the main window, Brewhouse.
 
     Attributes:
         mwindow_brewhouse (QMainWindow): The baseplate which forms the main
@@ -44,7 +44,7 @@ class Ui_mwindow_brewhouse(object):
                                        calendar interface.
         hori_spacer_predict (Spacer): Pushes the date input closer to the label
                                       for ease of use.
-        lbl_predict_date (QLabel): Provides an instruction for what the date
+        lbl_predict_date (QLabel): Displays an instruction for what the date
                                    input is for.
         btn_predict (QPushButton): Creates a sales prediction for the inputted
                                    date.
@@ -60,9 +60,36 @@ class Ui_mwindow_brewhouse(object):
                                  growth sections.
         hori_line_sales (Line): Separates the total sales and sales ratios
                                 sections.
-        lbl_advice (QLabel): Provides the user with advice on what beer to
-                             produce next.
-        
+        lbl_advice (QLabel): Displays advice on what beer to produce next.
+        lbl_brewhouse (QLabel): Displays the header for the main window.
+        lbl_dunkel_growth (QLabel): Displays average monthly growth percentage
+                                    for Dunkel.
+        lbl_dunkel_ratio (QLabel): Displays sales ratio percentage for Dunkel.
+        lbl_dunkel_sales (QLabel): Displays total sales for Dunkel.
+        lbl_growth (QLabel): Displays subheader for average monthly growth
+                             section.
+        lbl_overall_sales (QLabel): Displays total overall sales of beer.
+        lbl_pilsner_growth (QLabel): Displays average monthly growth percentage
+                                     for Pilsner.
+        lbl_pilsner_ratio (QLabel): Displays sales ratio percentage for
+                                    Pilsner.
+        lbl_pilsner_sales (QLabel): Displays total sales for Pilsner.
+        lbl_predict (QLabel): Displays subheader for predicted sales section.
+        lbl_predictions (QLabel): Displays predicted sales for each beer for
+                                  the month on the given date.
+        lbl_production_advice (QLabel): Displays subheader for beer production
+                                        advice section.
+        lbl_ratios (QLabel): Displays subheader for sales ratios section.
+        lbl_red_helles_growth (QLabel): Displays average monthly growth rate
+                                        for Red Helles.
+        lbl_red_helles_ratio (QLabel): Displays sales ratio percentage for
+                                       Red Helles.
+        lbl_red_helles_sales (QLabel): Displays total sales for Red Helles.
+        lbl_sales (QLabel): Displays subheader for total sales section.
+        vert_spacer_brewhouse (Spacer): Pushes UI elements up to avoid
+                                        unintended spacing.
+        status_bar (QStatusBar): Displays contextual status information at the
+                                 bottom of the window.
     """
 
     def setupUi(self, mwindow_brewhouse):
