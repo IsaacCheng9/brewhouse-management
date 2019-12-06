@@ -14,6 +14,57 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 
 
 class Ui_mwindow_brewhouse(object):
+    """Creates the objects for the user interface of the main window.
+
+    Attributes:
+        mwindow_brewhouse (QMainWindow): The baseplate which forms the main
+                                         window.
+        central_widget (QWidget): The base class for all UI objects in the
+                                  window.
+        vert_layout_brewhouse (QVBoxLayout): Lays out all objects in the UI
+                                             vertically for a cleaner
+                                             aesthetic.
+        hori_layout_nav (QHBoxLayout): Lays out the navigation buttons at the
+                                       top of the UI horizontally so they're
+                                       easily accessible.
+        btn_inv_management (QPushButton): Enables navigation to the inventory
+                                          management section of the program.
+        btn_process_monitoring (QPushButton): Enables navigation to the process
+                                              monitoring section of the
+                                              program.
+        btn_upload_sales (QPushButton): Enables navigation to the uploading
+                                        sales data section of the program.
+        hori_spacer_nav (Spacer): Pushes the navigation buttons closer together
+                                  for a cleaner interface.
+        hori_layout_predict (QHBoxLayout): Lays out the objects related to
+                                           the input for sales prediction
+                                           horizontally for ease of use.
+        date_edit_predict (QDateEdit): Enables the user to enter a date in the
+                                       correct format more easily, with a
+                                       calendar interface.
+        hori_spacer_predict (Spacer): Pushes the date input closer to the label
+                                      for ease of use.
+        lbl_predict_date (QLabel): Provides an instruction for what the date
+                                   input is for.
+        btn_predict (QPushButton): Creates a sales prediction for the inputted
+                                   date.
+        hori_line_brewhouse (Line): Separates the header and the navigation
+                                    buttons.
+        hori_line_growth (Line): Separates average monthly growth and the
+                                 sales prediction sections.
+        hori_line_nav (Line): Separates the navigation buttons and the total
+                              sales section.
+        hori_line_predict (Line): Separates the sales prediction and beer
+                                  production advice sections.
+        hori_line_ratios (Line): Separates the sales ratios and average monthly
+                                 growth sections.
+        hori_line_sales (Line): Separates the total sales and sales ratios
+                                sections.
+        lbl_advice (QLabel): Provides the user with advice on what beer to
+                             produce next.
+        
+    """
+
     def setupUi(self, mwindow_brewhouse):
         mwindow_brewhouse.setObjectName("mwindow_brewhouse")
         mwindow_brewhouse.resize(750, 900)
