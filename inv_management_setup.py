@@ -14,7 +14,45 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 
 
 class Ui_dialog_inv_management(object):
-    """Creates the objects for the UI of this dialog for managing inventory."""
+    """Creates the objects for the UI of this dialog for managing inventory.
+    
+        Attributes:
+        dialog_inv_management (QDialog): The baseplate which forms the dialog
+                                         window.
+        scroll_area (QScrollArea): Creates a scroll bar if the widget exceeds
+                                    size of the frame.
+        scroll_area_widget_contents (QWidget): Contents of the scroll area
+                                                widget.
+        vert_layout_inv_management (QVBoxLayout): Lays out all UI elements
+                                                  vertically for a cleaner
+                                                  interface.
+        grid_layout_update_inv (QGridLayout): Lays out inputs for updating
+                                              inventory in a grid for ease of
+                                              use.
+        combo_box_update_inv_recipe (QComboBox): Provides a dropdown menu input
+                                                 for user to input beer for
+                                                 updating inventory.
+        lbl_update_inv_recipe (QLabel): Displays an instruction for the user
+                                        to input beer for updating inventory.
+        lbl_update_inv_volume (QLabel): Displays an instruction for the user
+                                        to input volume for updating inventory.
+        line_edit_update_inv_volume (QLineEdit): Provides a line edit input for
+                                                 user to enter volume for
+                                                 updating inventory.
+        hori_layout_update_inv (QHBoxLayout): Lays out buttons for updating
+                                              inventory horizontally for ease
+                                              of use.
+        btn_add_inv (QPushButton): Enables user to add volume to selected beer.
+        btn_remove_inv (QPushButton): Enables user to remove volume from
+                                      selected beer.
+        hori_spacer_update_inv (Spacer): Pushes buttons for updating inventory
+                                         to the left for ease of use.
+        btn_add_order (QPushButton): Enables user to add the inputted
+                                     customer order.
+        btn_dispatch_order (QPushButton): Enables user to dispatch the inputted
+                                          customer order.
+        hori_line_add_order (Line): 
+    """
     def setupUi(self, dialog_inv_management):
         dialog_inv_management.setObjectName("dialog_inv_management")
         dialog_inv_management.resize(800, 800)
