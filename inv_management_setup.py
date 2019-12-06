@@ -9,7 +9,6 @@ Form implementation generated from reading ui file 'inv_management.ui'
 Created by: PyQt5 UI code generator 5.13.1
 """
 
-
 from PyQt5 import QtCore, QtGui, QtWidgets
 
 
