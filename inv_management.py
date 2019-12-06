@@ -185,6 +185,16 @@ class InventoryManagementDialog(QDialog, Ui_dialog_inv_management):
 
         return order_list
 
+    def save_orders(self, order_list: list):
+        """Saves order list to JSON file.
+
+        Args:
+            order_list (list): A list of the customer orders.
+        """
+        with open("customer_orders.json", "w") as orders_file:
+            json.dump(order_list, orders_file,
+                      ensure_ascii=False, indent=4)
+
     def add_order(self, order_list: list):
         """Adds customer order to the list.
 
@@ -209,9 +219,7 @@ class InventoryManagementDialog(QDialog, Ui_dialog_inv_management):
             order_list.append(order)
 
             # Saves order list to JSON file.
-            with open("customer_orders.json", "w") as orders_file:
-                json.dump(order_list, orders_file,
-                          ensure_ascii=False, indent=4)
+            self.save_orders(order_list)
 
             # Displays message to confirm their new order was added.
             self.lbl_order_message.setText("Order added successfully.")
@@ -257,9 +265,7 @@ class InventoryManagementDialog(QDialog, Ui_dialog_inv_management):
                     order_list.remove(order)
 
                     # Saves order list to JSON file.
-                    with open("customer_orders.json", "w") as orders_file:
-                        json.dump(order_list, orders_file,
-                                  ensure_ascii=False, indent=4)
+                    self.save_orders(order_list)
 
                     # Displays message to say dispatch was successful.
                     self.lbl_order_message.setText("Order dispatched "
