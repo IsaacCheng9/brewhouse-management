@@ -63,8 +63,9 @@ The `Inventory Management` button will open a dialog which displays the current
 inventory of each beer in Barnaby's Brewhouse in terms of both volume and
 number of 500 ml bottles. You can also add or remove volume of a given beer by
 selecting the beer recipe and volume, then clicking on a button to
-`Add to Inventory` or `Remove from Inventory`. Inventory data is automatically
-saved whenever changes are made.
+`Add to Inventory` or `Remove from Inventory`. A negative volume is
+purposefully allowed so debts of volumes can be accounted for. Inventory data
+is automatically saved whenever changes are made.
 
 Customer orders can be added in from the `Inventory Management` section as
 well. The user can add an order ID, beer, and volume to record the
