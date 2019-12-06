@@ -14,6 +14,7 @@ from PyQt5 import QtCore, QtGui, QtWidgets
 
 
 class Ui_dialog_inv_management(object):
+    """Creates the objects for the UI of this dialog for managing inventory."""
     def setupUi(self, dialog_inv_management):
         dialog_inv_management.setObjectName("dialog_inv_management")
         dialog_inv_management.resize(800, 800)
