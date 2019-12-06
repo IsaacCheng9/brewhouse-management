@@ -142,110 +142,6 @@
         </item>
         <item>
          <layout class="QGridLayout" name="grid_layout_start_process">
-          <item row="0" column="2">
-           <widget class="QLabel" name="lbl_vertical_placeholder">
-            <property name="text">
-             <string/>
-            </property>
-           </widget>
-          </item>
-          <item row="9" column="0">
-           <widget class="QLabel" name="lbl_condition_volume">
-            <property name="text">
-             <string>Volume (L):</string>
-            </property>
-           </widget>
-          </item>
-          <item row="8" column="4">
-           <widget class="QLineEdit" name="line_edit_bottle_volume"/>
-          </item>
-          <item row="7" column="3">
-           <widget class="QLabel" name="lbl_bottle_recipe">
-            <property name="text">
-             <string>Beer Recipe:</string>
-            </property>
-           </widget>
-          </item>
-          <item row="2" column="4">
-           <widget class="QComboBox" name="combo_box_ferment_tank">
-            <item>
-             <property name="text">
-              <string>Albert</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Brigadier</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Camilla</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Dylon</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Emily</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Florence </string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>R2D2</string>
-             </property>
-            </item>
-           </widget>
-          </item>
-          <item row="5" column="3">
-           <widget class="QLabel" name="lbl_hori_placeholder">
-            <property name="text">
-             <string/>
-            </property>
-           </widget>
-          </item>
-          <item row="10" column="3" alignment="Qt::AlignLeft|Qt::AlignTop">
-           <widget class="QPushButton" name="btn_start_bottling">
-            <property name="text">
-             <string>Start Bottling</string>
-            </property>
-           </widget>
-          </item>
-          <item row="8" column="0">
-           <widget class="QLabel" name="lbl_condition_tank">
-            <property name="text">
-             <string>Tank:</string>
-            </property>
-           </widget>
-          </item>
-          <item row="2" column="1">
-           <widget class="QLineEdit" name="line_edit_brew_volume"/>
-          </item>
-          <item row="3" column="3">
-           <widget class="QLabel" name="lbl_ferment_volume">
-            <property name="text">
-             <string>Volume (L):</string>
-            </property>
-           </widget>
-          </item>
-          <item row="10" column="0" alignment="Qt::AlignLeft|Qt::AlignTop">
-           <widget class="QPushButton" name="btn_start_conditioning">
-            <property name="text">
-             <string>Start Conditioning</string>
-            </property>
-           </widget>
-          </item>
-          <item row="9" column="1">
-           <widget class="QLineEdit" name="line_edit_condition_volume"/>
-          </item>
           <item row="1" column="4">
            <widget class="QComboBox" name="combo_box_ferment_recipe">
             <item>
@@ -265,6 +161,73 @@
             </item>
            </widget>
           </item>
+          <item row="2" column="1">
+           <widget class="QLineEdit" name="line_edit_brew_volume"/>
+          </item>
+          <item row="0" column="0">
+           <widget class="QLabel" name="lbl_start_brew">
+            <property name="font">
+             <font>
+              <underline>true</underline>
+              <kerning>true</kerning>
+             </font>
+            </property>
+            <property name="text">
+             <string>Start Hot Brew</string>
+            </property>
+           </widget>
+          </item>
+          <item row="8" column="3">
+           <widget class="QLabel" name="lbl_bottle_volume">
+            <property name="text">
+             <string>Volume (L):</string>
+            </property>
+           </widget>
+          </item>
+          <item row="7" column="3">
+           <widget class="QLabel" name="lbl_bottle_recipe">
+            <property name="text">
+             <string>Beer Recipe:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="9" column="1">
+           <widget class="QLineEdit" name="line_edit_condition_volume"/>
+          </item>
+          <item row="8" column="0">
+           <widget class="QLabel" name="lbl_condition_tank">
+            <property name="text">
+             <string>Tank:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="3">
+           <widget class="QLabel" name="lbl_start_fermentation">
+            <property name="font">
+             <font>
+              <underline>true</underline>
+              <kerning>true</kerning>
+             </font>
+            </property>
+            <property name="text">
+             <string>Start Fermentation</string>
+            </property>
+           </widget>
+          </item>
+          <item row="5" column="3">
+           <widget class="QLabel" name="lbl_hori_placeholder">
+            <property name="text">
+             <string/>
+            </property>
+           </widget>
+          </item>
+          <item row="9" column="0">
+           <widget class="QLabel" name="lbl_condition_volume">
+            <property name="text">
+             <string>Volume (L):</string>
+            </property>
+           </widget>
+          </item>
           <item row="6" column="3">
            <widget class="QLabel" name="lbl_start_bottling">
             <property name="font">
@@ -278,13 +241,10 @@
             </property>
            </widget>
           </item>
-          <item row="3" column="4">
-           <widget class="QLineEdit" name="line_edit_ferment_volume"/>
-          </item>
-          <item row="2" column="3">
-           <widget class="QLabel" name="lbl_ferment_tank">
+          <item row="10" column="0" alignment="Qt::AlignLeft|Qt::AlignTop">
+           <widget class="QPushButton" name="btn_start_conditioning">
             <property name="text">
-             <string>Tank:</string>
+             <string>Start Conditioning</string>
             </property>
            </widget>
           </item>
@@ -295,76 +255,11 @@
             </property>
            </widget>
           </item>
-          <item row="6" column="0">
-           <widget class="QLabel" name="lbl_start_conditioning">
-            <property name="font">
-             <font>
-              <underline>true</underline>
-              <kerning>true</kerning>
-             </font>
-            </property>
+          <item row="0" column="2">
+           <widget class="QLabel" name="lbl_vertical_placeholder">
             <property name="text">
-             <string>Start Conditioning</string>
+             <string/>
             </property>
-           </widget>
-          </item>
-          <item row="8" column="3">
-           <widget class="QLabel" name="lbl_bottle_volume">
-            <property name="text">
-             <string>Volume (L):</string>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="3">
-           <widget class="QLabel" name="lbl_ferment_recipe">
-            <property name="text">
-             <string>Beer Recipe:</string>
-            </property>
-           </widget>
-          </item>
-          <item row="2" column="0">
-           <widget class="QLabel" name="lbl_brew_volume">
-            <property name="text">
-             <string>Volume (L):</string>
-            </property>
-           </widget>
-          </item>
-          <item row="7" column="4">
-           <widget class="QComboBox" name="combo_box_bottle_recipe">
-            <item>
-             <property name="text">
-              <string>Organic Red Helles</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Organic Pilsner</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Organic Dunkel</string>
-             </property>
-            </item>
-           </widget>
-          </item>
-          <item row="1" column="1">
-           <widget class="QComboBox" name="combo_box_brew_recipe">
-            <item>
-             <property name="text">
-              <string>Organic Red Helles</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Organic Pilsner</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Organic Dunkel</string>
-             </property>
-            </item>
            </widget>
           </item>
           <item row="8" column="1">
@@ -411,10 +306,155 @@
             </item>
            </widget>
           </item>
+          <item row="4" column="3" alignment="Qt::AlignLeft|Qt::AlignTop">
+           <widget class="QPushButton" name="btn_start_fermentation">
+            <property name="text">
+             <string>Start Fermentation</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="4">
+           <widget class="QComboBox" name="combo_box_ferment_tank">
+            <item>
+             <property name="text">
+              <string>Albert</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Brigadier</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Camilla</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Dylon</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Emily</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Florence </string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>R2D2</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+          <item row="3" column="4">
+           <widget class="QLineEdit" name="line_edit_ferment_volume"/>
+          </item>
+          <item row="3" column="3">
+           <widget class="QLabel" name="lbl_ferment_volume">
+            <property name="text">
+             <string>Volume (L):</string>
+            </property>
+           </widget>
+          </item>
           <item row="7" column="0">
            <widget class="QLabel" name="lbl_condition_recipe">
             <property name="text">
              <string>Beer Recipe:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="10" column="3" alignment="Qt::AlignLeft|Qt::AlignTop">
+           <widget class="QPushButton" name="btn_start_bottling">
+            <property name="text">
+             <string>Start Bottling</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="3">
+           <widget class="QLabel" name="lbl_ferment_recipe">
+            <property name="text">
+             <string>Beer Recipe:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="8" column="4">
+           <widget class="QLineEdit" name="line_edit_bottle_volume"/>
+          </item>
+          <item row="7" column="4">
+           <widget class="QComboBox" name="combo_box_bottle_recipe">
+            <item>
+             <property name="text">
+              <string>Organic Red Helles</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Organic Pilsner</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Organic Dunkel</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+          <item row="4" column="0" alignment="Qt::AlignLeft|Qt::AlignTop">
+           <widget class="QPushButton" name="btn_start_hot_brew">
+            <property name="text">
+             <string>Start Hot Brew</string>
+            </property>
+           </widget>
+          </item>
+          <item row="6" column="0">
+           <widget class="QLabel" name="lbl_start_conditioning">
+            <property name="font">
+             <font>
+              <underline>true</underline>
+              <kerning>true</kerning>
+             </font>
+            </property>
+            <property name="text">
+             <string>Start Conditioning</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="0">
+           <widget class="QLabel" name="lbl_brew_volume">
+            <property name="text">
+             <string>Volume (L):</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1">
+           <widget class="QComboBox" name="combo_box_brew_recipe">
+            <item>
+             <property name="text">
+              <string>Organic Red Helles</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Organic Pilsner</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Organic Dunkel</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+          <item row="2" column="3">
+           <widget class="QLabel" name="lbl_ferment_tank">
+            <property name="text">
+             <string>Tank:</string>
             </property>
            </widget>
           </item>
@@ -437,47 +477,14 @@
             </item>
            </widget>
           </item>
-          <item row="0" column="3">
-           <widget class="QLabel" name="lbl_start_fermentation">
-            <property name="font">
-             <font>
-              <underline>true</underline>
-              <kerning>true</kerning>
-             </font>
-            </property>
-            <property name="text">
-             <string>Start Fermentation</string>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="0">
-           <widget class="QLabel" name="lbl_start_brew">
-            <property name="font">
-             <font>
-              <underline>true</underline>
-              <kerning>true</kerning>
-             </font>
-            </property>
-            <property name="text">
-             <string>Start Hot Brew</string>
-            </property>
-           </widget>
-          </item>
-          <item row="4" column="3" alignment="Qt::AlignLeft|Qt::AlignTop">
-           <widget class="QPushButton" name="btn_start_fermentation">
-            <property name="text">
-             <string>Start Fermentation</string>
-            </property>
-           </widget>
-          </item>
-          <item row="4" column="0" alignment="Qt::AlignLeft|Qt::AlignTop">
-           <widget class="QPushButton" name="btn_start_hot_brew">
-            <property name="text">
-             <string>Start Hot Brew</string>
-            </property>
-           </widget>
-          </item>
          </layout>
+        </item>
+        <item>
+         <widget class="QLabel" name="lbl_tank_advice">
+          <property name="text">
+           <string/>
+          </property>
+         </widget>
         </item>
         <item>
          <widget class="Line" name="hori_line_start_process">
@@ -692,6 +699,19 @@
          </spacer>
         </item>
        </layout>
+      </widget>
+      <widget class="Line" name="hori_line_start_process_2">
+       <property name="geometry">
+        <rect>
+         <x>330</x>
+         <y>570</y>
+         <width>718</width>
+         <height>3</height>
+        </rect>
+       </property>
+       <property name="orientation">
+        <enum>Qt::Horizontal</enum>
+       </property>
       </widget>
      </widget>
     </widget>

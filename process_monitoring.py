@@ -78,11 +78,49 @@ class ProcessMonitoringDialog(QDialog, Ui_dialog_monitoring):
         Returns:
             tank_list (list): A list showing tank availability.
         """
+        empty_tanks = []
+
+        # Reads list showing tank availability.
         with open("tanks.json", "r") as tanks_file:
             try:
                 tank_list = json.load(tanks_file)
             except ValueError:
                 print("Empty JSON file.")
+
+        # Reads list of full tanks.
+        with open("tanks_original.json", "r") as orig_tanks_file:
+            try:
+                orig_tank_list = json.load(orig_tanks_file)
+            except ValueError:
+                print("Empty JSON file.")
+
+        # Checks for full tanks.
+        for tank in tank_list:
+            for orig_tank in orig_tank_list:
+                if tank["volume"] == orig_tank["volume"]:
+                    any_empty_tank = True
+                    empty_tanks.append(tank["tank"])
+                    break
+
+        # Gives advice on beer to brew if there's an empty tank.
+        if any_empty_tank is True:
+            # Finds the least stocked beer in inventory.
+            (inventory_list, red_helles_volume, pilsner_volume,
+             dunkel_volume) = InventoryManagementDialog.read_inventory(self)
+            smallest_volume = min(
+                red_helles_volume, pilsner_volume, dunkel_volume)
+            if smallest_volume == red_helles_volume:
+                recommend_brew = "Organic Red Helles"
+            elif smallest_volume == pilsner_volume:
+                recommend_brew = "Organic Pilsner"
+            elif smallest_volume == dunkel_volume:
+                recommend_brew = "Organic Dunkel"
+
+            # Recommends the beer with the lowest stock.
+            message = (recommend_brew + " should be brewed in the tank " +
+                       empty_tanks[0] + ", as it is currently the lowest in "
+                       "stock.")
+            self.lbl_tank_advice.setText(message)
 
         return tank_list
 
