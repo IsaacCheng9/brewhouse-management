@@ -1,10 +1,13 @@
-# -*- coding: utf-8 -*-
+"""
+The base user interface for the main window of the software, Brewhouse.
 
-# Form implementation generated from reading ui file 'brewhouse.ui'
-#
-# Created by: PyQt5 UI code generator 5.13.1
-#
-# WARNING! All changes made in this file will be lost!
+This creates the objects in the user interface, so that the user can interact
+with the program more easily.
+
+Coding: utf-8
+Form implementation generated from reading ui file 'brewhouse.ui'
+Created by: PyQt5 UI code generator 5.13.1
+"""
 
 
 from PyQt5 import QtCore, QtGui, QtWidgets
@@ -43,14 +46,18 @@ class Ui_mwindow_brewhouse(object):
         self.hori_layout_nav.setObjectName("hori_layout_nav")
         self.btn_inv_management = QtWidgets.QPushButton(self.layoutWidget)
         self.btn_inv_management.setObjectName("btn_inv_management")
-        self.hori_layout_nav.addWidget(self.btn_inv_management, 0, QtCore.Qt.AlignLeft)
+        self.hori_layout_nav.addWidget(
+            self.btn_inv_management, 0, QtCore.Qt.AlignLeft)
         self.btn_process_monitoring = QtWidgets.QPushButton(self.layoutWidget)
         self.btn_process_monitoring.setObjectName("btn_process_monitoring")
-        self.hori_layout_nav.addWidget(self.btn_process_monitoring, 0, QtCore.Qt.AlignLeft)
+        self.hori_layout_nav.addWidget(
+            self.btn_process_monitoring, 0, QtCore.Qt.AlignLeft)
         self.btn_upload_sales = QtWidgets.QPushButton(self.layoutWidget)
         self.btn_upload_sales.setObjectName("btn_upload_sales")
         self.hori_layout_nav.addWidget(self.btn_upload_sales)
-        spacerItem = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        spacerItem = QtWidgets.QSpacerItem(
+            40, 20, QtWidgets.QSizePolicy.Expanding,
+            QtWidgets.QSizePolicy.Minimum)
         self.hori_layout_nav.addItem(spacerItem)
         self.vert_layout_brewhouse.addLayout(self.hori_layout_nav)
         self.hori_line_nav = QtWidgets.QFrame(self.layoutWidget)
@@ -131,13 +138,17 @@ class Ui_mwindow_brewhouse(object):
         self.hori_layout_predict.setObjectName("hori_layout_predict")
         self.lbl_predict_date = QtWidgets.QLabel(self.layoutWidget)
         self.lbl_predict_date.setObjectName("lbl_predict_date")
-        self.hori_layout_predict.addWidget(self.lbl_predict_date, 0, QtCore.Qt.AlignLeft)
+        self.hori_layout_predict.addWidget(
+            self.lbl_predict_date, 0, QtCore.Qt.AlignLeft)
         self.date_edit_predict = QtWidgets.QDateEdit(self.layoutWidget)
-        self.date_edit_predict.setMinimumDateTime(QtCore.QDateTime(QtCore.QDate(2019, 10, 31), QtCore.QTime(0, 0, 0)))
+        self.date_edit_predict.setMinimumDateTime(QtCore.QDateTime(
+            QtCore.QDate(2019, 10, 31), QtCore.QTime(0, 0, 0)))
         self.date_edit_predict.setCalendarPopup(True)
         self.date_edit_predict.setObjectName("date_edit_predict")
         self.hori_layout_predict.addWidget(self.date_edit_predict)
-        spacerItem1 = QtWidgets.QSpacerItem(40, 20, QtWidgets.QSizePolicy.Expanding, QtWidgets.QSizePolicy.Minimum)
+        spacerItem1 = QtWidgets.QSpacerItem(
+            40, 20, QtWidgets.QSizePolicy.Expanding,
+            QtWidgets.QSizePolicy.Minimum)
         self.hori_layout_predict.addItem(spacerItem1)
         self.vert_layout_brewhouse.addLayout(self.hori_layout_predict)
         self.lbl_predictions = QtWidgets.QLabel(self.layoutWidget)
@@ -146,7 +157,8 @@ class Ui_mwindow_brewhouse(object):
         self.vert_layout_brewhouse.addWidget(self.lbl_predictions)
         self.btn_predict = QtWidgets.QPushButton(self.layoutWidget)
         self.btn_predict.setObjectName("btn_predict")
-        self.vert_layout_brewhouse.addWidget(self.btn_predict, 0, QtCore.Qt.AlignLeft)
+        self.vert_layout_brewhouse.addWidget(
+            self.btn_predict, 0, QtCore.Qt.AlignLeft)
         self.hori_line_predict = QtWidgets.QFrame(self.layoutWidget)
         self.hori_line_predict.setFrameShape(QtWidgets.QFrame.HLine)
         self.hori_line_predict.setFrameShadow(QtWidgets.QFrame.Sunken)
@@ -162,7 +174,9 @@ class Ui_mwindow_brewhouse(object):
         self.lbl_advice.setText("")
         self.lbl_advice.setObjectName("lbl_advice")
         self.vert_layout_brewhouse.addWidget(self.lbl_advice)
-        spacerItem2 = QtWidgets.QSpacerItem(20, 40, QtWidgets.QSizePolicy.Minimum, QtWidgets.QSizePolicy.Expanding)
+        spacerItem2 = QtWidgets.QSpacerItem(
+            20, 40, QtWidgets.QSizePolicy.Minimum,
+            QtWidgets.QSizePolicy.Expanding)
         self.vert_layout_brewhouse.addItem(spacerItem2)
         mwindow_brewhouse.setCentralWidget(self.central_widget)
         self.status_bar = QtWidgets.QStatusBar(mwindow_brewhouse)
@@ -174,28 +188,54 @@ class Ui_mwindow_brewhouse(object):
 
     def retranslateUi(self, mwindow_brewhouse):
         _translate = QtCore.QCoreApplication.translate
-        mwindow_brewhouse.setWindowTitle(_translate("mwindow_brewhouse", "Barnaby\'s Brewhouse"))
-        self.lbl_brewhouse.setText(_translate("mwindow_brewhouse", "Barnaby\'s Brewhouse"))
-        self.btn_inv_management.setText(_translate("mwindow_brewhouse", "Inventory Management"))
-        self.btn_process_monitoring.setText(_translate("mwindow_brewhouse", "Process Monitoring"))
-        self.btn_upload_sales.setText(_translate("mwindow_brewhouse", "Upload Sales Data"))
-        self.lbl_sales.setText(_translate("mwindow_brewhouse", "Total Sales (November 2018 to October 2019)"))
-        self.lbl_overall_sales.setText(_translate("mwindow_brewhouse", "Overall: "))
-        self.lbl_red_helles_sales.setText(_translate("mwindow_brewhouse", "Organic Red Helles: "))
-        self.lbl_pilsner_sales.setText(_translate("mwindow_brewhouse", "Organic Pilsner: "))
-        self.lbl_dunkel_sales.setText(_translate("mwindow_brewhouse", "Organic Dunkel: "))
-        self.lbl_ratios.setText(_translate("mwindow_brewhouse", "Sales Ratios (November 2018 to October 2019)"))
-        self.lbl_red_helles_ratio.setText(_translate("mwindow_brewhouse", "Organic Red Helles: "))
-        self.lbl_pilsner_ratio.setText(_translate("mwindow_brewhouse", "Organic Pilsner: "))
-        self.lbl_dunkel_ratio.setText(_translate("mwindow_brewhouse", "Organic Dunkel:"))
-        self.lbl_growth.setText(_translate("mwindow_brewhouse", "Average Monthly Growth Percentages (November 2018 to October 2019)"))
-        self.lbl_red_helles_growth.setText(_translate("mwindow_brewhouse", "Organic Red Helles: "))
-        self.lbl_pilsner_growth.setText(_translate("mwindow_brewhouse", "Organic Pilsner: "))
-        self.lbl_dunkel_growth.setText(_translate("mwindow_brewhouse", "Organic Dunkel: "))
-        self.lbl_predict.setText(_translate("mwindow_brewhouse", "Predicted Sales"))
-        self.lbl_predict_date.setText(_translate("mwindow_brewhouse", "Date (DD/MM/YYYY):"))
-        self.btn_predict.setText(_translate("mwindow_brewhouse", "Update Sales Prediction"))
-        self.lbl_production_advice.setText(_translate("mwindow_brewhouse", "Beer Production Advice"))
+        mwindow_brewhouse.setWindowTitle(_translate(
+            "mwindow_brewhouse", "Barnaby\'s Brewhouse"))
+        self.lbl_brewhouse.setText(_translate(
+            "mwindow_brewhouse", "Barnaby\'s Brewhouse"))
+        self.btn_inv_management.setText(_translate(
+            "mwindow_brewhouse", "Inventory Management"))
+        self.btn_process_monitoring.setText(_translate(
+            "mwindow_brewhouse", "Process Monitoring"))
+        self.btn_upload_sales.setText(_translate(
+            "mwindow_brewhouse", "Upload Sales Data"))
+        self.lbl_sales.setText(_translate(
+            "mwindow_brewhouse",
+            "Total Sales (November 2018 to October 2019)"))
+        self.lbl_overall_sales.setText(
+            _translate("mwindow_brewhouse", "Overall: "))
+        self.lbl_red_helles_sales.setText(_translate(
+            "mwindow_brewhouse", "Organic Red Helles: "))
+        self.lbl_pilsner_sales.setText(_translate(
+            "mwindow_brewhouse", "Organic Pilsner: "))
+        self.lbl_dunkel_sales.setText(_translate(
+            "mwindow_brewhouse", "Organic Dunkel: "))
+        self.lbl_ratios.setText(_translate(
+            "mwindow_brewhouse",
+            "Sales Ratios (November 2018 to October 2019)"))
+        self.lbl_red_helles_ratio.setText(_translate(
+            "mwindow_brewhouse", "Organic Red Helles: "))
+        self.lbl_pilsner_ratio.setText(_translate(
+            "mwindow_brewhouse", "Organic Pilsner: "))
+        self.lbl_dunkel_ratio.setText(_translate(
+            "mwindow_brewhouse", "Organic Dunkel:"))
+        self.lbl_growth.setText(_translate(
+            "mwindow_brewhouse",
+            "Average Monthly Growth Percentages (November 2018 to October "
+            "2019)"))
+        self.lbl_red_helles_growth.setText(_translate(
+            "mwindow_brewhouse", "Organic Red Helles: "))
+        self.lbl_pilsner_growth.setText(_translate(
+            "mwindow_brewhouse", "Organic Pilsner: "))
+        self.lbl_dunkel_growth.setText(_translate(
+            "mwindow_brewhouse", "Organic Dunkel: "))
+        self.lbl_predict.setText(_translate(
+            "mwindow_brewhouse", "Predicted Sales"))
+        self.lbl_predict_date.setText(_translate(
+            "mwindow_brewhouse", "Date (DD/MM/YYYY):"))
+        self.btn_predict.setText(_translate(
+            "mwindow_brewhouse", "Update Sales Prediction"))
+        self.lbl_production_advice.setText(_translate(
+            "mwindow_brewhouse", "Beer Production Advice"))
 
 
 if __name__ == "__main__":
