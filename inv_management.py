@@ -266,11 +266,9 @@ class InventoryManagementDialog(QDialog, Ui_dialog_inv_management):
 
                     # Saves order list to JSON file.
                     self.save_orders(order_list)
-
                     # Displays message to say dispatch was successful.
                     self.lbl_order_message.setText("Order dispatched "
                                                    "successfully.")
-
                     # Updates orders list in UI.
                     self.read_orders()
                     # Saves the new inventory to the JSON file.
