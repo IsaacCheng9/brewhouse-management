@@ -35,6 +35,8 @@ files are needed for data persistence to function, and the `.csv` file is
 needed so that existing sales data can be accessed.
 
 ## Usage
+
+### Main Window and Sales Predictions
 Start running the software by opening `brewhouse.py` in your integrated
 developer environment (IDE) of choice, such as PyCharm, Visual Studio Code,
 or IDLE, and running the Python file from there. Alternatively, you could
@@ -50,11 +52,13 @@ software will display an estimate of the volume of each beer which will be
 ordered that month based on the average monthly growth in sales for each beer.
 It will also give advice on which beer should be produced next, based on which
 beer has the largest volume deficit, and this advice can be useful when
-managing the production process in the `Process Monitoring` section of the software.
+managing the production process in the `Process Monitoring` section of the
+software.
 
 At the top, you can navigate to other sections of the software; there are
 buttons to navigate to inventory management and process monitoring.
 
+### Inventory Management
 The `Inventory Management` button will open a dialog which displays the current
 inventory of each beer in Barnaby's Brewhouse in terms of both volume and
 number of 500 ml bottles. You can also add or remove volume of a given beer by
@@ -68,6 +72,7 @@ customer order. Once they've dispatched the order, they can record the dispatch
 by entering the order ID, which will remove the volume of the appropriate beer
 from the inventory of the brewhouse.
 
+### Process Monitoring
 The `Process Monitoring` button will open a dialog which displays the
 availability of tanks for fermentation and conditioning, and ongoing brewing
 processes. You can start different brewing processes as long as any
@@ -100,6 +105,7 @@ of the software.
 All changes which are made in the `Process Monitoring` section are
 automatically saved, so data is not lost when the window or program is closed.
 
+### Upload Sales Data
 The `Upload Sales Data` button will open a small dialog which provides a form
 for the user to input the details of their new sale. Once they click the
 `Upload New Sale` button, the form will be checked. If all of the fields have
