@@ -305,6 +305,7 @@ class BrewhouseWindow(QMainWindow, Ui_mwindow_brewhouse):
         red_helles_production = int()
         pilsner_production = int()
         dunkel_production = int()
+        recommendation = str()
 
         # Reads the inventory data to access volumes of each beer.
         (inventory_list, red_helles_volume, pilsner_volume,
@@ -318,7 +319,7 @@ class BrewhouseWindow(QMainWindow, Ui_mwindow_brewhouse):
                 red_helles_production = process["volume"]
             elif process["recipe"] == "Organic Pilsner":
                 pilsner_production = process["volume"]
-            elif process["recipe"] == "Organic Red Helles":
+            elif process["recipe"] == "Organic Dunkel":
                 dunkel_production = process["volume"]
 
         # Calculates the deficit in volume of each beer.
