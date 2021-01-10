@@ -103,12 +103,6 @@ venv.bak/
 # mypy
 .mypy_cache/
 
-# Log file
-logs.txt
-
-# Brewhouse process tracking files
-customer_orders.json
-inventory.json
-ongoing_processes.json
-tanks_original.json
-tanks.json
+# Storage files
+.txt
+.json
