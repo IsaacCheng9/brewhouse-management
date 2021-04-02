@@ -41,7 +41,7 @@ class UploadSalesDialog(QDialog, Ui_dialog_upload_sales):
         if (invoice != "" and customer != "" and gyle != "" and
                 quantity != ""):
             # Writes new sales data to the CSV file.
-            with open("sales_data.csv", "a") as sales_file:
+            with open("resources/sales_data.csv", "a") as sales_file:
                 date = datetime.strptime(date, "%d/%m/%Y").strftime("%d-%b-%y")
                 sale = (invoice + "," + customer + "," + date + "," + recipe +
                         "," + gyle + "," + quantity + "\n")

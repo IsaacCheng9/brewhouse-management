@@ -93,7 +93,7 @@ class BrewhouseWindow(QMainWindow, Ui_mwindow_brewhouse):
         Returns:
             data_frame (pandas.core.frame.DataFrame): Sales data of beers.
         """
-        data_frame = pandas.read_csv("sales_data.csv")
+        data_frame = pandas.read_csv("resources/sales_data.csv")
         print(str(data_frame) + "\n")
 
         return data_frame

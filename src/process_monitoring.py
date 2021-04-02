@@ -64,7 +64,7 @@ class ProcessMonitoringDialog(QDialog, Ui_dialog_monitoring):
         Returns:
             process_list (list): A list of ongoing processes.
         """
-        with open("ongoing_processes.json", "r") as process_file:
+        with open("resources/ongoing_processes.json", "r") as process_file:
             try:
                 process_list = json.load(process_file)
             except ValueError:
@@ -81,14 +81,14 @@ class ProcessMonitoringDialog(QDialog, Ui_dialog_monitoring):
         empty_tanks = []
 
         # Reads list showing tank availability.
-        with open("tanks.json", "r") as tanks_file:
+        with open("resources/tanks.json", "r") as tanks_file:
             try:
                 tank_list = json.load(tanks_file)
             except ValueError:
                 print("Empty JSON file.")
 
         # Reads list of full tanks.
-        with open("tanks_original.json", "r") as orig_tanks_file:
+        with open("resources/tanks_original.json", "r") as orig_tanks_file:
             try:
                 orig_tank_list = json.load(orig_tanks_file)
             except ValueError:
@@ -213,7 +213,7 @@ class ProcessMonitoringDialog(QDialog, Ui_dialog_monitoring):
         Args:
             tank_list (list): A list of ongoing processes.
         """
-        with open("tanks.json", "w") as tanks_file:
+        with open("resources/tanks.json", "w") as tanks_file:
             json.dump(tank_list, tanks_file, ensure_ascii=False, indent=4)
 
     def save_processes(self, process_list: list):
@@ -222,7 +222,7 @@ class ProcessMonitoringDialog(QDialog, Ui_dialog_monitoring):
         Args:
             process_list (list): A list of ongoing processes.
         """
-        with open("ongoing_processes.json", "w") as process_file:
+        with open("resources/ongoing_processes.json", "w") as process_file:
             json.dump(process_list, process_file, ensure_ascii=False, indent=4)
 
     def start_hot_brew(self, process_list: list):

@@ -55,7 +55,7 @@ class InventoryManagementDialog(QDialog, Ui_dialog_inv_management):
             pilsner_volume (int): Volume (L) of Pilsner.
             dunkel_volume (int): Volume (L) of Dunkel.
         """
-        with open("inventory.json", "r") as inventory_file:
+        with open("resources/inventory.json", "r") as inventory_file:
             try:
                 inventory_list = json.load(inventory_file)
                 for inventory in inventory_list:
@@ -99,7 +99,7 @@ class InventoryManagementDialog(QDialog, Ui_dialog_inv_management):
         Args:
             inventory_list (list): List storing the volume for each beer.
         """
-        with open("inventory.json", "w") as inventory_file:
+        with open("resources/inventory.json", "w") as inventory_file:
             json.dump(inventory_list, inventory_file,
                       ensure_ascii=False, indent=4)
 
@@ -167,7 +167,7 @@ class InventoryManagementDialog(QDialog, Ui_dialog_inv_management):
         """
         display_orders = ""
 
-        with open("customer_orders.json", "r") as orders_file:
+        with open("resources/customer_orders.json", "r") as orders_file:
             try:
                 order_list = json.load(orders_file)
             except ValueError:
@@ -191,7 +191,7 @@ class InventoryManagementDialog(QDialog, Ui_dialog_inv_management):
         Args:
             order_list (list): A list of the customer orders.
         """
-        with open("customer_orders.json", "w") as orders_file:
+        with open("resources/customer_orders.json", "w") as orders_file:
             json.dump(order_list, orders_file,
                       ensure_ascii=False, indent=4)
 
