@@ -143,7 +143,7 @@ developed for the user interface objects.
 ## GitHub Repository
 
 The Git repository for this software project can be found on
-[GitHub here.](https://github.com/IsaacCheng9/brewhouse) In this repository,
+[GitHub here.](https://github.com/IsaacCheng9/brewhouse-management) In this repository,
 you can view the version history of files for this project, meaning you can see
 the version history with changelogs and how development occurred over time. You
 can also flag issues with the software from this repository.
