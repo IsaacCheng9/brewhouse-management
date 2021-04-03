@@ -4,9 +4,9 @@ A system to predict demand and help monitor and schedule brewing processes for
 a brewhouse.
 
 ## Visuals
+
 ![Sales Predictions](https://i.imgur.com/3S2AThA.gif)
 ![Inventory Management](https://i.imgur.com/zpZNONO.gif)
-
 
 ## Installation
 
@@ -114,8 +114,8 @@ automatically saved, so data is not lost when the window or program is closed.
 
 The `Upload Sales Data` button will open a small dialog which provides a form
 for the user to input the details of their new sale. Once they click the
-`Upload New Sale` button, the form will be checked. If all the fields have
-been filled in, the new sale will be added to the CSV file.
+`Upload New Sale` button, the form will be checked. If all the fields have been
+filled in, the new sale will be added to the CSV file.
 
 ## Other Details
 
