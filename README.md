@@ -3,6 +3,11 @@
 A system to predict demand and help monitor and schedule brewing processes for
 a brewhouse.
 
+## Visuals
+![Sales Predictions](https://i.imgur.com/3S2AThA.gif)
+![Inventory Management](https://i.imgur.com/zpZNONO.gif)
+
+
 ## Installation
 
 These instructions will help you to get the software for Barnaby's Brewhouse
