@@ -46,6 +46,16 @@ class InventoryManagementDialog(QDialog, Ui_dialog_inv_management):
         # Updates the volumes in the inventory in the UI.
         self.update_inventory()
 
+    def save_inventory(self, inventory_list: list):
+        """Saves the new inventory to the JSON file.
+
+        Args:
+            inventory_list (list): List storing the volume for each beer.
+        """
+        with open("resources/inventory.json", "w") as inventory_file:
+            json.dump(inventory_list, inventory_file,
+                      ensure_ascii=False, indent=4)
+
     def read_inventory(self) -> Tuple[list, int, int, int]:
         """Reads the JSON file for inventory and gets volume for each beer.
 
@@ -70,6 +80,16 @@ class InventoryManagementDialog(QDialog, Ui_dialog_inv_management):
 
         return inventory_list, red_helles_volume, pilsner_volume, dunkel_volume
 
+    def save_orders(self, order_list: list):
+        """Saves order list to JSON file.
+
+        Args:
+            order_list (list): A list of the customer orders.
+        """
+        with open("resources/customer_orders.json", "w") as orders_file:
+            json.dump(order_list, orders_file,
+                      ensure_ascii=False, indent=4)
+
     def update_inventory(self):
         """Updates the volumes in the inventory in the UI."""
         (inventory_list, red_helles_volume, pilsner_volume,
@@ -92,16 +112,6 @@ class InventoryManagementDialog(QDialog, Ui_dialog_inv_management):
         self.lbl_dunkel_inv.setText(
             "Organic Dunkel: " + str(dunkel_volume) + " L / " +
             str(dunkel_quantity) + " bottle(s)")
-
-    def save_inventory(self, inventory_list: list):
-        """Saves the new inventory to the JSON file.
-
-        Args:
-            inventory_list (list): List storing the volume for each beer.
-        """
-        with open("resources/inventory.json", "w") as inventory_file:
-            json.dump(inventory_list, inventory_file,
-                      ensure_ascii=False, indent=4)
 
     def add_inventory(self, inventory_list: list):
         """Adds the given volume to the given beer in the inventory.
@@ -175,8 +185,8 @@ class InventoryManagementDialog(QDialog, Ui_dialog_inv_management):
 
         # Iterates through the orders and adds their details to an order list.
         for order in order_list:
-            display_orders += ("Order ID: " + order["order_id"] + ", Beer "
-                               "Recipe: " + order["order_recipe"] +
+            display_orders += ("Order ID: " + order["order_id"] +
+                               ", Beer Recipe: " + order["order_recipe"] +
                                ", Order Volume: " +
                                str(order["order_volume"]) + " L \n")
 
@@ -184,16 +194,6 @@ class InventoryManagementDialog(QDialog, Ui_dialog_inv_management):
         self.lbl_orders.setText(display_orders.rstrip())
 
         return order_list
-
-    def save_orders(self, order_list: list):
-        """Saves order list to JSON file.
-
-        Args:
-            order_list (list): A list of the customer orders.
-        """
-        with open("resources/customer_orders.json", "w") as orders_file:
-            json.dump(order_list, orders_file,
-                      ensure_ascii=False, indent=4)
 
     def add_order(self, order_list: list):
         """Adds customer order to the list.
