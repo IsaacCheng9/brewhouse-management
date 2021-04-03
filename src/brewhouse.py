@@ -43,6 +43,18 @@ def setup_logging():
     logging.debug("Barnaby's Brewhouse program started.")
 
 
+def read_sales_data() -> pandas.core.frame.DataFrame:
+    """Reads the sales data and loads it to a variable.
+
+    Returns:
+        data_frame (pandas.core.frame.DataFrame): Sales data of beers.
+    """
+    data_frame = pandas.read_csv("resources/sales_data.csv")
+    print(str(data_frame) + "\n")
+
+    return data_frame
+
+
 class BrewhouseWindow(QMainWindow, Ui_mwindow_brewhouse):
     """Contains the main window for the Brewhouse application."""
 
@@ -61,7 +73,7 @@ class BrewhouseWindow(QMainWindow, Ui_mwindow_brewhouse):
             self.open_dialog_upload_sales)
 
         # Reads sales data from the CSV file.
-        data_frame = self.read_sales_data()
+        data_frame = read_sales_data()
         # Calculates total sales and sales ratios of beer.
         self.get_sales_ratio(data_frame)
         # Calculates average monthly growth rates in sales of beer.
@@ -87,19 +99,7 @@ class BrewhouseWindow(QMainWindow, Ui_mwindow_brewhouse):
         self.Dialog = UploadSalesDialog()
         self.Dialog.open()
 
-    def read_sales_data(self) -> pandas.core.frame.DataFrame:
-        """Reads the sales data and loads it to a variable.
-
-        Returns:
-            data_frame (pandas.core.frame.DataFrame): Sales data of beers.
-        """
-        data_frame = pandas.read_csv("resources/sales_data.csv")
-        print(str(data_frame) + "\n")
-
-        return data_frame
-
-    def get_sales_ratio(self, data_frame:
-                        pandas.core.frame.DataFrame):
+    def get_sales_ratio(self, data_frame: pandas.core.frame.DataFrame):
         """Calculates total sales and sales ratio for different beers.
 
         Args:
@@ -139,10 +139,10 @@ class BrewhouseWindow(QMainWindow, Ui_mwindow_brewhouse):
         self.lbl_dunkel_ratio.setText(
             "Organic Dunkel: " + str(dunkel_ratio) + "%")
 
-    def get_avg_growth_rate(self, data_frame:
-                            pandas.core.frame.DataFrame) -> Tuple[list, float,
-                                                                  float,
-                                                                  float]:
+    def get_avg_growth_rate(
+            self,
+            data_frame: pandas.core.frame.DataFrame) -> Tuple[list, float,
+                                                              float, float]:
         """Calculates the average monthly growth rate from sales data.
 
         Args:
@@ -217,9 +217,9 @@ class BrewhouseWindow(QMainWindow, Ui_mwindow_brewhouse):
 
         return beers, red_helles_growth, pilsner_growth, dunkel_growth
 
-    def predict_sales(self, data_frame:
-                      pandas.core.frame.DataFrame, red_helles_growth: float,
-                      pilsner_growth: float, dunkel_growth: float) -> int:
+    def predict_sales(self, data_frame: pandas.core.frame.DataFrame,
+                      red_helles_growth: float, pilsner_growth: float,
+                      dunkel_growth: float):
         """Predicts future sales of Red Helles, Pilsner, and Dunkel.
 
         Args:
@@ -277,11 +277,10 @@ class BrewhouseWindow(QMainWindow, Ui_mwindow_brewhouse):
             "Month Difference))\nOrganic Red Helles: (" +
             str(last_red_helles_sales) + " * (" + str(red_helles_growth) +
             " ^ " + str(month_difference) + ")) = " +
-            str(predicted_red_helles_sales) + " L"
-            "\nOrganic Pilsner: (" + str(last_pilsner_sales) + "* (" +
-            str(pilsner_growth) + " ^ " + str(month_difference) + ")) = " +
-            str(predicted_pilsner_sales) + " L"
-            "\nOrganic Dunkel: (" + str(last_dunkel_sales) + "* (" +
+            str(predicted_red_helles_sales) + " L\nOrganic Pilsner: (" +
+            str(last_pilsner_sales) + " * (" + str(pilsner_growth) + " ^ " +
+            str(month_difference) + ")) = " + str(predicted_pilsner_sales) +
+            " L\nOrganic Dunkel: (" + str(last_dunkel_sales) + " * (" +
             str(dunkel_growth) + " ^ " + str(month_difference) + ")) = " +
             str(predicted_dunkel_sales) + " L")
 
@@ -339,13 +338,13 @@ class BrewhouseWindow(QMainWindow, Ui_mwindow_brewhouse):
                                str(predicted_red_helles_sales) + " - " +
                                str(red_helles_volume) + " - " +
                                str(red_helles_production) + " = " +
-                               str(red_helles_deficit) + " L\n"
-                               "Organic Pilsner Deficit: " +
+                               str(red_helles_deficit) +
+                               " L\nOrganic Pilsner Deficit: " +
                                str(predicted_pilsner_sales) + " - " +
                                str(pilsner_volume) + " - " +
                                str(pilsner_production) + " = " +
-                               str(pilsner_deficit) + " L\n"
-                               "Organic Dunkel Deficit:  " +
+                               str(pilsner_deficit) +
+                               " L\nOrganic Dunkel Deficit:  " +
                                str(predicted_dunkel_sales) + " - " +
                                str(dunkel_volume) + " - " +
                                str(dunkel_production) + " = " +

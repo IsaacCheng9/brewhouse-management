@@ -15,6 +15,37 @@ from inv_management import InventoryManagementDialog
 from process_monitoring_setup import Ui_dialog_monitoring
 
 
+def remove_used_processes(process_list: list):
+    """Removes process from process list if they've been used up.
+
+    Args:
+        process_list (list): A list of ongoing processes.
+    """
+    for existing_process in process_list:
+        if existing_process["volume"] == 0:
+            process_list.remove(existing_process)
+
+
+def save_tanks(tank_list: list):
+    """Saves the updated tank list to the JSON file.
+
+    Args:
+        tank_list (list): A list of ongoing processes.
+    """
+    with open("resources/tanks.json", "w") as tanks_file:
+        json.dump(tank_list, tanks_file, ensure_ascii=False, indent=4)
+
+
+def save_processes(process_list: list):
+    """Saves the updated process list to the JSON file.
+
+    Args:
+        process_list (list): A list of ongoing processes.
+    """
+    with open("resources/ongoing_processes.json", "w") as process_file:
+        json.dump(process_list, process_file, ensure_ascii=False, indent=4)
+
+
 class ProcessMonitoringDialog(QDialog, Ui_dialog_monitoring):
     """Contains the dialog window for process monitoring."""
 
@@ -36,7 +67,7 @@ class ProcessMonitoringDialog(QDialog, Ui_dialog_monitoring):
 
         # Connects the 'Refresh Processes' button to refresh processes.
         self.btn_send_bottles.clicked.connect(
-            lambda: self.send_bottles_to_inventory(tank_list, process_list))
+            lambda: self.send_bottles_to_inventory(process_list))
         # Connects the 'Start Hot Brew' button to start hot brew.
         self.btn_start_hot_brew.clicked.connect(
             lambda: self.start_hot_brew(process_list))
@@ -118,22 +149,11 @@ class ProcessMonitoringDialog(QDialog, Ui_dialog_monitoring):
 
             # Recommends the beer with the lowest stock.
             message = (recommend_brew + " should be brewed in the tank " +
-                       empty_tanks[0] + ", as it is currently the lowest in "
-                       "stock.")
+                       empty_tanks[0] +
+                       ", as it is currently the lowest in stock.")
             self.lbl_tank_advice.setText(message)
 
         return tank_list
-
-    def remove_used_processes(self, process_list: list):
-        """Removes process from process list if they've been used up.
-
-        Args:
-            tank_list (list): A list showing tank availability.
-            process_list (list): A list of ongoing processes.
-        """
-        for existing_process in process_list:
-            if existing_process["volume"] == 0:
-                process_list.remove(existing_process)
 
     def update_tanks(self):
         """Updates the tank availability displayed in the UI."""
@@ -167,11 +187,10 @@ class ProcessMonitoringDialog(QDialog, Ui_dialog_monitoring):
         # Displays list of process details in UI.
         self.lbl_processes.setText(display_processes.rstrip())
 
-    def send_bottles_to_inventory(self, tank_list: list, process_list: list):
+    def send_bottles_to_inventory(self, process_list: list):
         """Removes finished bottling from process list and adds to inventory.
 
         Args:
-            tank_list (list): A list showing tank availability.
             process_list (list): A list of ongoing processes.
         """
         (inventory_list, red_helles_volume, pilsner_volume,
@@ -201,29 +220,11 @@ class ProcessMonitoringDialog(QDialog, Ui_dialog_monitoring):
                                                  "to inventory.")
 
         # Saves the newly updated inventory.
-        InventoryManagementDialog.save_inventory(self, inventory_list)
+        InventoryManagementDialog.save_inventory(inventory_list)
         # Saves the updated process list to the JSON file.
-        self.save_processes(process_list)
+        save_processes(process_list)
         # Updates the process list in the UI.
         self.update_processes()
-
-    def save_tanks(self, tank_list: list):
-        """Saves the updated tank list to the JSON file.
-
-        Args:
-            tank_list (list): A list of ongoing processes.
-        """
-        with open("resources/tanks.json", "w") as tanks_file:
-            json.dump(tank_list, tanks_file, ensure_ascii=False, indent=4)
-
-    def save_processes(self, process_list: list):
-        """Saves the updated process list to the JSON file.
-
-        Args:
-            process_list (list): A list of ongoing processes.
-        """
-        with open("resources/ongoing_processes.json", "w") as process_file:
-            json.dump(process_list, process_file, ensure_ascii=False, indent=4)
 
     def start_hot_brew(self, process_list: list):
         """Starts a hot brew for the given recipe and volume.
@@ -261,7 +262,7 @@ class ProcessMonitoringDialog(QDialog, Ui_dialog_monitoring):
             self.lbl_process_message.setText("Hot brew successfully started.")
 
             # Saves the updated process list to the JSON file.
-            self.save_processes(process_list)
+            save_processes(process_list)
             # Updates the process list in the UI.
             self.update_processes()
 
@@ -328,11 +329,11 @@ class ProcessMonitoringDialog(QDialog, Ui_dialog_monitoring):
                     break
 
             # Removes process from process list if they've been used up.
-            self.remove_used_processes(process_list)
+            remove_used_processes(process_list)
             # Saves the updated tank list to the JSON file.
-            self.save_tanks(tank_list)
+            save_tanks(tank_list)
             # Saves the updated process list to the JSON file.
-            self.save_processes(process_list)
+            save_processes(process_list)
             # Updates the tank availability displayed in the UI.
             self.update_tanks()
             # Updates the process list in the UI.
@@ -404,11 +405,11 @@ class ProcessMonitoringDialog(QDialog, Ui_dialog_monitoring):
                     break
 
             # Removes process from process list if they've been used up.
-            self.remove_used_processes(process_list)
+            remove_used_processes(process_list)
             # Saves the updated tank list to the JSON file.
-            self.save_tanks(tank_list)
+            save_tanks(tank_list)
             # Saves the updated process list to the JSON file.
-            self.save_processes(process_list)
+            save_processes(process_list)
             # Updates the tank availability displayed in the UI.
             self.update_tanks()
             # Updates the process list in the UI.
@@ -470,11 +471,11 @@ class ProcessMonitoringDialog(QDialog, Ui_dialog_monitoring):
                     break
 
             # Removes process from process list if they've been used up.
-            self.remove_used_processes(process_list)
+            remove_used_processes(process_list)
             # Saves the updated tank list to the JSON file.
-            self.save_tanks(tank_list)
+            save_tanks(tank_list)
             # Saves the updated process list to the JSON file.
-            self.save_processes(process_list)
+            save_processes(process_list)
             # Updates the tank availability displayed in the UI.
             self.update_tanks()
             # Updates the process list in the UI.
@@ -521,9 +522,9 @@ class ProcessMonitoringDialog(QDialog, Ui_dialog_monitoring):
                                                      "successfully aborted.")
 
             # Saves the updated tank list to the JSON file.
-            self.save_tanks(tank_list)
+            save_tanks(tank_list)
             # Saves the updated process list to the JSON file.
-            self.save_processes(process_list)
+            save_processes(process_list)
             # Updates the tank availability displayed in the UI.
             self.update_tanks()
             # Updates the process list in the UI.
