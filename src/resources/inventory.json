@@ -1,14 +1,14 @@
 [
     {
         "recipe": "red_helles",
-        "volume": 0
+        "volume": 250
     },
     {
         "recipe": "pilsner",
-        "volume": 0
+        "volume": 750
     },
     {
         "recipe": "dunkel",
-        "volume": 0
+        "volume": 500
     }
 ]
