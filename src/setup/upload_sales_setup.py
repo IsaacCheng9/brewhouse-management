@@ -16,8 +16,6 @@ class Ui_dialog_upload_sales(object):
     """Creates the objects for the UI of this dialog for uploading sales.
 
     Attributes:
-        dialog_upload_sales (QDialog): The baseplate which forms the dialog
-                                       window.
         scroll_area (QScrollArea): Creates a scroll bar if the widget exceeds
                                    size of the frame.
         scroll_area_widget_contents (QWidget): Contents of the scroll area
@@ -58,8 +56,6 @@ class Ui_dialog_upload_sales(object):
         lbl_upload_sales (QLabel): Displays the header for the dialog box.
         lbl_upload_successful (QLabel): Displays a message confirming their
                                         upload was successful/unsuccessful.
-        vert_spacer_upload_sales (Spacer): Pushes UI elements up to avoid
-                                           unintended vertical spacing.
     """
 
     def setupUi(self, dialog_upload_sales):
