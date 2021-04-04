@@ -18,9 +18,9 @@ import pandas
 from PyQt5 import QtWidgets
 from PyQt5.QtWidgets import QMainWindow
 
-from brewhouse_setup import Ui_mwindow_brewhouse
 from inv_management import InventoryManagementDialog
 from process_monitoring import ProcessMonitoringDialog
+from src.setup.brewhouse_setup import Ui_mwindow_brewhouse
 from upload_sales import UploadSalesDialog
 
 
@@ -38,7 +38,7 @@ def setup_logging():
     Sets up the logging system to automatically log actions to log file.
     """
     # No restoration from logging; data is always persisted in files anyway.
-    logging.basicConfig(filename="logs.txt", level=logging.DEBUG,
+    logging.basicConfig(filename="resources/logs.txt", level=logging.DEBUG,
                         format="%(asctime)s - %(levelname)s - %(message)s")
     logging.debug("Barnaby's Brewhouse program started.")
 

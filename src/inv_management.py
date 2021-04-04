@@ -10,7 +10,7 @@ from typing import Tuple
 from PyQt5.QtGui import QIntValidator
 from PyQt5.QtWidgets import QDialog
 
-from inv_management_setup import Ui_dialog_inv_management
+from src.setup.inv_management_setup import Ui_dialog_inv_management
 
 
 class InventoryManagementDialog(QDialog, Ui_dialog_inv_management):

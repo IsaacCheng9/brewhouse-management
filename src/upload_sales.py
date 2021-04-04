@@ -8,7 +8,7 @@ from datetime import datetime
 from PyQt5.QtGui import QIntValidator
 from PyQt5.QtWidgets import QDialog
 
-from upload_sales_setup import Ui_dialog_upload_sales
+from src.setup.upload_sales_setup import Ui_dialog_upload_sales
 
 
 class UploadSalesDialog(QDialog, Ui_dialog_upload_sales):
