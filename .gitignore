@@ -106,3 +106,6 @@ venv.bak/
 # Storage files
 .txt
 .json
+
+# IntelliJ project files
+*.idea
