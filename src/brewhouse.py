@@ -20,7 +20,7 @@ from PyQt5.QtWidgets import QMainWindow
 
 from inv_management import InventoryManagementDialog
 from process_monitoring import ProcessMonitoringDialog
-from src.setup.brewhouse_setup import Ui_mwindow_brewhouse
+from setup.brewhouse_setup import Ui_mwindow_brewhouse
 from upload_sales import UploadSalesDialog
 
 
