@@ -67,22 +67,28 @@ class ProcessMonitoringDialog(QDialog, Ui_dialog_monitoring):
 
         # Connects the 'Refresh Processes' button to refresh processes.
         self.btn_send_bottles.clicked.connect(
-            lambda: self.send_bottles_to_inventory(process_list))
+            lambda: self.send_bottles_to_inventory(process_list)
+        )
         # Connects the 'Start Hot Brew' button to start hot brew.
         self.btn_start_hot_brew.clicked.connect(
-            lambda: self.start_hot_brew(process_list))
+            lambda: self.start_hot_brew(process_list)
+        )
         # Connects the 'Start Fermentation' button to start fermentation.
         self.btn_start_fermentation.clicked.connect(
-            lambda: self.start_fermentation(tank_list, process_list))
+            lambda: self.start_fermentation(tank_list, process_list)
+        )
         # Connects the 'Start Conditioning' button to start conditioning.
         self.btn_start_conditioning.clicked.connect(
-            lambda: self.start_conditioning(tank_list, process_list))
+            lambda: self.start_conditioning(tank_list, process_list)
+        )
         # Connects the 'Start Bottling' button to start bottling.
         self.btn_start_bottling.clicked.connect(
-            lambda: self.start_bottling(tank_list, process_list))
+            lambda: self.start_bottling(tank_list, process_list)
+        )
         # Connects the 'Abort Process' button to abort process.
         self.btn_abort_process.clicked.connect(
-            lambda: self.abort_process(tank_list, process_list))
+            lambda: self.abort_process(tank_list, process_list)
+        )
 
         # Updates the tank availability displayed in the UI.
         self.update_tanks()
@@ -136,10 +142,13 @@ class ProcessMonitoringDialog(QDialog, Ui_dialog_monitoring):
         # Gives advice on beer to brew if there's an empty tank.
         if any_empty_tank is True:
             # Finds the least stocked beer in inventory.
-            (inventory_list, red_helles_volume, pilsner_volume,
-             dunkel_volume) = InventoryManagementDialog.read_inventory(self)
-            smallest_volume = min(
-                red_helles_volume, pilsner_volume, dunkel_volume)
+            (
+                _,
+                red_helles_volume,
+                pilsner_volume,
+                dunkel_volume,
+            ) = InventoryManagementDialog.read_inventory(self)
+            smallest_volume = min(red_helles_volume, pilsner_volume, dunkel_volume)
             if smallest_volume == red_helles_volume:
                 recommend_brew = "Organic Red Helles"
             elif smallest_volume == pilsner_volume:
@@ -148,9 +157,12 @@ class ProcessMonitoringDialog(QDialog, Ui_dialog_monitoring):
                 recommend_brew = "Organic Dunkel"
 
             # Recommends the beer with the lowest stock.
-            message = (recommend_brew + " should be brewed in the tank " +
-                       empty_tanks[0] +
-                       ", as it is currently the lowest in stock.")
+            message = (
+                recommend_brew
+                + " should be brewed in the tank "
+                + empty_tanks[0]
+                + ", as it is currently the lowest in stock."
+            )
             self.lbl_tank_advice.setText(message)
 
         return tank_list
@@ -163,9 +175,14 @@ class ProcessMonitoringDialog(QDialog, Ui_dialog_monitoring):
 
         # Iterates through tanks and adds their details to a tank list.
         for tank in tank_list:
-            display_tanks += (tank["tank"] + ": " +
-                              str(tank["volume"]) +
-                              " L (" + tank["capability"] + ")\n")
+            display_tanks += (
+                tank["tank"]
+                + ": "
+                + str(tank["volume"])
+                + " L ("
+                + tank["capability"]
+                + ")\n"
+            )
 
         # Displays list of tank availability in UI.
         self.lbl_tanks.setText(display_tanks.rstrip())
@@ -178,11 +195,18 @@ class ProcessMonitoringDialog(QDialog, Ui_dialog_monitoring):
 
         # Iterates through processes and adds their details to a process list.
         for process in process_list:
-            display_processes += (process["process"] + ", " + process["recipe"]
-                                  + ", " + process["tank"] + ", " +
-                                  str(process["volume"]) +
-                                  " L (Completion Time: "
-                                  + process["completion"] + ")\n")
+            display_processes += (
+                process["process"]
+                + ", "
+                + process["recipe"]
+                + ", "
+                + process["tank"]
+                + ", "
+                + str(process["volume"])
+                + " L (Completion Time: "
+                + process["completion"]
+                + ")\n"
+            )
 
         # Displays list of process details in UI.
         self.lbl_processes.setText(display_processes.rstrip())
@@ -193,31 +217,45 @@ class ProcessMonitoringDialog(QDialog, Ui_dialog_monitoring):
         Args:
             process_list (list): A list of ongoing processes.
         """
-        (inventory_list, red_helles_volume, pilsner_volume,
-         dunkel_volume) = InventoryManagementDialog.read_inventory(self)
+        (
+            inventory_list,
+            _,
+            _,
+            _,
+        ) = InventoryManagementDialog.read_inventory(self)
 
         for existing_process in process_list:
-            if (existing_process["process"] == "Bottling" and
-                    datetime.strptime(existing_process["completion"],
-                                      "%d/%m/%Y %H:%M:%S")
-                    <= datetime.now()):
+            if (
+                existing_process["process"] == "Bottling"
+                and datetime.strptime(
+                    existing_process["completion"], "%d/%m/%Y %H:%M:%S"
+                )
+                <= datetime.now()
+            ):
                 # Adds the bottled volume of relevant beer to the inventory.
                 for inventory in inventory_list:
-                    if (existing_process["recipe"] == "Organic Red Helles" and
-                            inventory["recipe"] == "red_helles"):
-                        inventory["volume"] += (existing_process["volume"])
-                    elif (existing_process["recipe"] == "Organic Pilsner" and
-                          inventory["recipe"] == "pilsner"):
-                        inventory["volume"] += (existing_process["volume"])
-                    elif (existing_process["recipe"] == "Organic Dunkel" and
-                          inventory["recipe"] == "pilsner"):
-                        inventory["volume"] += (existing_process["volume"])
+                    if (
+                        existing_process["recipe"] == "Organic Red Helles"
+                        and inventory["recipe"] == "red_helles"
+                    ):
+                        inventory["volume"] += existing_process["volume"]
+                    elif (
+                        existing_process["recipe"] == "Organic Pilsner"
+                        and inventory["recipe"] == "pilsner"
+                    ):
+                        inventory["volume"] += existing_process["volume"]
+                    elif (
+                        existing_process["recipe"] == "Organic Dunkel"
+                        and inventory["recipe"] == "pilsner"
+                    ):
+                        inventory["volume"] += existing_process["volume"]
                 # Removes finished bottling process from process list.
                 process_list.remove(existing_process)
 
                 # Displays confirmation message of successful action.
-                self.lbl_process_message.setText("Bottles successfully sent "
-                                                 "to inventory.")
+                self.lbl_process_message.setText(
+                    "Bottles successfully sent " "to inventory."
+                )
 
         # Saves the newly updated inventory.
         InventoryManagementDialog.save_inventory(inventory_list)
@@ -245,15 +283,16 @@ class ProcessMonitoringDialog(QDialog, Ui_dialog_monitoring):
         if str(new_volume) != "":
             # Sets the completion date to three hours later.
             epoch_time = time() + 10800
-            completion_date = strftime(
-                "%d/%m/%Y %H:%M:%S", localtime(epoch_time))
+            completion_date = strftime("%d/%m/%Y %H:%M:%S", localtime(epoch_time))
 
             # Creates the process dictionary.
-            process = {"process": "Hot Brew",
-                       "recipe": new_recipe,
-                       "tank": "N/A",
-                       "volume": new_volume,
-                       "completion": completion_date}
+            process = {
+                "process": "Hot Brew",
+                "recipe": new_recipe,
+                "tank": "N/A",
+                "volume": new_volume,
+                "completion": completion_date,
+            }
 
             # Appends the process to the process list.
             process_list.append(dict(process))
@@ -287,15 +326,16 @@ class ProcessMonitoringDialog(QDialog, Ui_dialog_monitoring):
         if str(new_volume) != "":
             # Sets the completion date to four weeks later.
             epoch_time = time() + 2419200
-            completion_date = strftime(
-                "%d/%m/%Y %H:%M:%S", localtime(epoch_time))
+            completion_date = strftime("%d/%m/%Y %H:%M:%S", localtime(epoch_time))
 
             # Creates the process dictionary.
-            process = {"process": "Fermentation",
-                       "recipe": new_recipe,
-                       "tank": new_tank,
-                       "volume": new_volume,
-                       "completion": completion_date}
+            process = {
+                "process": "Fermentation",
+                "recipe": new_recipe,
+                "tank": new_tank,
+                "volume": new_volume,
+                "completion": completion_date,
+            }
 
             # Calculates the available volume from the selected tank.
             for tank in tank_list:
@@ -304,14 +344,16 @@ class ProcessMonitoringDialog(QDialog, Ui_dialog_monitoring):
 
             # Checks if prerequisite process has been completed.
             for existing_process in process_list:
-                if (existing_process["process"] == "Hot Brew" and
-                        existing_process["recipe"] == new_recipe and
-                        existing_process["volume"] >= new_volume and
-                        datetime.strptime(
-                            existing_process["completion"],
-                            "%d/%m/%Y %H:%M:%S")
-                        <= datetime.now()
-                        and new_volume <= allowed_volume):
+                if (
+                    existing_process["process"] == "Hot Brew"
+                    and existing_process["recipe"] == new_recipe
+                    and existing_process["volume"] >= new_volume
+                    and datetime.strptime(
+                        existing_process["completion"], "%d/%m/%Y %H:%M:%S"
+                    )
+                    <= datetime.now()
+                    and new_volume <= allowed_volume
+                ):
                     # Adds process details to the list.
                     process_list.append(dict(process))
 
@@ -324,8 +366,9 @@ class ProcessMonitoringDialog(QDialog, Ui_dialog_monitoring):
                     existing_process["volume"] -= new_volume
 
                     # Displays confirmation message of successful action.
-                    self.lbl_process_message.setText("Fermentation "
-                                                     "successfully started.")
+                    self.lbl_process_message.setText(
+                        "Fermentation " "successfully started."
+                    )
                     break
 
             # Removes process from process list if they've been used up.
@@ -360,15 +403,16 @@ class ProcessMonitoringDialog(QDialog, Ui_dialog_monitoring):
         if str(new_volume) != "":
             # Sets the completion date to two weeks later.
             epoch_time = time() + 1209600
-            completion_date = strftime(
-                "%d/%m/%Y %H:%M:%S", localtime(epoch_time))
+            completion_date = strftime("%d/%m/%Y %H:%M:%S", localtime(epoch_time))
 
             # Creates the process dictionary.
-            process = {"process": "Conditioning",
-                       "recipe": new_recipe,
-                       "tank": new_tank,
-                       "volume": new_volume,
-                       "completion": completion_date}
+            process = {
+                "process": "Conditioning",
+                "recipe": new_recipe,
+                "tank": new_tank,
+                "volume": new_volume,
+                "completion": completion_date,
+            }
 
             # Calculates the available volume from the selected tank.
             for tank in tank_list:
@@ -377,14 +421,16 @@ class ProcessMonitoringDialog(QDialog, Ui_dialog_monitoring):
 
             # Checks if prerequisite process has been completed.
             for existing_process in process_list:
-                if (existing_process["process"] == "Fermentation" and
-                        existing_process["recipe"] == new_recipe and
-                        existing_process["volume"] >= new_volume and
-                        datetime.strptime(
-                            existing_process["completion"],
-                            "%d/%m/%Y %H:%M:%S")
-                        <= datetime.now()
-                        and new_volume <= allowed_volume):
+                if (
+                    existing_process["process"] == "Fermentation"
+                    and existing_process["recipe"] == new_recipe
+                    and existing_process["volume"] >= new_volume
+                    and datetime.strptime(
+                        existing_process["completion"], "%d/%m/%Y %H:%M:%S"
+                    )
+                    <= datetime.now()
+                    and new_volume <= allowed_volume
+                ):
                     # Adds process details to the list.
                     process_list.append(dict(process))
 
@@ -400,8 +446,9 @@ class ProcessMonitoringDialog(QDialog, Ui_dialog_monitoring):
                     existing_process["volume"] -= new_volume
 
                     # Displays confirmation message of successful action.
-                    self.lbl_process_message.setText("Conditioning "
-                                                     "successfully started.")
+                    self.lbl_process_message.setText(
+                        "Conditioning " "successfully started."
+                    )
                     break
 
             # Removes process from process list if they've been used up.
@@ -435,25 +482,28 @@ class ProcessMonitoringDialog(QDialog, Ui_dialog_monitoring):
         if str(new_volume) != "":
             # Sets the completion date to 10 minutes per bottle later.
             epoch_time = time() + ((new_volume / 0.5) * 600)
-            completion_date = strftime("%d/%m/%Y %H:%M:%S",
-                                       localtime(epoch_time))
+            completion_date = strftime("%d/%m/%Y %H:%M:%S", localtime(epoch_time))
 
             # Creates the process dictionary.
-            process = {"process": "Bottling",
-                       "recipe": new_recipe,
-                       "tank": "N/A",
-                       "volume": new_volume,
-                       "completion": completion_date}
+            process = {
+                "process": "Bottling",
+                "recipe": new_recipe,
+                "tank": "N/A",
+                "volume": new_volume,
+                "completion": completion_date,
+            }
 
             # Checks if prerequisite process has been completed.
             for existing_process in process_list:
-                if (existing_process["process"] == "Conditioning" and
-                        existing_process["recipe"] == new_recipe and
-                        existing_process["volume"] >= new_volume and
-                        datetime.strptime(
-                            existing_process["completion"],
-                            "%d/%m/%Y %H:%M:%S")
-                        <= datetime.now()):
+                if (
+                    existing_process["process"] == "Conditioning"
+                    and existing_process["recipe"] == new_recipe
+                    and existing_process["volume"] >= new_volume
+                    and datetime.strptime(
+                        existing_process["completion"], "%d/%m/%Y %H:%M:%S"
+                    )
+                    <= datetime.now()
+                ):
                     # Adds process details to the list.
                     process_list.append(dict(process))
 
@@ -466,8 +516,9 @@ class ProcessMonitoringDialog(QDialog, Ui_dialog_monitoring):
                     existing_process["volume"] -= new_volume
 
                     # Displays confirmation message of successful action.
-                    self.lbl_process_message.setText("Bottling "
-                                                     "successfully started.")
+                    self.lbl_process_message.setText(
+                        "Bottling " "successfully started."
+                    )
                     break
 
             # Removes process from process list if they've been used up.
@@ -504,11 +555,13 @@ class ProcessMonitoringDialog(QDialog, Ui_dialog_monitoring):
         if abort_volume != "":
             # Checks for selected process in the process list.
             for existing_process in process_list:
-                if (abort_process == existing_process["process"] and
-                        abort_recipe == existing_process["recipe"] and
-                        abort_tank == existing_process["tank"] and
-                        abort_volume == existing_process["volume"] and
-                        abort_completion == existing_process["completion"]):
+                if (
+                    abort_process == existing_process["process"]
+                    and abort_recipe == existing_process["recipe"]
+                    and abort_tank == existing_process["tank"]
+                    and abort_volume == existing_process["volume"]
+                    and abort_completion == existing_process["completion"]
+                ):
                     for tank in tank_list:
                         # Adds volume to tank of removed process.
                         if tank["tank"] == existing_process["tank"]:
@@ -518,8 +571,7 @@ class ProcessMonitoringDialog(QDialog, Ui_dialog_monitoring):
                     process_list.remove(existing_process)
 
                     # Displays confirmation message of successful action.
-                    self.lbl_process_message.setText("Process "
-                                                     "successfully aborted.")
+                    self.lbl_process_message.setText("Process " "successfully aborted.")
 
             # Saves the updated tank list to the JSON file.
             save_tanks(tank_list)

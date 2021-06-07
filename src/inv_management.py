@@ -26,22 +26,27 @@ class InventoryManagementDialog(QDialog, Ui_dialog_inv_management):
         self.line_edit_add_order_volume.setValidator(self.only_int)
 
         # Reads the inventory and gets volume for each beer.
-        (inventory_list, red_helles_volume, pilsner_volume,
-         dunkel_volume) = self.read_inventory()
+        (
+            inventory_list,
+            _,
+            _,
+            _,
+        ) = self.read_inventory()
         # Reads the customer order list and adds to UI..
         order_list = self.read_orders()
 
         # Connects 'Add to Inventory' button to add inventory volume.
-        self.btn_add_inv.clicked.connect(lambda: self.add_inventory(
-            inventory_list))
+        self.btn_add_inv.clicked.connect(lambda: self.add_inventory(inventory_list))
         # Connects 'Remove from Inventory' button to remove inventory volume.
-        self.btn_remove_inv.clicked.connect(lambda: self.remove_inventory(
-            inventory_list))
+        self.btn_remove_inv.clicked.connect(
+            lambda: self.remove_inventory(inventory_list)
+        )
         # Connects 'Add Order' button to add customer order.
         self.btn_add_order.clicked.connect(lambda: self.add_order(order_list))
         # Connects 'Dispatch Order' button to dispatch customer order.
-        self.btn_dispatch_order.clicked.connect(lambda: self.dispatch_order(
-            inventory_list, order_list))
+        self.btn_dispatch_order.clicked.connect(
+            lambda: self.dispatch_order(inventory_list, order_list)
+        )
 
         # Updates the volumes in the inventory in the UI.
         self.update_inventory()
@@ -53,8 +58,7 @@ class InventoryManagementDialog(QDialog, Ui_dialog_inv_management):
             inventory_list (list): List storing the volume for each beer.
         """
         with open("resources/inventory.json", "w") as inventory_file:
-            json.dump(inventory_list, inventory_file,
-                      ensure_ascii=False, indent=4)
+            json.dump(inventory_list, inventory_file, ensure_ascii=False, indent=4)
 
     def read_inventory(self) -> Tuple[list, int, int, int]:
         """Reads the JSON file for inventory and gets volume for each beer.
@@ -87,31 +91,46 @@ class InventoryManagementDialog(QDialog, Ui_dialog_inv_management):
             order_list (list): A list of the customer orders.
         """
         with open("resources/customer_orders.json", "w") as orders_file:
-            json.dump(order_list, orders_file,
-                      ensure_ascii=False, indent=4)
+            json.dump(order_list, orders_file, ensure_ascii=False, indent=4)
 
     def update_inventory(self):
         """Updates the volumes in the inventory in the UI."""
-        (inventory_list, red_helles_volume, pilsner_volume,
-         dunkel_volume) = self.read_inventory()
+        (
+            _,
+            red_helles_volume,
+            pilsner_volume,
+            dunkel_volume,
+        ) = self.read_inventory()
 
         # Shows the volume and number of bottles of Red Helles.
         red_helles_quantity = int(red_helles_volume / 0.5)
         self.lbl_red_helles_inv.setText(
-            "Organic Red Helles: " + str(red_helles_volume) + " L / " +
-            str(red_helles_quantity) + " bottle(s)")
+            "Organic Red Helles: "
+            + str(red_helles_volume)
+            + " L / "
+            + str(red_helles_quantity)
+            + " bottle(s)"
+        )
 
         # Shows the volume and number of bottles of Pilsner.
         pilsner_quantity = int(pilsner_volume / 0.5)
         self.lbl_pilsner_inv.setText(
-            "Organic Pilsner: " + str(pilsner_volume) + " L / " +
-            str(pilsner_quantity) + " bottle(s)")
+            "Organic Pilsner: "
+            + str(pilsner_volume)
+            + " L / "
+            + str(pilsner_quantity)
+            + " bottle(s)"
+        )
 
         # Shows the volume and number of bottles of Dunkel.
         dunkel_quantity = int(dunkel_volume / 0.5)
         self.lbl_dunkel_inv.setText(
-            "Organic Dunkel: " + str(dunkel_volume) + " L / " +
-            str(dunkel_quantity) + " bottle(s)")
+            "Organic Dunkel: "
+            + str(dunkel_volume)
+            + " L / "
+            + str(dunkel_quantity)
+            + " bottle(s)"
+        )
 
     def add_inventory(self, inventory_list: list):
         """Adds the given volume to the given beer in the inventory.
@@ -185,10 +204,15 @@ class InventoryManagementDialog(QDialog, Ui_dialog_inv_management):
 
         # Iterates through the orders and adds their details to an order list.
         for order in order_list:
-            display_orders += ("Order ID: " + order["order_id"] +
-                               ", Beer Recipe: " + order["order_recipe"] +
-                               ", Order Volume: " +
-                               str(order["order_volume"]) + " L \n")
+            display_orders += (
+                "Order ID: "
+                + order["order_id"]
+                + ", Beer Recipe: "
+                + order["order_recipe"]
+                + ", Order Volume: "
+                + str(order["order_volume"])
+                + " L \n"
+            )
 
         # Displays list of orders in UI.
         self.lbl_orders.setText(display_orders.rstrip())
@@ -213,9 +237,11 @@ class InventoryManagementDialog(QDialog, Ui_dialog_inv_management):
         # Validates against null inputs.
         if order_id != "" and str(order_volume) != "":
             # Appends order to order list.
-            order = {"order_id": order_id,
-                     "order_recipe": order_recipe,
-                     "order_volume": order_volume}
+            order = {
+                "order_id": order_id,
+                "order_recipe": order_recipe,
+                "order_volume": order_volume,
+            }
             order_list.append(order)
 
             # Saves order list to JSON file.
@@ -228,8 +254,9 @@ class InventoryManagementDialog(QDialog, Ui_dialog_inv_management):
             self.read_orders()
         else:
             # Displays message to notify their new order was unsuccessful.
-            self.lbl_order_message.setText("This is not a valid order to add. "
-                                           "Please add input in all fields.")
+            self.lbl_order_message.setText(
+                "This is not a valid order to add. " "Please add input in all fields."
+            )
 
     def dispatch_order(self, inventory_list: list, order_list: list):
         """Dispatches customer order from the list.
@@ -251,14 +278,20 @@ class InventoryManagementDialog(QDialog, Ui_dialog_inv_management):
                 if dispatch_order_id == order["order_id"]:
                     for inventory in inventory_list:
                         # Subtracts volume of beer from order from inventory.
-                        if ((order["order_recipe"] == "Organic Red Helles" and
-                             inventory["recipe"] == "red_helles")
-                                or
-                                (order["order_recipe"] == "Organic Pilsner" and
-                                 inventory["recipe"] == "pilsner")
-                                or
-                                (order["order_recipe"] == "Organic Dunkel" and
-                                 inventory["recipe"] == "dunkel")):
+                        if (
+                            (
+                                order["order_recipe"] == "Organic Red Helles"
+                                and inventory["recipe"] == "red_helles"
+                            )
+                            or (
+                                order["order_recipe"] == "Organic Pilsner"
+                                and inventory["recipe"] == "pilsner"
+                            )
+                            or (
+                                order["order_recipe"] == "Organic Dunkel"
+                                and inventory["recipe"] == "dunkel"
+                            )
+                        ):
                             inventory["volume"] -= order["order_volume"]
 
                     # Removes order from the order list.
@@ -267,8 +300,7 @@ class InventoryManagementDialog(QDialog, Ui_dialog_inv_management):
                     # Saves order list to JSON file.
                     self.save_orders(order_list)
                     # Displays message to say dispatch was successful.
-                    self.lbl_order_message.setText("Order dispatched "
-                                                   "successfully.")
+                    self.lbl_order_message.setText("Order dispatched " "successfully.")
                     # Updates orders list in UI.
                     self.read_orders()
                     # Saves the new inventory to the JSON file.
@@ -277,6 +309,8 @@ class InventoryManagementDialog(QDialog, Ui_dialog_inv_management):
                     self.update_inventory()
         else:
             # Displays message to say dispatch was unsuccessful.
-            self.lbl_order_message.setText("This is not a valid order to "
-                                           "dispatch. Please input the order "
-                                           "ID.")
+            self.lbl_order_message.setText(
+                "This is not a valid order to "
+                "dispatch. Please input the order "
+                "ID."
+            )
