@@ -25,17 +25,9 @@ from [Python's website here.](https://www.python.org/getit/)
 The following Python modules must be installed, as they are not built into the
 Python installation by default:
 
-- pandas [for CSV handling]
+- pandas [for CSV handling] -  `pip install pandas`
 
-```
-pip install pandas
-```
-
-- pyqt5 [for user interfaces]
-
-```
-pip install pyqt5
-```
+- pyqt5 [for user interfaces] - `pip install pyqt5`
 
 ### Running the Application
 
