@@ -27,6 +27,7 @@ from upload_sales import UploadSalesDialog
 def main() -> None:
     """Opens the program window, and exits program when window is closed."""
     app = QtWidgets.QApplication(sys.argv)
+    app.setStyle("fusion")
     setup_logging()
     mwindow_brewhouse = BrewhouseWindow()
     mwindow_brewhouse.show()
