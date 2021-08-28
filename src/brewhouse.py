@@ -10,12 +10,13 @@ stages of different beers, and upload new sales data respectively.
 """
 
 import logging
+import os
 import sys
 from datetime import datetime
 from typing import Tuple
 
 import pandas
-from PyQt5 import QtWidgets
+from PyQt5 import QtCore, QtWidgets
 from PyQt5.QtWidgets import QMainWindow
 
 from inv_management import InventoryManagementDialog
@@ -26,6 +27,10 @@ from upload_sales import UploadSalesDialog
 
 def main() -> None:
     """Opens the program window, and exits program when window is closed."""
+    # Performs scaling to prevent tiny UI on high resolution screens.
+    QtWidgets.QApplication.setAttribute(QtCore.Qt.AA_EnableHighDpiScaling, True)
+    QtWidgets.QApplication.setAttribute(QtCore.Qt.AA_UseHighDpiPixmaps, True)
+    os.environ["QT_SCALE_FACTOR"] = "1.5"
     app = QtWidgets.QApplication(sys.argv)
     app.setStyle("fusion")
     setup_logging()
