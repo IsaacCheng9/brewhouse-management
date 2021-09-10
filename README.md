@@ -43,7 +43,7 @@ To run the application, you should follow the following steps:
 
 1. Clone this GitHub repository.
 2. Ensure that you're in the root directory: `brewhouse-management`
-3. Run the application with the command: `python -m src.brewhouse`
+3. Run the application with the command: `python -m src.app`
 
 ## Usage
 
@@ -131,5 +131,5 @@ effectively converting the `.ui` files to `.py` files. I edited the generated
 code to conform to PEP 8 guidelines, and added documentation to make the code
 easier to understand. These generated code files are marked with the
 `_setup.py` suffixes, such as `brewhouse_setup.py`, and they were imported into
-the other Python files such as `brewhouse.py` so that functionality could be
+the other Python files such as `app.py` so that functionality could be
 developed for the user interface objects.
