@@ -11,8 +11,8 @@ from time import localtime, strftime, time
 from PyQt5.QtGui import QIntValidator
 from PyQt5.QtWidgets import QDialog
 
-from inv_management import InventoryManagementDialog
-from setup.process_monitoring_setup import Ui_dialog_monitoring
+from src.inv_management import InventoryManagementDialog
+from src.setup.process_monitoring_setup import Ui_dialog_monitoring
 
 
 def remove_used_processes(process_list: list):

@@ -19,10 +19,10 @@ import pandas
 from PyQt5 import QtCore, QtWidgets
 from PyQt5.QtWidgets import QMainWindow
 
-from inv_management import InventoryManagementDialog
-from process_monitoring import ProcessMonitoringDialog
-from setup.brewhouse_setup import Ui_mwindow_brewhouse
-from upload_sales import UploadSalesDialog
+from src.inv_management import InventoryManagementDialog
+from src.process_monitoring import ProcessMonitoringDialog
+from src.setup.brewhouse_setup import Ui_mwindow_brewhouse
+from src.upload_sales import UploadSalesDialog
 
 
 def main() -> None:
