@@ -49,16 +49,7 @@ To run the application, you should follow the following steps:
 
 ### Main Window and Sales Predictions
 
-Start running the software by opening `brewhouse.py` in your integrated
-developer environment (IDE) of choice, such as PyCharm, Visual Studio Code, or
-IDLE, and running the Python file from there.
-
-Alternatively, you could navigate to the file directory where the files have
-been saved in your operating system's terminal using the `cd [DIRECTORY]`
-command (`cd` followed by the file directory). Then, you can run `brewhouse.py`
-with the command `python brewhouse.py`.
-
-This will open the main window for the software. You will be presented with the
+After running the application, you'll be presented with the
 total sales, sales ratios, and average monthly growth percentages from the
 existing sales data. You can predict sales by entering a month, and the
 software will display an estimate of the volume of each beer which will be
