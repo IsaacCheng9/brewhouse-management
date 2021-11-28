@@ -28,22 +28,14 @@ Compatible with:
 Python 3.7.0 or later is required for this software to run. It can be downloaded
 from [Python's website here.](https://www.python.org/getit/)
 
-### Python Modules
-
-The following Python modules must be installed, as they are not built into the
-Python installation by default:
-
-- pandas [for CSV handling] - `pip install pandas`
-
-- pyqt5 [for user interfaces] - `pip install pyqt5`
-
 ### Running the Application
 
 To run the application, you should follow the following steps:
 
 1. Clone this GitHub repository.
 2. Ensure that you're in the root directory: `brewhouse-management`
-3. Run the application with the command: `python -m src.app`
+3. Install the required Python libraries: `pip install -r requirements.txt`
+4. Run the application with the command: `python -m src.app`
 
 ## Usage
 
